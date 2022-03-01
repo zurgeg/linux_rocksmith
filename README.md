@@ -35,8 +35,8 @@ I will refer to them with variables. You can actually set them as variables via 
 There's a quick way that most people on [ProtonDB](https://www.protondb.com/app/221680) choose, then there's the way of routing the audio through JACK -> wineASIO -> RS_ASIO, which has less delay and sounds better, but also takes longer. I have Guides for Arch-based Distros and Debian-based ones.
 
 * [Quick and easy way](quick.md)
-* [Harder way (Arch-based)](arch/index.md)
-* [Harder way (Debian-based)](debian/index.md)
+* [Harder way (Arch-based)](arch.md)
+* [Harder way (Debian-based)](debian.md)
 
 # Credits
 
