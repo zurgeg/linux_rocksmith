@@ -5,7 +5,7 @@
 1. [Install necessary stuff](#install-necessary-stuff)
 1. [wineasio](#wineasio)
 1. [Setting up the game's prefix/compatdata](#setting-up-the-games-prefixcompatdata)
-1. [Installing RS_ASIO](#installing-rsasio)
+1. [Installing RS_ASIO](#installing-rs_asio)
 1. [Set up JACK with Cadence](#set-up-jack-with-cadence)
 1. [Starting the game](#starting-the-game)
 1. [Command (No Lutris)](#command-no-lutris)
@@ -13,7 +13,18 @@
 
 ## Install necessary stuff
 
-`sudo pacman -S carla jack2 lib32-jack2 realtime-privileges` (if asked, replace `jack`)
+If asked, replace `jack`.
+
+```
+sudo pacman -S carla jack2 lib32-jack2 realtime-privileges
+# the groups should already exist, but just in case
+sudo groupadd audio
+suod groupadd realtime
+sudo usermod -aG audio $USER`
+sudo usermod -aG realtime $USER`
+```
+
+Log out and back in
 
 ### wineasio
 
@@ -66,16 +77,7 @@ cp /usr/lib32/wine/wineasio.dll.so $PROTON/lib/wine
 ## Setting up the game's prefix/compatdata
 
 1. Delete or rename `$STEAMLIBRARY/steamapps/compatdata/221680`, then start Rocksmith and stop the game once it's running.
-2. Run the following:
-```
-# the groups should already exist, but just in case
-sudo groupadd audio
-suod groupadd realtime
-sudo usermod -aG audio $USER`
-sudo usermod -aG realtime $USER`
-```
-3. Log out and back in
-4. `WINEPREFIX=$STEAMLIBRARY/steamapps/compatdata/221680/pfx regsvr32 /usr/lib32/wine/i386-windows/wineasio.dll` (Errors are normal, should end with "regsvr32: Successfully registered DLL [...]")
+1. `WINEPREFIX=$STEAMLIBRARY/steamapps/compatdata/221680/pfx regsvr32 /usr/lib32/wine/i386-windows/wineasio.dll` (Errors are normal, should end with "regsvr32: Successfully registered DLL [...]")
 
 ## Installing RS_ASIO
 
