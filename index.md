@@ -4,6 +4,8 @@ These are a few Guides to get [Rocksmith 2014](https://store.steampowered.com/ap
 
 # Disclaimer
 
+This is the bare minimum to get it to work. I don't know if certain changes recommended by other people have a performance impact.
+
 I tested it on Manjaro and a Linux Mint VM. Due to the VM factor, you can start the game, but the experience is 1fps or something like that.
 
 I have only tested the Steam version.
