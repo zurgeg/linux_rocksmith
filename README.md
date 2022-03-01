@@ -32,11 +32,13 @@ I will refer to them with variables. You can actually set them as variables via 
 
 # Guides
 
-There's a quick way that most people on [ProtonDB](https://www.protondb.com/app/221680) choose, then there's the way of routing the audio through JACK -> wineASIO -> RS_ASIO, which has less delay and sounds better, but also takes longer. I have Guides for Arch-based Distros and Debian-based ones.
+There are two ways to do this. The one most people on [ProtonDB](https://www.protondb.com/app/221680) use is quicker, but results in high delay and distorted sound. It routes the sound through ALSA.
 
-* [Quick and easy way](quick.md)
-* [Harder way (Arch-based)](arch.md)
-* [Harder way (Debian-based)](debian.md)
+Then there's the way of routing the audio through JACK -> wineASIO -> RS_ASIO, which has less delay and sounds better, but also takes longer to set up. I have Guides for Arch-based Distros and Debian-based ones.
+
+* [ALSA - Quick and and dirty](quick.md)
+* [JACK to ASIO (Arch-based)](arch.md)
+* [JACK to ASIO (Debian-based)](debian.md)
 
 # Credits
 

@@ -1,4 +1,4 @@
-# Harder way on Arch-based distros
+# JACK to ASIO on Arch-based distros
 
 ## Table of contents
 

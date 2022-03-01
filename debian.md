@@ -1,4 +1,4 @@
-# Harder way on Debian-based distros
+# JACK to ASIO on Debian-based distros
 
 I don't have a debian-based machine to test this. Everything up to starting the game was tested in a VM.
 
