@@ -1,37 +1,47 @@
-## Welcome to GitHub Pages
+# Rocksmith 2014 on Linux
 
-You can use the [editor on GitHub](https://github.com/theNizo/linux_rocksmith/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+These are a few Guides to get [Rocksmith 2014](https://store.steampowered.com/app/221680/Rocksmith_2014_Edition__Remastered/) running on Linux. In case you haven't tried gaming on Linux yet, other than not working, it won't get harder than this by far for other games.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+# Disclaimer
 
-### Markdown
+I tested it on Manjaro and a Linux Mint VM. Due to the VM factor, you can start the game, but the experience is 1fps or something like that.
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+I have only tested the Steam version.
 
-```markdown
-Syntax highlighted code block
+**I take no responsibility and will not guarantee for this working.**
 
-# Header 1
-## Header 2
-### Header 3
+# Prerequisites
 
-- Bulleted
-- List
+Don't install or copy Rocksmith from an NTFS drive. It will not start. (I think that's because of permissions, but I'm not sure.)
 
-1. Numbered
-2. List
+If you use Proton-GE, install scripts sometimes don't run. Make sure you use normal Proton the first time.
 
-**Bold** and _Italic_ and `Code` text
+Wine should already be installed, we will need it later.
 
-[Link](url) and ![Image](src)
-```
+## Common paths
 
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
+I will refer to them with variables. You can actually set them as variables via `variablename=value` and just copy-paste the commands, or replace the text. Keep in mind that these are temporary, so only available in the terminal instance where the variable was defined.
 
-### Jekyll Themes
+#.## has to be replaced by a version number, because I don't know which version you use. So for "Proton #.##", an example replacement would be "Proton 7.0".
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/theNizo/linux_rocksmith/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+* `$HOME`: Already set, don't worry about it. (redirects to `/home/<username>`)
+* `$STEAMLIBRARY`: The Steam Library, where Rocksmith is installed in. You can check it by opening Steam, then going to `Steam -> Settings -> Downloads -> Steam Library Folders`. Right above the disk usage indicator, there's a path. that's the one we need.
+* `$PROTON`: A specific location inside your Proton installation
+ * Normal Proton: `/path/to/steamapps/common/Proton\ #.##/dist`
+ * Proton-GE: It's located in the default Steam Library under `compatibilitytools.d/Proton-#.##-GE-#/files`
 
-### Support or Contact
+# Guides
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+There are two ways to do this. The one most people on [ProtonDB](https://www.protondb.com/app/221680) use is quicker, but results in high delay and distorted sound. It routes the sound through ALSA.
+
+Then there's the way of routing the audio through JACK -> wineASIO -> RS_ASIO, which has less delay and sounds better, but also takes longer to set up. I have Guides for Arch-based Distros and Debian-based ones.
+
+* [ALSA - Quick and and dirty](quick.md)
+* [JACK to ASIO (Arch-based)](arch.md)
+* [JACK to ASIO (Debian-based)](debian.md)
+
+# Credits
+
+* [preflex](https://gitlab.com/preflex) for showing me how to do it on Arch-based distros.
+* [u/JacKeTUs](https://www.reddit.com/user/JacKeTUs) for publishing a [Debian-based Guide](https://old.reddit.com/r/linux_gaming/comments/jmediu/guide_for_setup_rocksmith_2014_steam_no_rs_cable/) on [r/linux_gaming](https://old.reddit.com/r/linux_gaming/)
+* [the_Nizo](https://github.com/theNizo), for using that information and updating it regularly in the past. My original Guide was posted [here](https://old.reddit.com/r/linux_gaming/comments/jmediu/guide_for_setup_rocksmith_2014_steam_no_rs_cable/gdhg4zx/).
