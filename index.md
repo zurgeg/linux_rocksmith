@@ -6,7 +6,7 @@ These are a few Guides to get [Rocksmith 2014](https://store.steampowered.com/ap
 
 This is the bare minimum to get it to work. I don't know if certain changes recommended by other people have a performance impact.
 
-I tested it on Manjaro and a Linux Mint VM. Due to the VM factor, you can start the game, but the experience is 1fps or something like that.
+I tested it on Manjaro and a Linux Mint VM. Due to the VM factor, I was actually able to start the game, but the experience is 1fps or something like that.
 
 I have only tested the Steam version.
 
@@ -14,7 +14,7 @@ I have only tested the Steam version.
 
 # Prerequisites
 
-Don't install or copy Rocksmith from an NTFS drive. It will not start. (I think that's because of permissions, but I'm not sure.)
+Don't install or copy Rocksmith from/to an NTFS drive. It will not start. (I think that's because of permissions, but I'm not sure.)
 
 If you use Proton-GE, install scripts sometimes don't run. Make sure you use normal Proton the first time.
 
