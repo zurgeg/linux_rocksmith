@@ -38,9 +38,11 @@ There are two ways to do this. The one most people on [ProtonDB](https://www.pro
 
 Then there's the way of routing the audio through JACK -> wineASIO -> RS_ASIO, which has less delay and sounds better, but also takes longer to set up. I have Guides for Arch-based Distros and Debian-based ones.
 
-* [ALSA - Quick and and dirty](quick.md)
-* [JACK to ASIO (Arch-based)](arch.md)
-* [JACK to ASIO (Debian-based)](debian.md)
+* [ALSA - Quick and and dirty](https://github.com/theNizo/linux_rocksmith/blob/main/quick.md)
+* [JACK to ASIO (Arch-based)](https://github.com/theNizo/linux_rocksmith/blob/main/arch.md)
+* [JACK to ASIO (Debian-based)](https://github.com/theNizo/linux_rocksmith/blob/main/debian.md)
+
+(The links currently redirect to my GitHub repo, because the site builder messes up some of the text.)
 
 # Credits
 
