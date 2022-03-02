@@ -37,7 +37,7 @@ Once in winecfg, go to the Audio Tab.
 
 Hit "Apply" and "Ok".
 
-## Disbale Input device for Pulse
+## Disable Input device for Pulse
 
 Open `pavucontrol` ("PulseAudio Volume Control"), go to the configuration tab. Set the input device to "off".
 
