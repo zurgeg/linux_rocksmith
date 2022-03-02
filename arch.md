@@ -33,7 +33,7 @@ At the time I'm writing this, wineasio just got updated and the AUR packages are
 <details>
   <summary>All versions (recommended)</summary>
 
-[Download](https://github.com/wineasio/wineasio) the newest zip and unpack it. Open a terminal inside the newly created folder and run the following commands (stolen from the [README](https://github.com/wineasio/wineasio#readme), adjusted for Arch folderstructure):
+[Download](https://github.com/wineasio/wineasio) the newest zip and unpack it. Open a terminal inside the newly created folder and run the following commands (stolen from the [README](https://github.com/wineasio/wineasio#readme), adjusted for Arch folder structure):
 
 ```
 # build
@@ -64,7 +64,7 @@ In theory, this should also work with Lutris runners (located in `$HOME/.local/s
 </details>
 
 <details>
-<summary>Only 6.5 and below (a little bit easier)</summary>
+<summary>Only 6.5 and below (a little easier)</summary>
 
 ```
 yay -S wineasio
@@ -87,7 +87,7 @@ Edit RS_ASIO.ini: insert `WineASIO` where it says `Driver=`. Do this for `[Asio.
 
 ## Set up JACK with Cadence
 
-1. Open Cadence. If it says on the bottom left that you should log out and back in and you already did that, restart your machine.
+1. Open Cadence. If it says on the bottom left that you should log out and back in, and you already did that, restart your machine.
 1. Go to `Configure -> Engine`. Make sure that "Realtime" is ticked.
 1. Go to "Driver", select ALSA.
  * If you use the same device for input and output, untick "Duplex Mode" and select the device you want to use in the first line. If you use different devices for in- and output, tick "Duplex Mode" and select the devices in the 2nd and 3rd line. Please note that the names are not that intuitive to begin with.

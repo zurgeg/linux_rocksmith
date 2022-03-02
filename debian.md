@@ -13,7 +13,7 @@ I don't have a debian-based machine to test this. Everything up to starting the 
 
 ## Install necessary stuff
 
-When asked about realtime rpivileges, select yes with the arrow keys and confirm with enter.
+When asked about realtime privileges, select yes with the arrow keys and confirm with enter.
 
 ```
 sudo apt-get install apt-transport-https gpgv
@@ -59,7 +59,7 @@ Edit RS_ASIO.ini: insert `WineASIO` where it says `Driver=`. Do this for `[Asio.
 
 ## Set up JACK with Cadence
 
-1. Open Cadence. If it says on the bottom left that you should log out and back in and you already did that, restart your machine.
+1. Open Cadence. If it says on the bottom left that you should log out and back in, and you already did that, restart your machine.
 1. Go to `Configure -> Engine`. Make sure that "Realtime" is ticked.
 1. Go to "Driver", select ALSA.
  * If you use the same device for input and output, untick "Duplex Mode" and select the device you want to use in the first line. If you use different devices for in- and output, tick "Duplex Mode" and select the devices in the 2nd and 3rd line. Please note that the names are not that intuitive to begin with.
