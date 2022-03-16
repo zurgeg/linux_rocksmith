@@ -44,6 +44,14 @@ At the moment no one has figured out how to get JACK to ASIO working with pipewi
 * [JACK to ASIO (Arch-based)](arch.md)
 * [JACK to ASIO (Debian-based)](debian.md)
 
+## Scripts
+
+Because someone asked, I have written scripts that do everything for you.
+
+For native Steam: `wget https://raw.githubusercontent.com/theNizo/linux_rocksmith/main/native-steam.sh && ./native-steam.sh && rm native-steam.sh`
+
+For other Rocksmith installations: `wget https://raw.githubusercontent.com/theNizo/linux_rocksmith/main/other.sh && ./other.sh && rm other.sh`
+
 # Credits
 
 * [preflex](https://gitlab.com/preflex) for showing me how to do it on Arch-based distros.
