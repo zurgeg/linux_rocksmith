@@ -31,7 +31,7 @@ Log out and back in
 At the time I'm writing this, wineasio just got updated and the AUR packages are out of date, but will work with wine versions until 6.5.
 
 <details>
-  <summary>All versions (recommended)</summary>
+  <summary>Compile from source</summary>
 
 [Download](https://github.com/wineasio/wineasio) the newest zip and unpack it. Open a terminal inside the newly created folder and run the following commands (stolen from the [README](https://github.com/wineasio/wineasio#readme), adjusted for Arch folder structure):
 
@@ -47,16 +47,6 @@ sudo cp build32/wineasio.dll /usr/lib32/wine/i386-windows/wineasio.dll
 sudo cp build32/wineasio.dll.so /usr/lib32/wine/i386-unix/wineasio.dll.so
 sudo cp build64/wineasio.dll /usr/lib/wine/x86_64-windows/wineasio.dll
 sudo cp build64/wineasio.dll.so /usr/lib/wine/x86_64-unix/wineasio.dll.so
-
-# add to Proton version !! ADJUST THIS !!
-cp build32/wineasio.dll "$PROTON/lib/wine/i386-windows/wineasio.dll"
-cp build32/wineasio.dll.so "$PROTON/lib/wine/i386-unix/wineasio.dll.so"
-cp build64/wineasio.dll "$PROTON/lib64/wine/x86_64-windows/wineasio.dll"
-cp build64/wineasio.dll.so "$PROTON/lib64/wine/x86_64-unix/wineasio.dll.so"
-
-# for Proton versions 6.5 and below
-cp build32/wineasio.dll.so "$PROTON/lib/wine/wineasio.dll.so"
-cp build64/wineasio.dll.so "$PROTON/lib64/wine/wineasio.dll.so"
 ```
 
 In theory, this should also work with Lutris runners (located in `$HOME/.local/share/lutris/runners/wine/`)
@@ -64,15 +54,28 @@ In theory, this should also work with Lutris runners (located in `$HOME/.local/s
 </details>
 
 <details>
-<summary>Only 6.5 and below (a little easier)</summary>
+<summary>Use the AUR</summary>
+
+`yay` is an AUR helper, which I will use as an example. It will install the AUR package for you. You can do this other ways too, of course
 
 ```
 yay -S wineasio
-cp /usr/lib/wine/wineasio.dll.so $PROTON/lib64/wine
-cp /usr/lib32/wine/wineasio.dll.so $PROTON/lib/wine
 ```
-
 </details>
+
+wineasio is now installed on your native wine version. To install it for Proton, run these:
+
+```
+# add to Proton version !! watch out for variables !!
+cp /usr/lib32/wine/i386-windows/wineasio.dll "$PROTON/lib/wine/i386-windows/wineasio.dll"
+cp /usr/lib32/wine/i386-unix/wineasio.dll.so "$PROTON/lib/wine/i386-unix/wineasio.dll.so"
+cp /usr/lib/wine/x86_64-windows/wineasio.dll "$PROTON/lib64/wine/x86_64-windows/wineasio.dll"
+cp /usr/lib/wine/x86_64-unix/wineasio.dll.so "$PROTON/lib64/wine/x86_64-unix/wineasio.dll.so"
+
+# for Proton versions 6.5 and below
+cp /usr/lib32/wine/i386-windows/wineasio.dll "$PROTON/lib/wine/wineasio.dll.so"
+cp /usr/lib/wine/x86_64-unix/wineasio.dll.so "$PROTON/lib64/wine/wineasio.dll.so"
+```
 
 ## Setting up the game's prefix/compatdata
 
