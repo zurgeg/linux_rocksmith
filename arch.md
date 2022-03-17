@@ -36,7 +36,7 @@ For the groups, run `groups`. This will give you a list, which should contain "a
 
 ### wineasio
 
-At the time I'm writing this, wineasio just got updated and the AUR packages are out of date, but will work with wine versions until 6.5.
+Installing `base-devel` is very useful for using the AUR and compiling in general.
 
 <details>
 	<summary>Compile from source</summary>
