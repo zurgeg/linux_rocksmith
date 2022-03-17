@@ -139,7 +139,7 @@ Delete the `Rocksmith.ini` inside your Rocksmith installation. It will auto-gene
 
 Steam and JACK need to be running.
 
-If we start the game from Steam, it will not work. So there's to ways around that:
+If we start the game from Steam, the game cant connect to wineasio (you won't have sound and will get an error message). So there's two ways around that:
 
 ### Command (No Lutris)
 
