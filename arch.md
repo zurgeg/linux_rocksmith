@@ -31,7 +31,7 @@ Log out and back in.
 
 For the packages, do `pacman -Q <packages here>`. Should output the names and versions without errors.
 
-For the groups, run `groups`. This will give you a list, which should contain "audio" and "realtime.
+For the groups, run `groups`. This will give you a list, which should contain "audio" and "realtime".
 </details>
 
 ### wineasio

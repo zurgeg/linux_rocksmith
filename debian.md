@@ -32,7 +32,7 @@ Log out and back in.
 
 <details>
   <summary>How to check if this worked correctly</summary>
-For the groups, run `groups`. This will give you a list, which should contain "audio" and "realtime.
+For the groups, run `groups`. This will give you a list, which should contain "audio" and "realtime".
 </details>
 
 ### wineasio
