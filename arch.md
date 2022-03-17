@@ -24,14 +24,22 @@ sudo usermod -aG audio $USER`
 sudo usermod -aG realtime $USER`
 ```
 
-Log out and back in
+Log out and back in.
+
+<details>
+	<summary>How to check if this worked correctly</summary>
+
+For the packages, do `pacman -Q <packages here>`. Should output the names and versions without errors.
+
+For the groups, run `groups`. This will give you a list, which should contain "audio" and "realtime.
+</details>
 
 ### wineasio
 
 At the time I'm writing this, wineasio just got updated and the AUR packages are out of date, but will work with wine versions until 6.5.
 
 <details>
-  <summary>Compile from source</summary>
+	<summary>Compile from source</summary>
 
 [Download](https://github.com/wineasio/wineasio) the newest zip and unpack it. Open a terminal inside the newly created folder and run the following commands (stolen from the [README](https://github.com/wineasio/wineasio#readme), adjusted for Arch folder structure):
 
@@ -59,11 +67,30 @@ In theory, this should also work with Lutris runners (located in `$HOME/.local/s
 `yay` is an AUR helper, which I will use as an example. It will install the AUR package for you. You can do this other ways too, of course
 
 ```
-yay -S wineasio
+yay -S wineasio --noconfirm
 ```
+
+Notes:
+
+* If you use Manjaro, `yay` is in their repos.
+* If it exits with an error, try and remove `--noconfirm`.
+* [Tutorial on `yay`](https://youtube.com/watch?v=BbnSoY_yDr8)
 </details>
 
-wineasio is now installed on your native wine version. To install it for Proton, run these:
+wineasio is now installed on your native wine version.
+
+<details>
+	<summary>How to check if it's installed correctly</summary>
+
+	find /usr/lib/ -name "wineasio.dll"
+	find /usr/lib/ -name "wineasio.dll.so"
+	find /usr/lib32/ -name "wineasio.dll"
+	find /usr/lib32/ -name "wineasio.dll.so"
+
+This should output 4 paths (ignore the errors).
+</details>
+
+To install it for Proton, run these:
 
 ```
 # add to Proton version !! watch out for variables !!
@@ -82,11 +109,13 @@ cp /usr/lib/wine/x86_64-unix/wineasio.dll.so "$PROTON/lib64/wine/wineasio.dll.so
 1. Delete or rename `$STEAMLIBRARY/steamapps/compatdata/221680`, then start Rocksmith and stop the game once it's running.
 1. `WINEPREFIX=$STEAMLIBRARY/steamapps/compatdata/221680/pfx regsvr32 /usr/lib32/wine/i386-windows/wineasio.dll` (Errors are normal, should end with "regsvr32: Successfully registered DLL [...]")
 
+I don't know a way to check if this is set up correctly. This is one of the first steps I'd redo when I have issues.
+
 ## Installing RS_ASIO
 
 [Download](https://github.com/mdias/rs_asio/releases) the newest release, unpack everything to the root of your Rocksmith installation (`$STEAMLIBRARY/steamapps/common/Rocksmith2014/`)
 
-Edit RS_ASIO.ini: insert `WineASIO` where it says `Driver=`. Do this for `[Asio.Output]` and `[Asio.Input.0]`. If you don't play multiplayer, you can comment out Input1 and Input2 by putting a `;` in front of the lines.
+Edit RS_ASIO.ini: fill in `WineASIO` where it says `Driver=`. Do this for `[Asio.Output]` and `[Asio.Input.0]`. If you don't play multiplayer, you can comment out Input1 and Input2 by putting a `;` in front of the lines.
 
 ## Set up JACK with Cadence
 
@@ -132,14 +161,14 @@ ln -s $PROTON Proton-#.##
 Restart Lutris. Add a game:
 
 * General:
- * Name: Rocksmith® 2014 Edition - Remastered
- * Runner: Wine
- * Release year: 2014
+	* Name: Rocksmith® 2014 Edition - Remastered
+	* Runner: Wine
+	* Release year: 2014
 * Game Options
- * Executable: $STEAMLIBRARY/steamapps/common/Rocksmith 2014/Rocksmith2014.exe
- * Working directory: $STEAMLIBRARY/steamapps/common/Rocksmith 2014/
- * Wine prefix: $STEAMLIBRARY/steamapps/compatdata/221680/pfx
+	* Executable: $STEAMLIBRARY/steamapps/common/Rocksmith 2014/Rocksmith2014.exe
+	* Working directory: $STEAMLIBRARY/steamapps/common/Rocksmith 2014/
+	* Wine prefix: $STEAMLIBRARY/steamapps/compatdata/221680/pfx
 * Runner options
- * Wine version: Proton-#.##
+	* Wine version: Proton-#.##
 
 Save this and hit "Play."
