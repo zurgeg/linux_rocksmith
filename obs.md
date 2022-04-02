@@ -18,10 +18,10 @@ Start the game and open Catia once it's running. It will look something like thi
 
 ![](img/1-catia.png)
 
-* "Pulse Audio JACK [...]" is from `pulseaudio-jack` (which is pretty nice to have, but not needed to get the game running)
-* "system" are the input and output devices
-* "JACK Input Client" is the sink from OBS we just created
-* "Rocksmith2014" is the game
+* `Pulse Audio JACK [...]` is from `pulseaudio-jack` (which is pretty nice to have, but not needed to get the game running)
+* `system` are the input and output devices
+* `JACK Input Client` is the sink from OBS we just created
+* `Rocksmith2014` is the game
 
 Now tie Rocksmith's outputs to OBS's inputs. OBS should get sound from Rocksmith now.
 
