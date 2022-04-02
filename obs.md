@@ -14,6 +14,8 @@ Open OBS. In sources, click `+` -> JACK Input Client -> Choose name. Select 2 in
 
 I recommend to disable any other system audio in OBS: Settings -> Audio -> Global Audio devices -> disable any "Desktop Audio". They created white noise on my system.
 
+![](img/2-obs.png)
+
 Start the game and open Catia once it's running. It will look something like this:
 
 ![](img/1-catia.png)
