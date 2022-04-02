@@ -14,7 +14,7 @@ You can either use `protontricks`, or `winetricks`
 <summary>protontricks</summary>
 
 ```
-protontricks 221680 audio=alsa
+protontricks 221680 sound=alsa
 protontricks 221680 winecfg
 ```
 
@@ -24,7 +24,7 @@ protontricks 221680 winecfg
 <summary>winetricks</summary>
 
 ```
-WINEPREFIX=$STEAMLIBRARY/steamapps/compatdata/221680/pfx winetricks audio=alsa
+WINEPREFIX=$STEAMLIBRARY/steamapps/compatdata/221680/pfx winetricks sound=alsa
 WINEPREFIX=$STEAMLIBRARY/steamapps/compatdata/221680/pfx winecfg
 ```
 
