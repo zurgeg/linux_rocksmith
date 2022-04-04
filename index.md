@@ -46,6 +46,8 @@ At the moment no one has figured out how to get JACK to ASIO working with pipewi
 * [JACK to ASIO (Arch-based)](https://github.com/theNizo/linux_rocksmith/blob/main/arch.md)
 * [JACK to ASIO (Debian-based)](https://github.com/theNizo/linux_rocksmith/blob/main/debian.md)
 
+[OBS guide for these setups](https://github.com/theNizo/linux_rocksmith/blob/main/obs.md)
+
 (The links currently redirect to my GitHub repo, because the site builder messes up parts of the text.)
 
 ## Scripts
