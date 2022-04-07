@@ -44,7 +44,8 @@ At the moment no one has figured out how to get JACK to ASIO working with pipewi
 * [JACK to ASIO (Arch-based)](arch.md)
 * [JACK to ASIO (Debian-based)](debian.md)
 
-[OBS guide for these setups](obs.md)
+* [OBS guide for these setups](obs.md)
+* [Steps I cut out](unused.md)
 
 ## Scripts
 
