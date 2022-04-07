@@ -50,14 +50,11 @@ rm -rf build64
 make 32
 make 64
 
-# install on wine
 sudo cp build32/wineasio.dll /usr/lib32/wine/i386-windows/wineasio.dll
 sudo cp build32/wineasio.dll.so /usr/lib32/wine/i386-unix/wineasio.dll.so
 sudo cp build64/wineasio.dll /usr/lib/wine/x86_64-windows/wineasio.dll
 sudo cp build64/wineasio.dll.so /usr/lib/wine/x86_64-unix/wineasio.dll.so
 ```
-
-In theory, this should also work with Lutris runners (located in `$HOME/.local/share/lutris/runners/wine/`)
 
 </details>
 
@@ -103,6 +100,8 @@ cp /usr/lib/wine/x86_64-unix/wineasio.dll.so "$PROTON/lib64/wine/x86_64-unix/win
 cp /usr/lib32/wine/i386-windows/wineasio.dll "$PROTON/lib/wine/wineasio.dll.so"
 cp /usr/lib/wine/x86_64-unix/wineasio.dll.so "$PROTON/lib64/wine/wineasio.dll.so"
 ```
+
+In theory, this should also work with Lutris runners (located in `$HOME/.local/share/lutris/runners/wine/`)
 
 ## Setting up the game's prefix/compatdata
 

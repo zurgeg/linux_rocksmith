@@ -44,14 +44,21 @@ Note: despite what is said in the [wineasio repo](https://github.com/wineasio/wi
 * /usr/lib/x86_64-linux-gnu/wine/wineasio.dll.so
 * /usr/lib/x86_64-linux-gnu/wine/wineasio.dll.so
 
-To make Proton use wineasio, we need to copy these files into the appropriate locations:
+To make Proton use wineasio, we need to copy these files into the appropriate locations. Watch out for variables:
 
 ```
+# Recent Proton versions
 cp /usr/lib/i386-linux-gnu/wine/wineasio.dll "$PROTON/lib/wine/i386-windows/wineasio.dll"
 cp /usr/lib/i386-linux-gnu/wine/wineasio.dll.so "$PROTON/lib/wine/i386-unix/wineasio.dll.so"
 cp /usr/lib/x86_64-linux-gnu/wine/wineasio.dll "$PROTON/lib64/wine/x86_64-windows/wineasio.dll"
 cp /usr/lib/x86_64-linux-gnu/wine/wineasio.dll.so "$PROTON/lib64/wine/x86_64-unix/wineasio.dll.so"
+
+# for Proton versions 6.5 and below
+cp /usr/lib/i386-linux-gnu/wine/wineasio.dll.so "$PROTON/lib/wine/wineasio.dll.so"
+cp /usr/lib/x86_64-linux-gnu/wine/wineasio.dll.so "$PROTON/lib64/wine/wineasio.dll.so"
 ```
+
+In theory, this should also work with Lutris runners (located in `$HOME/.local/share/lutris/runners/wine/`)
 
 <details>
 	<summary>Troubleshooting</summary>
@@ -65,7 +72,7 @@ This should output 4 paths (ignore the errors).
 ## Setting up the game's prefix/compatdata
 
 1. Delete or rename `$STEAMLIBRARY/steamapps/compatdata/221680`, then start Rocksmith and stop the game once it's running.
-1. WINEPREFIX=$STEAMLIBRARY/steamapps/compatdata/221680/pfx regsrv32 /usr/lib/i386-linux-gnu/wine/wineasio.dll (Errors are normal, should end with "regsvr32: Successfully registered DLL [...]")
+1. `WINEPREFIX=$STEAMLIBRARY/steamapps/compatdata/221680/pfx regsrv32 /usr/lib/i386-linux-gnu/wine/wineasio.dll` (Errors are normal, should end with "regsvr32: Successfully registered DLL [...]")
 
 I don't know a way to check if this is set up correctly. This is one of the first steps I'd redo when I have issues.
 
@@ -93,4 +100,40 @@ Edit RS_ASIO.ini: fill in `WineASIO` where it says `Driver=`. Do this for `[Asio
 
 ## Starting the game
 
-In Debian-based distros, the game should be able to run by pressing "Play" in Steam. Make sure JACK is running.
+Delete the `Rocksmith.ini` inside your Rocksmith installation. It will auto-generate with the correct values. The only important part is the `LatencyBuffer=`, which has to match the Buffer Periods.
+
+Steam and JACK need to be running.
+
+If we start the game from Steam, the game cant connect to wineasio (you won't have sound and will get an error message). So there's two ways around that:
+
+### Command (No Lutris)
+
+```
+# cd is necessary for the Rocksmith.ini and the DLC folder
+cd $STEAMLIBRARY/steamapps/common/Rocksmith2014
+WINEPREFIX=$STEAMLIBRARY/steamapps/compatdata/221680/pfx $PROTON/bin/wine $STEAMLIBRARY/steamapps/common/Rocksmith2014/Rocksmith2014.exe
+```
+
+### Yes Lutris
+
+We need to add Proton as a Lutris runner. This is not officially supported, but otherwise the game can't find Steam.
+
+```
+cd ~/.local/share/lutris/runners/wine
+ln -s $PROTON Proton-#.##
+```
+
+Restart Lutris. Add a game:
+
+* General:
+	* Name: Rocksmith® 2014 Edition - Remastered
+	* Runner: Wine
+	* Release year: 2014
+* Game Options
+	* Executable: $STEAMLIBRARY/steamapps/common/Rocksmith 2014/Rocksmith2014.exe
+	* Working directory: $STEAMLIBRARY/steamapps/common/Rocksmith 2014/
+	* Wine prefix: $STEAMLIBRARY/steamapps/compatdata/221680/pfx
+* Runner options
+	* Wine version: Proton-#.##
+
+Save this and hit "Play."
