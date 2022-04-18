@@ -2,9 +2,16 @@
 trap "exit" INT
 
 # double-hashtag (## comment) means it is a TODO
+# Note: Someone once had issues with the realtime setup on debian-based. I don't check for this here.
+
+# because I like to write this.
+exit_msg() {
+	echo "Exiting..."
+	exit 1
+}
 
 # determines the distro, based on the package manager. This way, I don't need a list of child-distros.
-# sets a few distro-specific variables
+# sets a few distro-specific variables. I'm assuming they only differ by parent-distro.
 if [ -f "$(which apt)" ]; then
 	dist=deb
 	x32dll=/usr/lib/i386-linux-gnu/wine/wineasio.dll
@@ -18,13 +25,15 @@ elif [ -f "$(which pacman)" ]; then
 	x64dll=/usr/lib/wine/x86_64-windows/wineasio.dll
 	x64so=/usr/lib/wine/x86_64-unix/wineasio.dll.so
 else
-	echo "Your distro does not seem to be compatible. Exiting..."
-	exit 1
+	echo "Your distro does not seem to be compatible."
+	exit_msg
 fi
 
 clear
 echo "!! The provider of this script takes no responsibility !!"
 echo "!! and will not guarantee for this to work             !!"
+echo "!!                                                     !!"
+echo "!! The Script is experimental. I didn't really test it.!!"
 echo
 echo "============================================"
 echo "WARNING! You should set the Proton version"
@@ -63,11 +72,15 @@ while ! [ -f "$runner/dist/bin/wine" -o -f "$runner/files/bin/wine" -o -f "$runn
 	read -p "Proton: " runner
 done
 
-# adjust path accordingly.
-if [ -f dist/bin/wine ]; then
+# adjust path accordingly, if needed.
+if [ -f "$runner/dist/bin/wine" ]; then
 	runner="$runner/dist"
-elif [ -f files/bin/wine ]; then
+elif [ -f "$runner/files/bin/wine" ]; then
 	runner="$runner/files"
+elif ! [ -f "$runner/bin/wine" ]; then # dead code, unless I messed up while writing this script
+	echo "There's something wrong with the path recognition."
+	echo "Please open an issue on the repo."
+	exit_msg
 fi
 
 # install needed stuff
@@ -83,10 +96,17 @@ case $dist in
 		sudo apt install cadence carla wineasio jackd2
 		;;
 	"arch")
+		echo "If you're asked to replace JACK, do so."
+		sleep 1
+		# We can't use noconfirm here, because you might have to replace jack
 		if [ -f $(which yay) ]; then
-			yay -S carla jack2 lib32-jack2 realtime-privileges wineasio # this can't be with noconfirm, because you might have to replace jack
+			yay -S carla jack2 lib32-jack2 realtime-privileges wineasio
+		elif [ -f $(which paru) ]; then # literally the same text, but in case other AUR helpers have a different syntax
+			paru -S carla jack2 lib32-jack2 realtime-privileges wineasio
 		else
-			echo "yay is not installed on this system. Other aur helpers are not supported right now. If you use another one, please open an issue on the GitHub repo."
+			echo "This script currently only supports yay or paru, but could"
+			echo "not detect either on your system. If you want to use"
+			echo "another AUR helper, please open an issue on the GitHub repo."
 			exit 1
 		fi
 		;;
@@ -100,7 +120,7 @@ esac
 
 # add user to needed groups
 sudo groupadd audio
-suod groupadd realtime
+sudo groupadd realtime
 sudo usermod -aG audio $USER
 sudo usermod -aG realtime $USER
 
@@ -130,30 +150,27 @@ WINEPREFIX="$prefix" regsvr32 /usr/lib32/wine/i386-windows/wineasio.dll # regist
 wget https://github.com/mdias/rs_asio/releases/download/v0.5.7/release-0.5.7.zip -O RS_ASIO.zip
 unzip RS_ASIO.zip -d "$game"
 rm "$game/RS_ASIO.ini"
-wget https://raw.githubusercontent.com/theNizo/linux_rocksmith/main/RS_ASIO.ini -o "$game/RS_ASIO.ini"
+wget https://raw.githubusercontent.com/theNizo/linux_rocksmith/main/RS_ASIO.ini -O "$game/RS_ASIO.ini"
 rm RS_ASIO.zip
 rm "$game/Rocksmith.ini"
 
-if [ $dist = "arch" ]; then
-	# create launch script; optionally figure out a way with lutris
-	touch $HOME/rocksmith.sh
-	echo "#!/bin/bash" >> $HOME/rocksmith.sh
-	echo "cd \"$game\"" >> $HOME/rocksmith.sh
-	echo "WINEPREFIX=\"$prefix\" \"$runner/bin/wine\" \"$game/Rocksmith2014.exe\"" >> $HOME/rocksmith.sh
-	chmod u+x $HOME/rocksmith.sh
+# create launch script
+## optionally figure out a way with lutris
+# is there a more beautiful way? (Don't want to download yet another file though.)
+touch $HOME/rocksmith.sh
+echo "#!/bin/bash" >> $HOME/rocksmith.sh
+echo "cd \"$game\"" >> $HOME/rocksmith.sh
+echo "WINEPREFIX=\"$prefix\" \"$runner/bin/wine\" \"$game/Rocksmith2014.exe\"" >> $HOME/rocksmith.sh
+chmod u+x $HOME/rocksmith.sh
 
 echo
 echo "==============================================="
 echo "All done so far. Please Set up JACK, preferably"
-echo "in Carla. You can use qjackctl too."
-
-if [ $dist = "arch" ]; then
-	echo "To run the game, start JACK, have Steam"
-	echo "opened, then run ~/rocksmith.sh"
-else
-	echo "To run the game, start JACK, then start"
-	echo "the game in Steam."
-fi
+echo "in Cadence. You can use qjackctl too."
+echo "Instructions for that are in my guide."
+echo
+echo "To run the game, start JACK, have Steam"
+echo "opened, then run ~/rocksmith.sh"
 
 echo "==============================================="
 echo
