@@ -171,7 +171,9 @@ echo "Instructions for that are in my guide."
 echo
 echo "To run the game, start JACK, have Steam"
 echo "opened, then run ~/rocksmith.sh"
-
+echo
+echo "Please log out and back in, so that your groups"
+echo "and permissions are reloaded."
 echo "==============================================="
 echo
 
