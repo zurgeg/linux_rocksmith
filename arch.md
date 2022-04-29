@@ -118,6 +118,8 @@ Edit RS_ASIO.ini: fill in `WineASIO` where it says `Driver=`. Do this for `[Asio
 
 ## Set up JACK with Cadence
 
+(If you use pipewire, skip this.)
+
 1. Open Cadence. If it says on the bottom left that you should log out and back in, and you already did that, restart your machine.
 1. Go to `Configure -> Engine`. Make sure that "Realtime" is ticked.
 1. Go to "Driver", select ALSA.
@@ -145,8 +147,10 @@ If we start the game from Steam, the game cant connect to wineasio (you won't ha
 ```
 # cd is necessary for the Rocksmith.ini and the DLC folder
 cd $STEAMLIBRARY/steamapps/common/Rocksmith2014
-WINEPREFIX=$STEAMLIBRARY/steamapps/compatdata/221680/pfx $PROTON/bin/wine $STEAMLIBRARY/steamapps/common/Rocksmith2014/Rocksmith2014.exe
+PIPEWIRE_LATENCY=256/48000 WINEPREFIX=$STEAMLIBRARY/steamapps/compatdata/221680/pfx $PROTON/bin/wine $STEAMLIBRARY/steamapps/common/Rocksmith2014/Rocksmith2014.exe
 ```
+
+(`PIPEWIRE_LATENCY` is only needed, if you use pipewire. For non-pipewire users, it doesn't do any harm. I just wanted to have ONE command)
 
 ### Yes Lutris
 
@@ -165,6 +169,8 @@ Open Lutris and add a game:
 * Runner options
 	* Wine version: Custom
 	* (Toggle Advanced options to see this) Custom Wine executable: enter path to `dist/bin/wine` or `files/bin/wine` of your desired Proton version
+* System options (only needed for pipewire)
+	* Environment Variables: PIPEWIRE_LATENCY=256/48000
 
 (People who don't use the Steam version can just choose whatever runner they like.)
 

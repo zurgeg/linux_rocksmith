@@ -43,6 +43,7 @@ At the moment no one has figured out how to get JACK to ASIO working with pipewi
 * [ALSA - Quick and dirty](quick.md)
 * [JACK to ASIO (Arch-based)](arch.md)
 * [JACK to ASIO (Debian-based)](debian.md)
+* [JACK to ASIO with pipewire](pipewire.md)
 
 * [OBS guide for these setups](obs.md)
 * [Steps I cut out](unused.md)
