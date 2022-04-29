@@ -150,14 +150,9 @@ WINEPREFIX=$STEAMLIBRARY/steamapps/compatdata/221680/pfx $PROTON/bin/wine $STEAM
 
 ### Yes Lutris
 
-We need to add Proton as a Lutris runner. This is not officially supported, but otherwise the game can't find Steam.
+Using Proton outside of it's wrapper is discouraged, but if we use normal wine, the game can't find Steam, which is needed for Steam's DRM.
 
-```
-cd ~/.local/share/lutris/runners/wine
-ln -s $PROTON Proton-#.##
-```
-
-Restart Lutris. Add a game:
+Open Lutris and add a game:
 
 * General:
 	* Name: Rocksmith® 2014 Edition - Remastered
@@ -168,6 +163,9 @@ Restart Lutris. Add a game:
 	* Working directory: $STEAMLIBRARY/steamapps/common/Rocksmith 2014/
 	* Wine prefix: $STEAMLIBRARY/steamapps/compatdata/221680/pfx
 * Runner options
-	* Wine version: Proton-#.##
+	* Wine version: Custom
+	* (Toggle Advanced options to see this) Custom Wine executable: enter path to `dist/bin/wine` or `files/bin/wine` of your desired Proton version
+
+(People who don't use the Steam version can just choose whatever runner they like.)
 
 Save this and hit "Play."
