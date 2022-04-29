@@ -47,6 +47,7 @@ At the moment no one has figured out how to get JACK to ASIO working with pipewi
 
 * [OBS guide for these setups](obs.md)
 * [Steps I cut out](unused.md)
+* [Why all of this works](theory.md)
 
 ## Scripts
 
