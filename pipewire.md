@@ -1,3 +1,5 @@
+(Thanks to [vscsilva](https://github.com/vscsilva) for pointing out that it works now)
+
 # JACK to ASIO, but it's pipewire
 
 It's pretty much the same rundown, so I decided to just point out the differences. I will probably polish this in the future.
