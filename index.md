@@ -1,3 +1,5 @@
+# [This site is out of date, please click here for the newest version.](https://github.com/theNizo/linux_rocksmith/)
+
 # Rocksmith 2014 on Linux
 
 These are a few Guides to get [Rocksmith 2014](https://store.steampowered.com/app/221680/Rocksmith_2014_Edition__Remastered/) running on Linux. In case you haven't tried gaming on Linux yet, other than not working, it won't get harder than this by far for other games.
