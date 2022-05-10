@@ -8,7 +8,7 @@ It's pretty much the same rundown, so I decided to just point out the difference
 
 Don't install `jack2`, don't install `cadence` (because it requires `jack2`). Here's what you need, assuming you have `pipewire` and a session manager (probably `wireplumber`) already installed:
 
-`pipewire-alsa pipewire-pulse pipewire-jack qjackctl realtime-privileges pavucontrol`
+`wine-staging pipewire-alsa pipewire-pulse pipewire-jack lib32-pipewire-jack qpwgraph realtime-privileges pavucontrol`
 
 I've written this in a way that you can just put your package manager's install command in front of it.
 
