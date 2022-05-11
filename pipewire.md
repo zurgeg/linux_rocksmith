@@ -24,10 +24,16 @@ make 32
 make 64
 
 # Install on normal wine
+# Arch-based
 sudo cp build32/wineasio.dll /usr/lib32/wine/i386-windows/wineasio.dll
 sudo cp build32/wineasio.dll.so /usr/lib32/wine/i386-unix/wineasio.dll.so
 sudo cp build64/wineasio.dll /usr/lib/wine/x86_64-windows/wineasio.dll
 sudo cp build64/wineasio.dll.so /usr/lib/wine/x86_64-unix/wineasio.dll.so
+# Debian-based
+sudo cp build32/wineasio.dll /usr/lib/i386-linux-gnu/wine/wineasio.dll.so
+sudo cp build32/wineasio.dll.so /usr/lib/i386-linux-gnu/wine/wineasio.dll
+sudo cp build64/wineasio.dll /usr/lib/x86_64-linux-gnu/wine/wineasio.dll.so
+sudo cp build64/wineasio.dll.so /usr/lib/x86_64-linux-gnu/wine/wineasio.dll.so
 
 # add to Proton version !! watch out for variables !!
 cp /usr/lib32/wine/i386-windows/wineasio.dll "$PROTON/lib/wine/i386-windows/wineasio.dll"
