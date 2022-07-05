@@ -1,0 +1,1 @@
+For the packages, do `pacman -Q <packages here>`. Should output the names and versions without errors.
