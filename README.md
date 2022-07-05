@@ -34,18 +34,30 @@ I will refer to them with variables. You can actually set them as variables via 
 
 # Guides
 
-There are two ways to do this. The one most people on [ProtonDB](https://www.protondb.com/app/221680) use is quicker, but results in high delay and distorted sound. It routes the sound through ALSA.
+There are two ways to do this. The one most people on [ProtonDB](https://www.protondb.com/app/221680) use is quicker, but results in high delay and distorted sound. It routes the sound through ALSA. This can be found in "Other Guides".
 
-Then there's the way of routing the audio through JACK -> wineASIO -> RS_ASIO, which has less delay and sounds better, but also takes longer to set up. I have Guides for Arch-based Distros and Debian-based ones.
+Then there's the way of routing the audio through JACK -> wineASIO -> RS_ASIO, which has less delay and sounds better, but also takes longer to set up. I have Guides for Arch-based Distros and Debian-based ones. These can be found in the tables below.
 
-* [ALSA - Quick and dirty](quick.md)
-* [JACK to ASIO (Arch-based)](arch.md)
-* [JACK to ASIO (Debian-based)](debian.md)
-* [JACK to ASIO with pipewire](pipewire.md)
+**Recent Proton versions:**
 
-* [OBS guide for these setups](obs.md)
-* [Steps I cut out](unused.md)
-* [Why all of this works](theory.md)
+|| pipewire | non-pipewire |
+|---|---|---|
+| Arch | [Guide](guides/setup/arch-pipewire-new.md) | [Guide](guides/setup/arch-non-pipewire-new.md) |
+| Debian | [Guide](guides/setup/deb-pipewire-new.md) | [Guide](guides/setup/deb-non-pipewire-new.md) |
+
+**Proton versions 6.5 and below:**
+
+|| pipewire | non-pipewire |
+|---|---|---|
+| Arch | [Guide](guides/setup/arch-pipewire-old.md) | [Guide](guides/setup/arch-non-pipewire-old.md) |
+| Debian | [Guide](guides/setup/deb-pipewire-old.md) | [Guide](guides/setup/deb-non-pipewire-old.md) |
+
+**Other Guides:**
+
+* [ALSA - Quick and dirty](guides/quick.md)
+* [Steps I cut out](guides/unused.md)
+* [OBS guide for these setups](guides/obs.md)
+* [Why all of this works](guides/theory.md)
 
 ## Scripts
 

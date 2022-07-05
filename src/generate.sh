@@ -7,7 +7,7 @@ trap "exit" INT
 # paths to the wineasio files are handled in a seperate .sh, because calling them like that makes sed want to run whatever is at those paths.
 # Also, it's seperate so you can adjust them if needed, without having to work on this script.
 
-path=../guides
+path=../guides/setup
 
 echo -1
 rm $path/* # clean first
@@ -72,7 +72,7 @@ for dist in arch deb; do
 done
 
 echo 13
-echo "missing:"
+echo "missing replacements, by file:"
 for file in $(ls $path); do
 	echo $file
 	cat $path/$file | grep -P "000-"
