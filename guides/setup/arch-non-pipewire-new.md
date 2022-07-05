@@ -15,9 +15,9 @@
 
 (I recommend `wine-staging`, but usual `wine` works as well.)
 
-If asked, replace \`jack\`.
+If asked, replace `jack`.
 
-\`\`\`
+```
 sudo pacman -S cadence carla jack2 lib32-jack2 realtime-privileges
 # the groups should already exist, but just in case
 sudo groupadd audio
@@ -32,6 +32,7 @@ Log out and back in.
 For the packages, do `pacman -Q <packages here>`. Should output the names and versions without errors.
 
 	For the groups, run `groups`. This will give you a list, which should contain "audio" and "realtime".
+</details>
 
 # wineasio
 

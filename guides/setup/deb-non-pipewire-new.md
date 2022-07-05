@@ -38,6 +38,7 @@ Log out and back in.
 
 
 	For the groups, run `groups`. This will give you a list, which should contain "audio" and "realtime".
+</details>
 
 # wineasio
 

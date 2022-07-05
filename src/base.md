@@ -29,6 +29,7 @@ Log out and back in.
 	000-install-check-000
 
 	For the groups, run `groups`. This will give you a list, which should contain "audio" and "realtime".
+</details>
 
 # wineasio
 
