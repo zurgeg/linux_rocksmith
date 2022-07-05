@@ -43,14 +43,14 @@ Then there's the way of routing the audio through JACK -> wineASIO -> RS_ASIO, w
 || pipewire | non-pipewire |
 |---|---|---|
 | Arch | [Guide](guides/setup/arch-pipewire-new.md) | [Guide](guides/setup/arch-non-pipewire-new.md) |
-| Debian | [Guide](guides/setup/deb-pipewire-new.md) | [Guide](guides/setup/deb-non-pipewire-new.md) |
+| Debian | [Not finished](guides/setup/deb-pipewire-new.md) | [Guide](guides/setup/deb-non-pipewire-new.md) |
 
 **Proton versions 6.5 and below:**
 
 || pipewire | non-pipewire |
 |---|---|---|
 | Arch | [Guide](guides/setup/arch-pipewire-old.md) | [Guide](guides/setup/arch-non-pipewire-old.md) |
-| Debian | [Guide](guides/setup/deb-pipewire-old.md) | [Guide](guides/setup/deb-non-pipewire-old.md) |
+| Debian | [Not finished](guides/setup/deb-pipewire-old.md) | [Guide](guides/setup/deb-non-pipewire-old.md) |
 
 **Other Guides:**
 
