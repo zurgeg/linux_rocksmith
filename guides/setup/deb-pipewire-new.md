@@ -17,7 +17,10 @@ I don't have a debian-based machine to test this. Everything up to starting the 
 
 (I recommend `wine-staging`, but usual `wine` works as well.)
 
-[missing]
+[missing, sorry]
+
+```
+[missing, sorry]
 # the groups should already exist, but just in case
 sudo groupadd audio
 suod groupadd realtime
