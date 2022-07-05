@@ -1,6 +1,4 @@
-# JACK to ASIO with pipewire on Debian-based distros
-
-I don't have a debian-based machine to test this. Everything up to starting the game was tested in a VM.
+# JACK to ASIO on Arch-based distros
 
 ## Table of contents
 
@@ -17,7 +15,10 @@ I don't have a debian-based machine to test this. Everything up to starting the 
 
 (I recommend `wine-staging`, but usual `wine` works as well.)
 
-[missing]
+If asked, replace \`jack\`.
+
+\`\`\`
+sudo pacman -S cadence carla jack2 lib32-jack2 realtime-privileges
 # the groups should already exist, but just in case
 sudo groupadd audio
 suod groupadd realtime
@@ -28,13 +29,16 @@ sudo usermod -aG realtime $USER`
 Log out and back in.
 
 <details><summary> How to check if this worked correctly</summary>
-
+For the packages, do `pacman -Q <packages here>`. Should output the names and versions without errors.
 
 	For the groups, run `groups`. This will give you a list, which should contain "audio" and "realtime".
 
 # wineasio
 
 Installing `base-devel` is very useful for using the AUR and compiling in general.
+
+<details>
+	<summary>Compile from source</summary>
 
 [Download](https://github.com/wineasio/wineasio/releases) the newest zip and unpack it. Open a terminal inside the newly created folder and run the following commands:
 
@@ -46,11 +50,41 @@ make 32
 make 64
 
 # Install on normal wine
-sudo cp build32/wineasio.dll /usr/lib/i386-linux-gnu/wine/wineasio.dll
-sudo cp build32/wineasio.dll.so /usr/lib/i386-linux-gnu/wine/wineasio.dll.so
-sudo cp build64/wineasio.dll /usr/lib/x86_64-linux-gnu/wine/wineasio.dll
-sudo cp build64/wineasio.dll.so /usr/lib/x86_64-linux-gnu/wine/wineasio.dll.so
+sudo cp build32/wineasio.dll /usr/lib32/wine/i386-windows/wineasio.dll
+sudo cp build32/wineasio.dll.so /usr/lib32/wine/i386-unix/wineasio.dll.so
+sudo cp build64/wineasio.dll /usr/lib/wine/x86_64-windows/wineasio.dll
+sudo cp build64/wineasio.dll.so /usr/lib/wine/x86_64-unix/wineasio.dll.so
 ```
+
+</details>
+
+<details>
+<summary>Use the AUR</summary>
+
+`yay` is an AUR helper, which I will use as an example. It will install the AUR package for you. You can do this in other ways too, of course
+
+```
+yay -S wineasio --noconfirm
+```
+
+Notes:
+
+* If it exits with an error, try and remove `--noconfirm`.
+* [Tutorial on `yay`](https://youtube.com/watch?v=BbnSoY_yDr8)
+</details>
+
+wineasio is now installed on your native wine version.
+
+<details>
+	<summary>How to check if it's installed correctly</summary>
+
+	find /usr/lib/ -name "wineasio.dll"
+	find /usr/lib/ -name "wineasio.dll.so"
+	find /usr/lib32/ -name "wineasio.dll"
+	find /usr/lib32/ -name "wineasio.dll.so"
+
+This should output 4 paths (ignore the errors).
+</details>
 
 `wineasio` is now installed on your native wine installation.
 
@@ -69,17 +103,17 @@ To make Proton use wineasio, we need to copy these files into the appropriate lo
 
 ```
 # !!! WATCH OUT FOR VARIABLES !!!
-cp /usr/lib/i386-linux-gnu/wine/wineasio.dll.so "$PROTON/lib/wine/i386-unix/wineasio.dll.so"
-cp /usr/lib/x86_64-linux-gnu/wine/wineasio.dll.so "$PROTON/lib64/wine/x86_64-unix/wineasio.dll.so"
-cp /usr/lib/i386-linux-gnu/wine/wineasio.dll "$PROTON/lib/wine/i386-windows/wineasio.dll"
-cp /usr/lib/x86_64-linux-gnu/wine/wineasio.dll "$PROTON/lib64/wine/x86_64-windows/wineasio.dll"
+cp /usr/lib32/wine/i386-unix/wineasio.dll.so "$PROTON/lib/wine/i386-unix/wineasio.dll.so"
+cp /usr/lib/wine/x86_64-unix/wineasio.dll.so "$PROTON/lib64/wine/x86_64-unix/wineasio.dll.so"
+cp /usr/lib32/wine/i386-windows/wineasio.dll "$PROTON/lib/wine/i386-windows/wineasio.dll"
+cp /usr/lib/wine/x86_64-windows/wineasio.dll "$PROTON/lib64/wine/x86_64-windows/wineasio.dll"
 
 In theory, this should also work with Lutris runners (located in `$HOME/.local/share/lutris/runners/wine/`)
 
 ## Setting up the game's prefix/compatdata
 
 1. Delete or rename `$STEAMLIBRARY/steamapps/compatdata/221680`, then start Rocksmith and stop the game once it's running.
-1. `WINEPREFIX=$STEAMLIBRARY/steamapps/compatdata/221680/pfx regsvr32 /usr/lib/i386-linux-gnu/wine/wineasio.dll` (Errors are normal, should end with "regsvr32: Successfully registered DLL [...]")
+1. `WINEPREFIX=$STEAMLIBRARY/steamapps/compatdata/221680/pfx regsvr32 /usr/lib32/wine/i386-windows/wineasio.dll` (Errors are normal, should end with "regsvr32: Successfully registered DLL [...]")
 
 I don't know a way to check if this is set up correctly. This is one of the first steps I'd redo when I have issues.
 
@@ -91,15 +125,25 @@ Edit RS_ASIO.ini: fill in `WineASIO` where it says `Driver=`. Do this for `[Asio
 
 ## Set up JACK
 
-Open pavucontrol ("PulseAudio Volume Control"), go to "Configuration" and make sure there's exactly one input device and one output device enabled.
-
-All available devices will automatically be tied to Rocksmith, and the game doesn't like you messing around in the patchbay (= it would crash).
+1. Open Cadence. If it says on the bottom left that you should log out and back in, and you already did that, restart your machine.
+1. Go to `Configure -> Engine`. Make sure that "Realtime" is ticked.
+1. Go to "Driver", select ALSA.
+ * If you use the same device for input and output, untick "Duplex Mode" and select the device you want to use in the first line. If you use different devices for in- and output, tick "Duplex Mode" and select the devices in the 2nd and 3rd line. Please note that the names are not that intuitive to begin with.
+ * Input Channels: <no. of players>; Output Channels: 2
+ * Sample Rate: 48000
+ * Buffer Size and Buffer Periods: Bigger Buffer Size equals more stability and higher latency. AFAIK you can reduce the Buffer Size, if you add more Periods, but I'm not sure about that. 256/4 (~5ms) works fine for me.
+1. Press okay and go to `Tweaks -> WineASIO
+ * Tick everything
+ * Match No. of in- and -outputs
+ * Match Buffer size
+1. Press apply
+1. You're set up. To start JACK, you can press "Start" under "System"
 
 ## Starting the game
 
 Delete the `Rocksmith.ini` inside your Rocksmith installation. It will auto-generate with the correct values. The only important part is the `LatencyBuffer=`, which has to match the Buffer Periods.
 
-Steam needs to be running.
+Steam and JACK need to be running.
 
 If we start the game from Steam, the game cant connect to wineasio (you won't have sound and will get an error message). So there's two ways around that:
 
@@ -111,11 +155,7 @@ cd $STEAMLIBRARY/steamapps/common/Rocksmith2014
 PIPEWIRE_LATENCY=256/48000 WINEPREFIX=$STEAMLIBRARY/steamapps/compatdata/221680/pfx $PROTON/bin/wine $STEAMLIBRARY/steamapps/common/Rocksmith2014/Rocksmith2014.exe
 ```
 
-`PIPEWIRE_LATENCY`: Rocksmith needs a sample rate of 48000. 256 refers to the buffer size. This number worked great for me, but you can experiment with others, of course.
-
-(You don't always have to do this, but this give me the most reliable experience)
-
-As soon as you see the games window, take the focus away from it, eg. on a different window. Don't focus Rocksmith until the logos start to appear (it's usually the same amount of time). At this point, RS_ASIO is initialized and you can start playing.
+(`PIPEWIRE_LATENCY` is only needed for pipewire, but doesn't do any harm on non-pipewire systems.)
 
 ### Yes Lutris
 
@@ -138,5 +178,7 @@ Open Lutris and add a game:
 	* Environment Variables: PIPEWIRE_LATENCY=256/48000
 
 (People who don't use the Steam version can just choose whatever runner they like.)
+
+Save this and hit "Play."
 
 

@@ -1,6 +1,4 @@
-# JACK to ASIO on Debian-based distros
-
-I don't have a debian-based machine to test this. Everything up to starting the game was tested in a VM.
+# JACK to ASIO on Arch-based distros
 
 ## Table of contents
 
@@ -17,14 +15,10 @@ I don't have a debian-based machine to test this. Everything up to starting the 
 
 (I recommend `wine-staging`, but usual `wine` works as well.)
 
-When asked about realtime privileges, select yes with the arrow keys and confirm with enter.
+If asked, replace \`jack\`.
 
-```
-sudo apt-get install apt-transport-https gpgv
-wget https://launchpad.net/~kxstudio-debian/+archive/kxstudio/+files/kxstudio-repos_10.0.3_all.deb
-sudo dpkg -i kxstudio-repos_10.0.3_all.deb
-sudo apt update
-sudo apt install cadence carla wineasio jackd2
+\`\`\`
+sudo pacman -S cadence carla jack2 lib32-jack2 realtime-privileges
 # the groups should already exist, but just in case
 sudo groupadd audio
 suod groupadd realtime
@@ -35,7 +29,7 @@ sudo usermod -aG realtime $USER`
 Log out and back in.
 
 <details><summary> How to check if this worked correctly</summary>
-
+For the packages, do `pacman -Q <packages here>`. Should output the names and versions without errors.
 
 	For the groups, run `groups`. This will give you a list, which should contain "audio" and "realtime".
 
@@ -56,10 +50,10 @@ make 32
 make 64
 
 # Install on normal wine
-sudo cp build32/wineasio.dll /usr/lib/i386-linux-gnu/wine/wineasio.dll
-sudo cp build32/wineasio.dll.so /usr/lib/i386-linux-gnu/wine/wineasio.dll.so
-sudo cp build64/wineasio.dll /usr/lib/x86_64-linux-gnu/wine/wineasio.dll
-sudo cp build64/wineasio.dll.so /usr/lib/x86_64-linux-gnu/wine/wineasio.dll.so
+sudo cp build32/wineasio.dll /usr/lib32/wine/i386-windows/wineasio.dll
+sudo cp build32/wineasio.dll.so /usr/lib32/wine/i386-unix/wineasio.dll.so
+sudo cp build64/wineasio.dll /usr/lib/wine/x86_64-windows/wineasio.dll
+sudo cp build64/wineasio.dll.so /usr/lib/wine/x86_64-unix/wineasio.dll.so
 ```
 
 </details>
@@ -109,17 +103,15 @@ To make Proton use wineasio, we need to copy these files into the appropriate lo
 
 ```
 # !!! WATCH OUT FOR VARIABLES !!!
-cp /usr/lib/i386-linux-gnu/wine/wineasio.dll.so "$PROTON/lib/wine/i386-unix/wineasio.dll.so"
-cp /usr/lib/x86_64-linux-gnu/wine/wineasio.dll.so "$PROTON/lib64/wine/x86_64-unix/wineasio.dll.so"
-cp /usr/lib/i386-linux-gnu/wine/wineasio.dll "$PROTON/lib/wine/i386-windows/wineasio.dll"
-cp /usr/lib/x86_64-linux-gnu/wine/wineasio.dll "$PROTON/lib64/wine/x86_64-windows/wineasio.dll"
+cp /usr/lib32/wine/i386-unix/wineasio.dll.so "$PROTON/lib/wine/i386-unix/wineasio.dll.so"
+cp /usr/lib/wine/x86_64-unix/wineasio.dll.so "$PROTON/lib64/wine/x86_64-unix/wineasio.dll.so"
 
 In theory, this should also work with Lutris runners (located in `$HOME/.local/share/lutris/runners/wine/`)
 
 ## Setting up the game's prefix/compatdata
 
 1. Delete or rename `$STEAMLIBRARY/steamapps/compatdata/221680`, then start Rocksmith and stop the game once it's running.
-1. `WINEPREFIX=$STEAMLIBRARY/steamapps/compatdata/221680/pfx regsvr32 /usr/lib/i386-linux-gnu/wine/wineasio.dll` (Errors are normal, should end with "regsvr32: Successfully registered DLL [...]")
+1. `WINEPREFIX=$STEAMLIBRARY/steamapps/compatdata/221680/pfx regsvr32 /usr/lib32/wine/i386-windows/wineasio.dll` (Errors are normal, should end with "regsvr32: Successfully registered DLL [...]")
 
 I don't know a way to check if this is set up correctly. This is one of the first steps I'd redo when I have issues.
 
@@ -184,5 +176,7 @@ Open Lutris and add a game:
 	* Environment Variables: PIPEWIRE_LATENCY=256/48000
 
 (People who don't use the Steam version can just choose whatever runner they like.)
+
+Save this and hit "Play."
 
 

@@ -103,4 +103,6 @@ Open Lutris and add a game:
 
 (People who don't use the Steam version can just choose whatever runner they like.)
 
-Save this and hit "Play." 000-pipewire-bootup-000
+Save this and hit "Play."
+
+000-pipewire-bootup-000

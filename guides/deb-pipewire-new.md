@@ -71,6 +71,8 @@ To make Proton use wineasio, we need to copy these files into the appropriate lo
 # !!! WATCH OUT FOR VARIABLES !!!
 cp /usr/lib/i386-linux-gnu/wine/wineasio.dll.so "$PROTON/lib/wine/i386-unix/wineasio.dll.so"
 cp /usr/lib/x86_64-linux-gnu/wine/wineasio.dll.so "$PROTON/lib64/wine/x86_64-unix/wineasio.dll.so"
+cp /usr/lib/i386-linux-gnu/wine/wineasio.dll "$PROTON/lib/wine/i386-windows/wineasio.dll"
+cp /usr/lib/x86_64-linux-gnu/wine/wineasio.dll "$PROTON/lib64/wine/x86_64-windows/wineasio.dll"
 
 In theory, this should also work with Lutris runners (located in `$HOME/.local/share/lutris/runners/wine/`)
 
@@ -137,4 +139,8 @@ Open Lutris and add a game:
 
 (People who don't use the Steam version can just choose whatever runner they like.)
 
+Save this and hit "Play."
 
+(You don't always have to do this, but this give me the most reliable experience)
+
+As soon as you see the games window, take the focus away from it, eg. on a different window. Don't focus Rocksmith until the logos start to appear (it's usually the same amount of time). At this point, RS_ASIO is initialized and you can start playing.
