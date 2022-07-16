@@ -2,7 +2,7 @@
 name: Something in the guide is wrong
 about: If you're certain that it's not an issue on your end
 title: ''
-labels: ''
+labels: documentation
 assignees: ''
 
 ---
