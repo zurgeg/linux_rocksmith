@@ -30,10 +30,11 @@ else
 fi
 
 clear
-echo "!! The provider of this script takes no responsibility !!"
-echo "!! and will not guarantee for this to work             !!"
-echo "!!                                                     !!"
-echo "!! The Script is experimental. I didn't really test it.!!"
+echo "!! The provider of this script takes no responsibility  !!"
+echo "!! and will not guarantee for this to work.             !!"
+echo "!! This script is not compatible with pipewire.         !!"
+echo "!!                                                      !!"
+echo "!! The Script is experimental. I didn't really test it. !!"
 echo
 echo "============================================"
 echo "WARNING! You should set the Proton version"
@@ -139,7 +140,7 @@ echo "The game will now start."
 echo "When the game opens and starts"
 echo "loading, you can close it again."
 echo "================================"
-steam://rungameid/221680 #run game
+xdg-open steam://rungameid/221680 #run game
 
 echo
 read -p "Press enter to continue"
@@ -176,5 +177,7 @@ echo "Please log out and back in, so that your groups"
 echo "and permissions are reloaded."
 echo "==============================================="
 echo
+
+cadence
 
 exit 0

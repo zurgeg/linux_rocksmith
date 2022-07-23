@@ -23,8 +23,11 @@ else
 fi
 
 clear
-echo "!! The provider of this script takes no responsibility !!"
-echo "!! and will not guarantee for this to work             !!"
+echo "!! The provider of this script takes no responsibility  !!"
+echo "!! and will not guarantee for this to work.             !!"
+echo "!! This script is not compatible with pipewire.         !!"
+echo "!!                                                      !!"
+echo "!! The Script is experimental. I didn't really test it. !!"
 echo
 
 # determine the game's install location
@@ -137,5 +140,7 @@ fi
 
 echo "==============================================="
 echo
+
+cadence
 
 exit 0
