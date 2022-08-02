@@ -18,7 +18,7 @@
 000-install-part-000
 # the groups should already exist, but just in case
 sudo groupadd audio
-suod groupadd realtime
+sudo groupadd realtime
 sudo usermod -aG audio $USER`
 sudo usermod -aG realtime $USER`
 ```

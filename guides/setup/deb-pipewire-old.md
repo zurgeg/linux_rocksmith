@@ -23,7 +23,7 @@ I don't have a debian-based machine to test this. Everything up to starting the 
 [missing, sorry]
 # the groups should already exist, but just in case
 sudo groupadd audio
-suod groupadd realtime
+sudo groupadd realtime
 sudo usermod -aG audio $USER`
 sudo usermod -aG realtime $USER`
 ```
@@ -116,9 +116,7 @@ PIPEWIRE_LATENCY=256/48000 WINEPREFIX=$STEAMLIBRARY/steamapps/compatdata/221680/
 
 `PIPEWIRE_LATENCY`: Rocksmith needs a sample rate of 48000. 256 refers to the buffer size. This number worked great for me, but you can experiment with others, of course.
 
-(You don't always have to do this, but this give me the most reliable experience)
-
-As soon as you see the games window, take the focus away from it, eg. on a different window. Don't focus Rocksmith until the logos start to appear (it's usually the same amount of time). At this point, RS_ASIO is initialized and you can start playing.
+(You don't always have to do this, but this give me the most reliable experience) As soon as you see the games window, take the focus away from it, eg. on a different window. Don't focus Rocksmith until the logos start to appear (it's usually the same amount of time). At this point, RS_ASIO is initialized and you can start playing.
 
 ### Yes Lutris
 
@@ -144,6 +142,4 @@ Open Lutris and add a game:
 
 Save this and hit "Play."
 
-(You don't always have to do this, but this give me the most reliable experience)
-
-As soon as you see the games window, take the focus away from it, eg. on a different window. Don't focus Rocksmith until the logos start to appear (it's usually the same amount of time). At this point, RS_ASIO is initialized and you can start playing.
+(You don't always have to do this, but this give me the most reliable experience) As soon as you see the games window, take the focus away from it, eg. on a different window. Don't focus Rocksmith until the logos start to appear (it's usually the same amount of time). At this point, RS_ASIO is initialized and you can start playing.

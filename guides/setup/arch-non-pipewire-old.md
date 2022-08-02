@@ -21,7 +21,7 @@ If asked, replace `jack`.
 sudo pacman -S cadence carla jack2 lib32-jack2 realtime-privileges
 # the groups should already exist, but just in case
 sudo groupadd audio
-suod groupadd realtime
+sudo groupadd realtime
 sudo usermod -aG audio $USER`
 sudo usermod -aG realtime $USER`
 ```
