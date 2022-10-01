@@ -54,6 +54,7 @@ Then there's the way of routing the audio through JACK -> wineASIO -> RS_ASIO, w
 |---|---|---|
 | Arch | [Guide](guides/setup/arch-pipewire-new.md) | [Guide](guides/setup/arch-non-pipewire-new.md) |
 | Debian | [Not finished](guides/setup/deb-pipewire-new.md) | [Guide](guides/setup/deb-non-pipewire-new.md) |
+| Steam Deck | [Guide](guides/setup/deck-pipewire-new.md) | N/A |
 
 **Proton versions 6.5 and below:**
 
@@ -61,6 +62,7 @@ Then there's the way of routing the audio through JACK -> wineASIO -> RS_ASIO, w
 |---|---|---|
 | Arch | [Guide](guides/setup/arch-pipewire-old.md) | [Guide](guides/setup/arch-non-pipewire-old.md) |
 | Debian | [Not finished](guides/setup/deb-pipewire-old.md) | [Guide](guides/setup/deb-non-pipewire-old.md) |
+| Steam Deck | [Guide](guides/setup/deck-pipewire-old.md) | N/A |
 
 **Other Guides:**
 
@@ -82,3 +84,4 @@ For other Rocksmith installations: `wget https://raw.githubusercontent.com/theNi
 * [preflex](https://gitlab.com/preflex) for showing me how to do it on Arch-based distros.
 * [u/JacKeTUs](https://www.reddit.com/user/JacKeTUs) for publishing a [Debian-based Guide](https://old.reddit.com/r/linux_gaming/comments/jmediu/guide_for_setup_rocksmith_2014_steam_no_rs_cable/) on [r/linux_gaming](https://old.reddit.com/r/linux_gaming/)
 * [the_Nizo](https://github.com/theNizo), for using that information and updating it regularly in the past. My original Guide was posted [here](https://old.reddit.com/r/linux_gaming/comments/jmediu/guide_for_setup_rocksmith_2014_steam_no_rs_cable/gdhg4zx/).
+* [BWagener](https://github.com/BWagener) for writing the Steam Deck Guide.

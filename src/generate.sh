@@ -1,7 +1,7 @@
 #!/bin/bash
 trap "exit" INT
 
-# commented out echos are meant for debugging purposes, to find the point where it doeesn't behave properly
+# number echos are meant for debugging purposes, to find the point where it doeesn't behave properly
 # basically, it's a bunch of replacements for parts with a specific name. the name in 000-<name>-000 and the folder names match.
 # The order of the subfolders is determined by need. This has the advantage that I don't need as much empty files.
 # paths to the wineasio files are handled in a seperate .sh, because calling them like that makes sed want to run whatever is at those paths.
@@ -11,21 +11,19 @@ path=../guides/setup
 
 echo -1
 rm $path/* # clean first
-# for every variation (8 at the time)
+# for every variation
 for dist in arch deb deck; do
 	for sound in non-pipewire pipewire; do
 		for proton in old new; do
 			echo 0
-			echo $dist
-			echo $sound
-			echo $proton
+			echo "$dist; $sound; $proton" # print out, which file is worked on, so it's easier to debug.
 			# deck with non-pipewire is N/A, so we'll skip that.
 			if [ "$dist" = "deck" ] && [ "$sound" = "non-pipewire" ]; then
 				echo "recognized deck-non-pipewire loop, skipping."
 				continue
 			fi
 			filename=$path/$dist-$sound-$proton.md
-			cp base.md $filename # BASE SHOULD NEVER BE TOUCHED
+			cp base.md $filename # BASE SHOULD NEVER BE CHANGED BY THIS SCRIPT
 
 			echo 01
 			sed -i "s/000-title-000/cat title\/${dist}\/${sound}/e" $filename
@@ -78,6 +76,7 @@ for dist in arch deb deck; do
 	done
 done
 
+# This will list all the file names, regardless of missing something, or not. If there's a tag that's not replaced, it will appear below the according filename.
 echo 13
 echo "missing replacements, by file:"
 for file in $(ls $path); do
