@@ -5,7 +5,7 @@ trap "exit" INT
 # $2: $filename
 
 case $1 in
-	arch)
+	arch|deck)
 		echo "path script: arch"
 		sed -i 's/000-x64unix-000/\/usr\/lib\/wine\/x86_64-unix/' $2
 		#echo p1

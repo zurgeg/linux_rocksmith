@@ -1,0 +1,12 @@
+Note: Install qpwgraph through Discover (Discover comes preinstalled on Steam Deck)
+
+```
+# disable readonly mode
+sudo steamos-readonly disable
+
+sudo pacman-key --init
+sudo pacman-key --populate archlinux
+
+sudo pacman -S realtime-privileges wine-staging
+# These packages are already on SteamOS so I did not install them:
+# pipewire-alsa pipewire-pulse pipewire-jack lib32-pipewire-jack pavucontrol

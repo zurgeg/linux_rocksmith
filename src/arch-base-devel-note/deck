@@ -1,1 +1,3 @@
 Installing `base-devel` is very useful for using the AUR and compiling in general.
+
+On SteamOS the following additional packages were required to compile wineasio:

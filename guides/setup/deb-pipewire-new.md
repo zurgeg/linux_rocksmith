@@ -38,36 +38,7 @@ Log out and back in.
 
 # wineasio
 
-Installing `base-devel` is very useful for using the AUR and compiling in general.
 
-[Download](https://github.com/wineasio/wineasio/releases) the newest zip and unpack it. Open a terminal inside the newly created folder and run the following commands:
-
-```
-# build
-rm -rf build32
-rm -rf build64
-make 32
-make 64
-
-# Install on normal wine
-sudo cp build32/wineasio.dll /usr/lib/i386-linux-gnu/wine/wineasio.dll
-sudo cp build32/wineasio.dll.so /usr/lib/i386-linux-gnu/wine/wineasio.dll.so
-sudo cp build64/wineasio.dll /usr/lib/x86_64-linux-gnu/wine/wineasio.dll
-sudo cp build64/wineasio.dll.so /usr/lib/x86_64-linux-gnu/wine/wineasio.dll.so
-```
-
-`wineasio` is now installed on your native wine installation.
-
-<details>
-	<summary>How to check if it's installed correctly</summary>
-
-	find /usr/lib/ -name "wineasio.dll"
-	find /usr/lib/ -name "wineasio.dll.so"
-	find /usr/lib32/ -name "wineasio.dll"
-	find /usr/lib32/ -name "wineasio.dll.so"
-
-This should output 4 paths (ignore the errors).
-</details>
 
 To make Proton use wineasio, we need to copy these files into the appropriate locations:
 

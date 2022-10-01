@@ -33,11 +33,7 @@ Log out and back in.
 
 # wineasio
 
-000-arch-base-devel-note-000
-
 000-install-wineasio-system-000
-
-000-wineasio-installed-note-000
 
 To make Proton use wineasio, we need to copy these files into the appropriate locations:
 

@@ -1,6 +1,6 @@
-# JACK to ASIO with pipewire on Debian-based distros
+# JACK to ASIO on Steam Deck (pipewire)
 
-I don't have a debian-based machine to test this. Everything up to starting the game was tested in a VM.
+(Thanks to [BWagener](https://github.com/BWagener) for writing this.)
 
 ## Table of contents
 
@@ -17,10 +17,18 @@ I don't have a debian-based machine to test this. Everything up to starting the 
 
 (I recommend `wine-staging`, but usual `wine` works as well.)
 
-[missing, sorry]
+Note: Install qpwgraph through Discover (Discover comes preinstalled on Steam Deck)
 
 ```
-[missing, sorry]
+# disable readonly mode
+sudo steamos-readonly disable
+
+sudo pacman-key --init
+sudo pacman-key --populate archlinux
+
+sudo pacman -S realtime-privileges wine-staging
+# These packages are already on SteamOS so I did not install them:
+# pipewire-alsa pipewire-pulse pipewire-jack lib32-pipewire-jack pavucontrol
 # the groups should already exist, but just in case
 sudo groupadd audio
 sudo groupadd realtime
@@ -31,21 +39,65 @@ sudo usermod -aG realtime $USER`
 Log out and back in.
 
 <details><summary> How to check if this worked correctly</summary>
-
+For the packages, do `pacman -Q <packages here>`. Should output the names and versions without errors.
 
 	For the groups, run `groups`. This will give you a list, which should contain "audio" and "realtime".
 </details>
 
 # wineasio
 
+Installing `base-devel` is very useful for using the AUR and compiling in general.
 
+On SteamOS the following additional packages were required to compile wineasio:
+
+```
+sudo pacman -S base-devel glibc linux-headers linux-api-headers libtool binutils lib32-glibc
+# note about these two packages: they are in conflict with lib32-pipewire-jack pipewire-jack
+# pacman can remove these packages for you and we can reinstall them once wineasio is compiled
+sudo pacman -S lib32-jack2 jack2
+```
+
+The official source for wineasio is [wineasio/wineasio](https://github.com/wineasio/wineasio), however I could not get it to work with pipewire-jack.
+
+I took the [fixed version from here](https://github.com/TobiasKozel/wineasio) and modified it slightly to get it to compile on the Steam Deck, see [here](https://github.com/BWagener/wineasio/commit/8e24a15801b5980c9245ebf4fe30a722857f7e40) for the modification I made.
+
+```
+# retrieve fixed version:
+git clone https://github.com/BWagener/wineasio.git
+cd wineasio
+
+# build
+rm -rf build32
+rm -rf build64
+make 32
+make 64
+
+# Install on normal wine
+sudo cp build32/wineasio.dll /usr/lib32/wine/i386-windows/wineasio.dll
+sudo cp build32/wineasio.dll.so /usr/lib32/wine/i386-unix/wineasio.dll.so
+sudo cp build64/wineasio.dll /usr/lib/wine/x86_64-windows/wineasio.dll
+sudo cp build64/wineasio.dll.so /usr/lib/wine/x86_64-unix/wineasio.dll.so
+```
+
+`wineasio` is now installed on your native wine installation.
+
+<details>
+	<summary>How to check if it's installed correctly</summary>
+
+	find /usr/lib/ -name "wineasio.dll"
+	find /usr/lib/ -name "wineasio.dll.so"
+	find /usr/lib32/ -name "wineasio.dll"
+	find /usr/lib32/ -name "wineasio.dll.so"
+
+This should output 4 paths (ignore the errors).
+</details>
 
 To make Proton use wineasio, we need to copy these files into the appropriate locations:
 
 ```
 # !!! WATCH OUT FOR VARIABLES !!!
-cp /usr/lib/i386-linux-gnu/wine/wineasio.dll.so "$PROTON/lib/wine/i386-unix/wineasio.dll.so"
-cp /usr/lib/x86_64-linux-gnu/wine/wineasio.dll.so "$PROTON/lib64/wine/x86_64-unix/wineasio.dll.so"
+cp /usr/lib32/wine/i386-unix/wineasio.dll.so "$PROTON/lib/wine/i386-unix/wineasio.dll.so"
+cp /usr/lib/wine/x86_64-unix/wineasio.dll.so "$PROTON/lib64/wine/x86_64-unix/wineasio.dll.so"
 ```
 
 In theory, this should also work with Lutris runners (located in `$HOME/.local/share/lutris/runners/wine/`)
@@ -53,7 +105,7 @@ In theory, this should also work with Lutris runners (located in `$HOME/.local/s
 ## Setting up the game's prefix/compatdata
 
 1. Delete or rename `$STEAMLIBRARY/steamapps/compatdata/221680`, then start Rocksmith and stop the game once it's running.
-1. `WINEPREFIX=$STEAMLIBRARY/steamapps/compatdata/221680/pfx regsvr32 /usr/lib/i386-linux-gnu/wine/wineasio.dll` (Errors are normal, should end with "regsvr32: Successfully registered DLL [...]")
+1. `WINEPREFIX=$STEAMLIBRARY/steamapps/compatdata/221680/pfx regsvr32 /usr/lib32/wine/i386-windows/wineasio.dll` (Errors are normal, should end with "regsvr32: Successfully registered DLL [...]")
 
 I don't know a way to check if this is set up correctly. This is one of the first steps I'd redo when I have issues.
 

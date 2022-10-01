@@ -12,13 +12,18 @@ path=../guides/setup
 echo -1
 rm $path/* # clean first
 # for every variation (8 at the time)
-for dist in arch deb; do
+for dist in arch deb deck; do
 	for sound in non-pipewire pipewire; do
 		for proton in old new; do
 			echo 0
 			echo $dist
 			echo $sound
 			echo $proton
+			# deck with non-pipewire is N/A, so we'll skip that.
+			if [ "$dist" = "deck" ] && [ "$sound" = "non-pipewire" ]; then
+				echo "recognized deck-non-pipewire loop, skipping."
+				continue
+			fi
 			filename=$path/$dist-$sound-$proton.md
 			cp base.md $filename # BASE SHOULD NEVER BE TOUCHED
 
@@ -30,14 +35,16 @@ for dist in arch deb; do
 			sed -i "s/000-install-part-000/cat install-part\/${dist}\/${sound}/e" $filename #needs fixing
 
 			echo 03
-			sed -i "s/000-install-check-000/cat install-check\/${dist}/e" $filename
+			sed -i "s/000-install-check-000/cat install-check\/${dist}/e" $filename # "deck" here is a symlink to "arch", in case something doesn't work
 
 			echo 04
-			sed -i "s/000-arch-base-devel-note-000/cat install-wineasio-system\/arch-base-devel-note/e" $filename
+			sed -i "s/000-arch-base-devel-note-000/cat arch-base-devel-note\/${dist}/e" $filename
 			echo 06
-			sed -i "s/000-install-wineasio-system-000/cat install-wineasio-system\/${sound}/e" $filename
+			sed -i "s/000-install-wineasio-system-000/cat install-wineasio-system\/${dist}/e" $filename
+			sed -i "s/000-install-wineasio-system-1-000/cat install-wineasio-system\/${sound}/e" $filename
 			sed -i "s/000-wineasio-source-000/cat install-wineasio-system\/wineasio-source/e" $filename
-			sed -i "s/000-wineasio-installed-note-000/cat install-wineasio-system\/wineasio-installed-note/e" $filename
+			sed -i "s/000-download-wineasio-000/cat install-wineasio-system\/download-wineasio\/${dist}/e" $filename
+			#sed -i "s/000-wineasio-installed-note-000/cat install-wineasio-system\/wineasio-installed-note/e" $filename
 
 			echo 07
 			sed -i "s/000-install-wineasio-runner-000/cat install-wineasio-runner\/${proton}/e" $filename

@@ -74,19 +74,6 @@ Notes:
 * [Tutorial on `yay`](https://youtube.com/watch?v=BbnSoY_yDr8)
 </details>
 
-wineasio is now installed on your native wine version.
-
-<details>
-	<summary>How to check if it's installed correctly</summary>
-
-	find /usr/lib/ -name "wineasio.dll"
-	find /usr/lib/ -name "wineasio.dll.so"
-	find /usr/lib32/ -name "wineasio.dll"
-	find /usr/lib32/ -name "wineasio.dll.so"
-
-This should output 4 paths (ignore the errors).
-</details>
-
 `wineasio` is now installed on your native wine installation.
 
 <details>
