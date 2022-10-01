@@ -20,6 +20,16 @@ If you use Proton-GE, install scripts sometimes don't run. Make sure you use nor
 
 Wine should already be installed, we will need it later.
 
+## "previous_version" beta
+
+There was an update and the developers aknowledged that it might/will break some mods. That's why they made a beta branch with the previous version.
+
+Since the update breaks our setup as well, we will need to use the beta branch until we come up with a better solution.
+
+1. Steam -> Library -> Right click on game -> Properties -> Betas
+2. Type in "JustInCaseWeNeedIt"
+3. Activate.
+
 ## Common paths
 
 I will refer to them with variables. You can actually set them as variables via `variablename=value` and just copy-paste the commands, or replace the text. Keep in mind that these are temporary, so only available in the terminal instance where the variable was defined.
