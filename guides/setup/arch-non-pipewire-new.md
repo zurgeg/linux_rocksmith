@@ -68,6 +68,8 @@ cd into the unpacked directory, then run this.
 ```
 rm -rf build32
 rm -rf build64
+make 32
+make 64
 sudo cp build32/wineasio.dll /usr/lib32/wine/i386-windows/wineasio.dll
 sudo cp build32/wineasio.dll.so /usr/lib32/wine/i386-unix/wineasio.dll.so
 sudo cp build64/wineasio.dll /usr/lib/wine/x86_64-windows/wineasio.dll
