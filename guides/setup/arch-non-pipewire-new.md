@@ -57,6 +57,31 @@ sudo cp build64/wineasio.dll /usr/lib/wine/x86_64-windows/wineasio.dll
 sudo cp build64/wineasio.dll.so /usr/lib/wine/x86_64-unix/wineasio.dll.so
 ```
 
+<details><summary>Know already what's going on? Here are all commands in one piece without an explanation</summary>
+
+If the commands in this collapsible section don't work for you, try the "longer" variant first before asking for help.
+
+YOU NEED TO HAVE THE $PROTON VARIABLE SET!! (or replaced with the correct path first)
+
+cd into the unpacked directory, then run this.
+
+```
+rm -rf build32
+rm -rf build64
+sudo cp build32/wineasio.dll /usr/lib32/wine/i386-windows/wineasio.dll
+sudo cp build32/wineasio.dll.so /usr/lib32/wine/i386-unix/wineasio.dll.so
+sudo cp build64/wineasio.dll /usr/lib/wine/x86_64-windows/wineasio.dll
+sudo cp build64/wineasio.dll.so /usr/lib/wine/x86_64-unix/wineasio.dll.so
+cp build32/wineasio.dll "$PROTON/lib/wine/i386-windows/wineasio.dll"
+cp build32/wineasio.dll.so "$PROTON/lib/wine/i386-unix/wineasio.dll.so"
+cp build64/wineasio.dll "$PROTON/lib64/wine/x86_64-windows/wineasio.dll"
+cp build64/wineasio.dll.so "$PROTON/lib64/wine/x86_64-unix/wineasio.dll.so"
+```
+
+And you're done, continue with [Setting up the game's prefix/compatdata](#setting-up-the-games-prefixcompatdata).
+
+</details>
+
 </details>
 
 <details>
