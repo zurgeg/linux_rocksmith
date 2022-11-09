@@ -2,7 +2,7 @@
 name: Help needed
 about: If you're not able to figure out what you did wrong
 title: ''
-labels: ''
+labels: help wanted
 assignees: ''
 
 ---
@@ -13,3 +13,4 @@ assignees: ''
 * What appears to be the problem? (Describe it as best as you can)
 * Did you notice any other unexpected behavior?
 * What did you try already?
+* Did you do any of the steps differently or leave them out?
