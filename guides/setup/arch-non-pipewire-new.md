@@ -216,7 +216,7 @@ copy the cover art into this folder and name it <id>p.<file-ending>.
 
 This is how it looks on my system:
 
-![](/img/grid-files.png)
+![](/img/grid-file.png)
 
 Launch Big Picture Mode now and find the entry in your Library. It should now have artwork.
 
