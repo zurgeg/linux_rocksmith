@@ -160,7 +160,9 @@ We can start the game via this script now: `PIPEWIRE_LATENCY="256/48000" $STEAML
 We can't start Rocksmith directly from the Steam Library. But we can use the Steam Library to start the script that starts the game in a way that Steam recognizes.
 
 <details><summary>Fitting meme</summary>
-![Charlie Day whiteboard](https://i.kym-cdn.com/photos/images/original/002/546/187/fb1.jpg)
+
+![](https://i.kym-cdn.com/photos/images/original/002/546/187/fb1.jpg)
+
 </details>
 
 Go into your Steam Library and select "Add a game" -> "Add a Non-Steam Game"
@@ -188,7 +190,7 @@ copy the cover art into this folder and name it <id>p.<file-ending>.
 
 This is how it looks on my system:
 
-![](../../img/grid-files.png)
+![](/img/grid-files.png)
 
 Launch Big Picture Mode now and find the entry in your Library. It should now have artwork.
 
