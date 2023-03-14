@@ -63,9 +63,9 @@ cp build64/wineasio.dll.so "$PROTON/lib64/wine/x86_64-unix/wineasio.dll.so"
 
 And you're done, continue with [Setting up the game's prefix/compatdata](#setting-up-the-games-prefixcompatdata).
 
-</details>
-
 ---
+
+</details>
 
 [Download](https://github.com/wineasio/wineasio/releases) the newest zip and unpack it. Open a terminal inside the newly created folder and run the following commands:
 
@@ -127,13 +127,13 @@ Open pavucontrol ("PulseAudio Volume Control"), go to "Configuration" and make s
 
 All available devices will automatically be tied to Rocksmith, and the game doesn't like you messing around in the patchbay (= it would crash often).
 
-## Starting the game
+# Starting the game
 
 Delete the `Rocksmith.ini` inside your Rocksmith installation. It will auto-generate with the correct values. The only important part is the `LatencyBuffer=`, which has to match the Buffer Periods.
 
 Steam needs to be running.
 
-If we start the game from the button that says "Play" in Steam, the game cant connect to wineasio (you won't have sound and will get an error message). However, running it from the terminal, or running a script, always made it work.
+If we start the game from the button that says "Play" in Steam, the game can't connect to wineasio (you won't have sound and will get an error message). However, running it from the terminal, or running a script, always made it work.
 
 ## Get the start script
 
@@ -163,11 +163,11 @@ We can't start Rocksmith directly from the Steam Library. But we can use the Ste
 
 </details>
 
-Go into your Steam Library and select "Add a game" -> "Add a Non-Steam Game"
+Go into your Steam Library and select "Add a game" -> "Add a Non-Steam Game" on the bottom left.
 Make sure you can see all files. Select the script we generated just now and add it. This will create a shortcut to the script, which I will refer to as "shortcut" from here on.
 Right click on the shortcut and select "Properties". Add these launch Options: `PIPEWIRE_LATENCY="256/48000" %command%`
 
-`PIPEWIRE_LATENCY`: Rocksmith needs a sample rate of 48000. 256 refers to the buffer size. This number worked great for me, but you can experiment with others, of course.
+`PIPEWIRE_LATENCY`: Rocksmith needs a sample rate of 48000. 256 refers to the buffer size. This number worked great for me and others, but you can experiment with different values, of course.
 
 You can now start the game from Steam. Use the shortcut, it will launch the actual game.
 
@@ -179,12 +179,12 @@ You can give the games in your Steam Library a custom look. A good Website for r
 
 You can take artwork from [Rocksmith](https://www.steamgriddb.com/game/1841), [Rocksmith 2014](https://www.steamgriddb.com/game/2295), [Rocksmith+](https://www.steamgriddb.com/game/5359161) or anything else you want. I would recommend something that makes the shortcut look different than the game.
 
-Go into the shortcuts Properties. Right under the text "Shortcut" you can change the game's icon and name (both show up in the list in desktop mode). I recommend something like "Rocksmith 2014 - Launcher".
+Go into the shortcut's Properties. Right under the text "Shortcut" you can change the game's icon and name (both show up in the list on the left in desktop mode). I recommend something like "Rocksmith 2014 - Launcher".
 
 Above the "Play" button in Steam, there's artwork called the "hero". Right-click on it and choose "set custom background".
 
 For the cover art ("grid"), it gets a bit harder. Go to `$HOME/.steam/steam/userdata/<number>/config/grid`. Since we added a hero, there should be a file that resembles it. It's called `<id>_hero.<file-ending>` we need the ID.
-copy the cover art into this folder and name it <id>p.<file-ending>.
+copy the cover art into this folder and name it `<id>p.<file-ending>`.
 
 This is how it looks on my system:
 

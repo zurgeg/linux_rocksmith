@@ -23,6 +23,6 @@ cp build64/wineasio.dll.so "$PROTON/lib64/wine/x86_64-unix/wineasio.dll.so"
 
 And you're done, continue with [Setting up the game's prefix/compatdata](#setting-up-the-games-prefixcompatdata).
 
-</details>
-
 ---
+
+</details>
