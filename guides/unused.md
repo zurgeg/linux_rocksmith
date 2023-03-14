@@ -21,3 +21,15 @@ Worked regardless, didn't notice a difference.
 Go to Libraries. Type in `wineasio` and click add. Search for it in the list and select "Builtin, then native"
 
 An alternative way to do this is to write this in front of your launch command: `WINEDLLOVERRIDES=wineasio=b,n`
+
+## "previous_version" beta
+
+This was removed because there's a known way now to make it work with the newer versions.
+
+There was an update and the developers aknowledged that it might/will break some mods. That's why they made a beta branch with the previous version.
+
+Since the update breaks our setup as well, we will need to use the beta branch until we come up with a better solution.
+
+1. Steam -> Library -> Right click on game -> Properties -> Betas
+2. Type in "JustInCaseWeNeedIt"
+3. Activate.

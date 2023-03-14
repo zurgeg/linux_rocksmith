@@ -6,7 +6,7 @@ These are a few Guides to get [Rocksmith 2014](https://store.steampowered.com/ap
 
 This is the bare minimum to get it to work. I don't know if certain changes recommended by other people have a performance impact.
 
-I tested it on Manjaro and a Linux Mint VM. Due to the VM factor, I was actually able to start the game, but the experience is 1fps or something like that.
+I tested it on Manjaro, Arch and a Linux Mint VM. Due to the VM factor, I was actually able to start the game, but the experience is 1fps or something like that.
 
 I have only tested the Steam version.
 
@@ -18,17 +18,7 @@ Don't install or copy Rocksmith from/to an NTFS drive. It will not start. (I thi
 
 If you use Proton-GE, install scripts sometimes don't run. Make sure you use normal Proton the first time.
 
-Wine should already be installed, we will need it later.
-
-## "previous_version" beta
-
-There was an update and the developers aknowledged that it might/will break some mods. That's why they made a beta branch with the previous version.
-
-Since the update breaks our setup as well, we will need to use the beta branch until we come up with a better solution.
-
-1. Steam -> Library -> Right click on game -> Properties -> Betas
-2. Type in "JustInCaseWeNeedIt"
-3. Activate.
+We will need wine, which is installed in the first step.
 
 ## Common paths
 
@@ -85,3 +75,6 @@ For other Rocksmith installations: `wget https://raw.githubusercontent.com/theNi
 * [u/JacKeTUs](https://www.reddit.com/user/JacKeTUs) for publishing a [Debian-based Guide](https://old.reddit.com/r/linux_gaming/comments/jmediu/guide_for_setup_rocksmith_2014_steam_no_rs_cable/) on [r/linux_gaming](https://old.reddit.com/r/linux_gaming/)
 * [the_Nizo](https://github.com/theNizo), for using that information and updating it regularly in the past. My original Guide was posted [here](https://old.reddit.com/r/linux_gaming/comments/jmediu/guide_for_setup_rocksmith_2014_steam_no_rs_cable/gdhg4zx/).
 * [BWagener](https://github.com/BWagener) for writing the Steam Deck Guide.
+* [Siarkowy](https://github.com/Siarkowy) for replacing the "JustInCaseWeNeedIt" workaround and the shortcut in Steam.
+
+Thank you all for the work ^^

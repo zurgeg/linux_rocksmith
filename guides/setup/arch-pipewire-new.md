@@ -127,7 +127,7 @@ What we basically need to do is to select only one output and one input (2 input
 
 Open pavucontrol ("PulseAudio Volume Control"), go to "Configuration" and make sure there's exactly one input device and one output device enabled.
 
-All available devices will automatically be tied to Rocksmith, and the game doesn't like you messing around in the patchbay (= it would crash).
+All available devices will automatically be tied to Rocksmith, and the game doesn't like you messing around in the patchbay (= it would crash often).
 
 ## Starting the game
 
@@ -135,42 +135,84 @@ Delete the `Rocksmith.ini` inside your Rocksmith installation. It will auto-gene
 
 Steam needs to be running.
 
-If we start the game from Steam, the game cant connect to wineasio (you won't have sound and will get an error message). So there's two ways around that:
+If we start the game from the button that says "Play" in Steam, the game cant connect to wineasio (you won't have sound and will get an error message). However, running it from the terminal, or running a script, always made it work.
 
-### Command (No Lutris)
+## Get the start script
+
+In Steam, right click on Rocksmith and choose "Properties". Set the following launch options:
 
 ```
-# cd is necessary for the Rocksmith.ini and the DLC folder
-cd $STEAMLIBRARY/steamapps/common/Rocksmith2014
-PIPEWIRE_LATENCY=256/48000 WINEPREFIX=$STEAMLIBRARY/steamapps/compatdata/221680/pfx $PROTON/bin/wine $STEAMLIBRARY/steamapps/common/Rocksmith2014/Rocksmith2014.exe
+PROTON_LOG=1 PROTON_DUMP_DEBUG_COMMANDS=1 %command%
 ```
+
+then start the game from Steam again. You will now have a script at `/tmp/proton_$USER/run` that represents the command Steam runs when starting the game. If we run this script, Rocksmith can start via Steam and have sound.
+
+Let's copy the script to somewhere else and give it a better name. This is an example that I will use in the rest of the guide. You can change the path or the name of the script, if you want to.
+
+```
+cp /tmp/proton_$USER/run $STEAMLIBRARY/steamapps/common/rocksmith-launcher.sh
+```
+
+We can start the game via this script now: `PIPEWIRE_LATENCY="256/48000" $STEAMLIBRARY/steamapps/common/rocksmith-launcher.sh`
+
+## Making it nice via Steam entry (optional)
+
+We can't start Rocksmith directly from the Steam Library. But we can use the Steam Library to start the script that starts the game in a way that Steam recognizes.
+
+<details><summary>Fitting meme</summary>
+![Charlie Day whiteboard](https://i.kym-cdn.com/photos/images/original/002/546/187/fb1.jpg)
+</details>
+
+Go into your Steam Library and select "Add a game" -> "Add a Non-Steam Game"
+Make sure you can see all files. Select the script we generated just now and add it. This will create a shortcut to the script, which I will refer to as "shortcut" from here on.
+Right click on the shortcut and select "Properties". Add these launch Options: `PIPEWIRE_LATENCY="256/48000" %command%`
 
 `PIPEWIRE_LATENCY`: Rocksmith needs a sample rate of 48000. 256 refers to the buffer size. This number worked great for me, but you can experiment with others, of course.
 
-(You don't always have to do this, but this give me the most reliable experience) As soon as you see the games window, take the focus away from it, eg. on a different window. Don't focus Rocksmith until the logos start to appear (it's usually the same amount of time). At this point, RS_ASIO is initialized and you can start playing.
+You can now start the game from Steam. Use the shortcut, it will launch the actual game.
 
-### Yes Lutris
+### Beautification (even more optional, but recommended)
 
-Using Proton outside of it's wrapper is discouraged, but if we use normal wine, the game can't find Steam, which is needed for Steam's DRM.
+Leaving the shortcut just like that is not pretty, so we're going to change that.
 
-Open Lutris and add a game:
+You can give the games in your Steam Library a custom look. A good Website for resources is the [SteamGridDB](https://www.steamgriddb.com/).
 
-* General:
-	* Name: Rocksmith® 2014 Edition - Remastered
-	* Runner: Wine
-	* Release year: 2014
-* Game Options
-	* Executable: $STEAMLIBRARY/steamapps/common/Rocksmith 2014/Rocksmith2014.exe
-	* Working directory: $STEAMLIBRARY/steamapps/common/Rocksmith 2014/
-	* Wine prefix: $STEAMLIBRARY/steamapps/compatdata/221680/pfx
-* Runner options
-	* Wine version: Custom
-	* (Toggle Advanced options to see this) Custom Wine executable: enter path to `dist/bin/wine` or `files/bin/wine` of your desired Proton version
-* System options (only needed for pipewire)
-	* Environment Variables: PIPEWIRE_LATENCY=256/48000
+You can take artwork from [Rocksmith](https://www.steamgriddb.com/game/1841), [Rocksmith 2014](https://www.steamgriddb.com/game/2295), [Rocksmith+](https://www.steamgriddb.com/game/5359161) or anything else you want. I would recommend something that makes the shortcut look different than the game.
 
-(People who don't use the Steam version can just choose whatever runner they like.)
+Go into the shortcuts Properties. Right under the text "Shortcut" you can change the game's icon and name (both show up in the list in desktop mode). I recommend something like "Rocksmith 2014 - Launcher".
 
-Save this and hit "Play."
+Above the "Play" button in Steam, there's artwork called the "hero". Right-click on it and choose "set custom background".
 
-(You don't always have to do this, but this give me the most reliable experience) As soon as you see the games window, take the focus away from it, eg. on a different window. Don't focus Rocksmith until the logos start to appear (it's usually the same amount of time). At this point, RS_ASIO is initialized and you can start playing.
+For the cover art ("grid"), it gets a bit harder. Go to `$HOME/.steam/steam/userdata/<number>/config/grid`. Since we added a hero, there should be a file that resembles it. It's called `<id>_hero.<file-ending>` we need the ID.
+copy the cover art into this folder and name it <id>p.<file-ending>.
+
+This is how it looks on my system:
+
+![](../../img/grid-files.png)
+
+Launch Big Picture Mode now and find the entry in your Library. It should now have artwork.
+
+# Small Troubleshooting: The game crashes
+
+## Immediately
+
+When I first tried to set the game up with pipewire, I experienced this.
+The solution was the following:
+
+1. Start game
+1. As soon as you see the window, take the focus away from it. Focus a different window. Do that as quick as possible. When testing, I needed two tries.
+1. If you run it from terminal, wait until logs start to appear.
+1. Otherwise, wait a few seconds (10-20), or if you can see the window, wait until the bootup logos show up. Sometimes you will hear sound when unfocussed, sometimes not.
+1. Focus the game again
+
+## When messing with Patchbay
+
+Rocksmith doesn't like the patchbay being tampered with very much. It might crash on you if you try something like this.
+
+## When Focussing on the window again
+
+Also, unfocussing and focussing again has the risk of the game crashing too. It won't always crash, but the possibility is high enough to notice.
+
+---
+
+Note to self, adjust this guide for two-player setup as well (which pretty much consists of setting 2 inputs everywhere)
