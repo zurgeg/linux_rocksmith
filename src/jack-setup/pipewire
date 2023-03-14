@@ -1,3 +1,5 @@
+What we basically need to do is to select only one output and one input (2 inputs for multiplayer). I like to do this via `pavucontrol`, which works if `pipewire-pulse` is installed.
+
 Open pavucontrol ("PulseAudio Volume Control"), go to "Configuration" and make sure there's exactly one input device and one output device enabled.
 
 All available devices will automatically be tied to Rocksmith, and the game doesn't like you messing around in the patchbay (= it would crash).

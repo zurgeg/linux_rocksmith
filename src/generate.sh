@@ -33,12 +33,13 @@ for dist in arch deb deck; do
 			sed -i "s/000-install-part-000/cat install-part\/${dist}\/${sound}/e" $filename #needs fixing
 
 			echo 03
-			sed -i "s/000-install-check-000/cat install-check\/${dist}/e" $filename # "deck" here is a symlink to "arch", in case something doesn't work
+			sed -i "s/000-install-check-000/cat install-check\/${dist}/e" $filename # "deck" here is a symlink to "arch" here
 
 			echo 04
-			sed -i "s/000-arch-base-devel-note-000/cat arch-base-devel-note\/${dist}/e" $filename
+			#sed -i "s/000-arch-base-devel-note-000/cat arch-base-devel-note\/${dist}/e" $filename # not used anymore
 			echo 06
 			sed -i "s/000-install-wineasio-system-000/cat install-wineasio-system\/${dist}/e" $filename
+			sed -i "s/000-all-in-1-000/cat install-wineasio-system\/all-in-1/e" $filename
 			sed -i "s/000-install-wineasio-system-1-000/cat install-wineasio-system\/${sound}/e" $filename
 			sed -i "s/000-wineasio-source-000/cat install-wineasio-system\/wineasio-source/e" $filename
 			sed -i "s/000-download-wineasio-000/cat install-wineasio-system\/download-wineasio\/${dist}/e" $filename

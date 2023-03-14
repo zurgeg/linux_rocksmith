@@ -38,22 +38,6 @@ For the packages, do `pacman -Q <packages here>`. Should output the names and ve
 
 Installing `base-devel` is very useful for using the AUR and compiling in general.
 
-[Download](https://github.com/wineasio/wineasio/releases) the newest zip and unpack it. Open a terminal inside the newly created folder and run the following commands:
-
-```
-# build
-rm -rf build32
-rm -rf build64
-make 32
-make 64
-
-# Install on normal wine
-sudo cp build32/wineasio.dll /usr/lib32/wine/i386-windows/wineasio.dll
-sudo cp build32/wineasio.dll.so /usr/lib32/wine/i386-unix/wineasio.dll.so
-sudo cp build64/wineasio.dll /usr/lib/wine/x86_64-windows/wineasio.dll
-sudo cp build64/wineasio.dll.so /usr/lib/wine/x86_64-unix/wineasio.dll.so
-```
-
 <details><summary>Know already what's going on? Here are all commands in one piece without an explanation</summary>
 
 If the commands in this collapsible section don't work for you, try the "longer" variant first before asking for help.
@@ -80,6 +64,24 @@ cp build64/wineasio.dll.so "$PROTON/lib64/wine/x86_64-unix/wineasio.dll.so"
 And you're done, continue with [Setting up the game's prefix/compatdata](#setting-up-the-games-prefixcompatdata).
 
 </details>
+
+---
+
+[Download](https://github.com/wineasio/wineasio/releases) the newest zip and unpack it. Open a terminal inside the newly created folder and run the following commands:
+
+```
+# build
+rm -rf build32
+rm -rf build64
+make 32
+make 64
+
+# Install on normal wine
+sudo cp build32/wineasio.dll /usr/lib32/wine/i386-windows/wineasio.dll
+sudo cp build32/wineasio.dll.so /usr/lib32/wine/i386-unix/wineasio.dll.so
+sudo cp build64/wineasio.dll /usr/lib/wine/x86_64-windows/wineasio.dll
+sudo cp build64/wineasio.dll.so /usr/lib/wine/x86_64-unix/wineasio.dll.so
+```
 
 `wineasio` is now installed on your native wine installation.
 
@@ -118,6 +120,8 @@ I don't know a way to check if this is set up correctly. This is one of the firs
 Edit RS_ASIO.ini: fill in `WineASIO` where it says `Driver=`. Do this for `[Asio.Output]` and `[Asio.Input.0]`. If you don't play multiplayer, you can comment out Input1 and Input2 by putting a `;` in front of the lines.
 
 ## Set up JACK
+
+What we basically need to do is to select only one output and one input (2 inputs for multiplayer). I like to do this via `pavucontrol`, which works if `pipewire-pulse` is installed.
 
 Open pavucontrol ("PulseAudio Volume Control"), go to "Configuration" and make sure there's exactly one input device and one output device enabled.
 

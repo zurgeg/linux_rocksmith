@@ -57,28 +57,6 @@ sudo pacman -S base-devel glibc linux-headers linux-api-headers libtool binutils
 sudo pacman -S lib32-jack2 jack2
 ```
 
-The official source for wineasio is [wineasio/wineasio](https://github.com/wineasio/wineasio), however I could not get it to work with pipewire-jack.
-
-I took the [fixed version from here](https://github.com/TobiasKozel/wineasio) and modified it slightly to get it to compile on the Steam Deck, see [here](https://github.com/BWagener/wineasio/commit/8e24a15801b5980c9245ebf4fe30a722857f7e40) for the modification I made.
-
-```
-# retrieve fixed version:
-git clone https://github.com/BWagener/wineasio.git
-cd wineasio
-
-# build
-rm -rf build32
-rm -rf build64
-make 32
-make 64
-
-# Install on normal wine
-sudo cp build32/wineasio.dll /usr/lib32/wine/i386-windows/wineasio.dll
-sudo cp build32/wineasio.dll.so /usr/lib32/wine/i386-unix/wineasio.dll.so
-sudo cp build64/wineasio.dll /usr/lib/wine/x86_64-windows/wineasio.dll
-sudo cp build64/wineasio.dll.so /usr/lib/wine/x86_64-unix/wineasio.dll.so
-```
-
 <details><summary>Know already what's going on? Here are all commands in one piece without an explanation</summary>
 
 If the commands in this collapsible section don't work for you, try the "longer" variant first before asking for help.
@@ -105,6 +83,30 @@ cp build64/wineasio.dll.so "$PROTON/lib64/wine/x86_64-unix/wineasio.dll.so"
 And you're done, continue with [Setting up the game's prefix/compatdata](#setting-up-the-games-prefixcompatdata).
 
 </details>
+
+---
+
+The official source for wineasio is [wineasio/wineasio](https://github.com/wineasio/wineasio), however I could not get it to work with pipewire-jack.
+
+I took the [fixed version from here](https://github.com/TobiasKozel/wineasio) and modified it slightly to get it to compile on the Steam Deck, see [here](https://github.com/BWagener/wineasio/commit/8e24a15801b5980c9245ebf4fe30a722857f7e40) for the modification I made.
+
+```
+# retrieve fixed version:
+git clone https://github.com/BWagener/wineasio.git
+cd wineasio
+
+# build
+rm -rf build32
+rm -rf build64
+make 32
+make 64
+
+# Install on normal wine
+sudo cp build32/wineasio.dll /usr/lib32/wine/i386-windows/wineasio.dll
+sudo cp build32/wineasio.dll.so /usr/lib32/wine/i386-unix/wineasio.dll.so
+sudo cp build64/wineasio.dll /usr/lib/wine/x86_64-windows/wineasio.dll
+sudo cp build64/wineasio.dll.so /usr/lib/wine/x86_64-unix/wineasio.dll.so
+```
 
 `wineasio` is now installed on your native wine installation.
 
@@ -145,6 +147,8 @@ I don't know a way to check if this is set up correctly. This is one of the firs
 Edit RS_ASIO.ini: fill in `WineASIO` where it says `Driver=`. Do this for `[Asio.Output]` and `[Asio.Input.0]`. If you don't play multiplayer, you can comment out Input1 and Input2 by putting a `;` in front of the lines.
 
 ## Set up JACK
+
+What we basically need to do is to select only one output and one input (2 inputs for multiplayer). I like to do this via `pavucontrol`, which works if `pipewire-pulse` is installed.
 
 Open pavucontrol ("PulseAudio Volume Control"), go to "Configuration" and make sure there's exactly one input device and one output device enabled.
 

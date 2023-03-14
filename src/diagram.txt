@@ -1,0 +1,20 @@
+1 Indentation means it's buried one step deeper.
+1st indentation means the replaced string can be found in base.md, but eg. title-note can be found inside title.
+
+base.md
+    title
+        title-note
+    install-part
+    install-check
+    (arch-base-devel-note)
+    install-wineasio-system
+        all-in-1
+        install-wineasio-system-1 (sound server name)
+            wineasio-source (one file)
+                download-wineasio
+    install wienasio-runner
+        old
+    jack-setup
+    steam-running-required
+    pipewire-note
+    pipewire-bootup
