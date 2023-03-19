@@ -58,7 +58,7 @@ for dist in arch deb deck; do
 			echo 10
 			sed -i "s/000-pipewire-note-000/cat pipewire-note\/${sound}/e" $filename
 			echo 10.1
-			sed -i "s/000-pipewire-bootup-000/cat pipewire-bootup\/${sound}/e" $filename # using "start" in the regex gave the following error message (I don't know why): sh: line 1: Save: command not found
+			#sed -i "s/000-pipewire-bootup-000/cat pipewire-bootup\/${sound}/e" $filename # using "start" in the regex gave the following error message (I don't know why): sh: line 1: Save: command not found
 
 			echo 11
 			./replace-paths.sh $dist $filename

@@ -1,9 +1,18 @@
-The official source for wineasio is [wineasio/wineasio](https://github.com/wineasio/wineasio), however I could not get it to work with pipewire-jack.
+The official source for wineasio is [wineasio/wineasio](https://github.com/wineasio/wineasio). If the official one doesn't work, clone the fixed version from here: https://github.com/BWagener/wineasio.git
 
-I took the [fixed version from here](https://github.com/TobiasKozel/wineasio) and modified it slightly to get it to compile on the Steam Deck, see [here](https://github.com/BWagener/wineasio/commit/8e24a15801b5980c9245ebf4fe30a722857f7e40) for the modification I made.
+[Download](https://github.com/wineasio/wineasio/releases) the newest zip and unpack it. Open a terminal inside the newly created folder and run the following commands:
+
+<details><summary>[How to] Clone instead of downloading:</summary>
+
+(Release Packages are easier to replicate. Support for cloning steps only with BWagener's version.)
 
 ```
-# retrieve fixed version:
-git clone https://github.com/BWagener/wineasio.git
+git clone --recursive https://github.com/wineasio/wineasio.git
 cd wineasio
+```
 
+---
+
+</details>
+
+```

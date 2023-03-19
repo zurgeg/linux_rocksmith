@@ -8,8 +8,9 @@
 1. [Installing RS_ASIO](#installing-rs_asio)
 1. [Set up JACK](#set-up-jack)
 1. [Starting the game](#starting-the-game)
-1. [Command (No Lutris)](#command-no-lutris)
-1. [Yes Lutris](#yes-lutris)
+1. [Get the start script)](#get-the-start-script)
+1. [Making it nice via Steam entry (optional)](#making-it-nice-via-steam-entry-optional)
+1. [Beautification (even more optional, but recommended)](#beautification-even-more-optional-but-recommended)
 
 # Install necessary stuff
 
@@ -55,7 +56,7 @@ I don't know a way to check if this is set up correctly. This is one of the firs
 
 [Download](https://github.com/mdias/rs_asio/releases) the newest release, unpack everything to the root of your Rocksmith installation (`$STEAMLIBRARY/steamapps/common/Rocksmith2014/`)
 
-Edit RS_ASIO.ini: fill in `WineASIO` where it says `Driver=`. Do this for `[Asio.Output]` and `[Asio.Input.0]`. If you don't play multiplayer, you can comment out Input1 and Input2 by putting a `;` in front of the lines.
+Edit RS_ASIO.ini: fill in `WineASIO` where it says `Driver=`. Do this for `[Asio.Output]`, `[Asio.Input.0]` and `[Asio.Input.Mic]`. If you don't play multiplayer, you can comment out Input.1 and Input.Mic by putting a `;` in front of the lines.
 
 ## Set up JACK
 
@@ -124,8 +125,28 @@ This is how it looks on my system:
 
 Launch Big Picture Mode now and find the entry in your Library. It should now have artwork.
 
-000-pipewire-bootup-000
+# A bit of troubleshooting
 
----
+If some commands don't work, make sure you've set the variables.
 
-Note to self, adjust this guide for two-player setup as well (which pretty much consists of setting 2 inputs everywhere)
+## Game crashes
+
+Can happen sometimes when you use a different application, then focus Rocksmith again. Other than that:
+
+* First off, if the game crashes at the start, try two more times. Sometimes it was just random.
+* Keep Pavucontrol (or whatever you used) open while starting/playing - I can't really tell why, but it helps a lot
+* **Patch bay:** (Meaning: Changes with something like qpwgraph or Catia.) The game doesn't like these changes too much. You might get away with 1-2, but this is a bit luck-based.
+* **Disable Big Picture:** I think this was an issue for me at one point. I would do it just to be sure.
+* **Focus away:** If you use pipewire and the game crashes right after the window shows up, you could try taking the focus to another window as quick as possible. It helps sometimes, but isn't reliable
+* **Use onboard audio:** I use a seperate sound card (Shows up as "CM106") that creates issues. I don't have to unplug it, but just use the audio built into the mainboard. RealTone Cable works fine btw.
+* **Start from terminal:** This gives you more info on what's going on. Launch the script from the terminal or
+* **Try the old approach:** This is not meant to be used for playing anymore, but it's a reliable way to get the game running: `PIPEWIRE_LATENCY=256/48000 WINEPREFIX=$STEAMLIBRARY/steamapps/compatdata/221680/pfx $PROTON/bin/wine $STEAMLIBRARY/steamapps/common/Rocksmith2014/Rocksmith2014.exe`
+
+## WineASIO
+
+This is a handy debugging tool (that I've also [used in the past](https://github.com/theNizo/linux_rocksmith/issues/22#issuecomment-1276457128)]): https://forum.vb-audio.com/viewtopic.php?t=1204
+
+## CDLC
+
+* Make sure your game is patched for it. Since it's now an .exe, add that to your Steam Library and run it with Proton.
+* In the past, we had to set the working directory to the root of the game's folder. This would either be done in the script, in the properties of the shortcut, or in the terminal via `cd`.

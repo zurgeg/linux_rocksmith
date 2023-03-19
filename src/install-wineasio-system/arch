@@ -15,4 +15,7 @@ Installing `base-devel` is very useful for using the AUR and compiling in genera
 	find /usr/lib32/ -name "wineasio.dll.so"
 
 This should output 4 paths (ignore the errors).
+
+---
+
 </details>
