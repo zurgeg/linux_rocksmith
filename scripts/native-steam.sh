@@ -41,6 +41,8 @@ echo "WARNING! You should set the Proton version"
 echo "you want to use with Rocksmith NOW in Steam!"
 echo "============================================"
 echo
+echo "SCRIPTS ARE OUTDATED CURRENTLY"
+echo
 
 # determine the game's install location
 # checks first, if the game is in the default Steam Library

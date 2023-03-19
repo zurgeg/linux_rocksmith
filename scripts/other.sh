@@ -29,6 +29,8 @@ echo "!! This script is not compatible with pipewire.         !!"
 echo "!!                                                      !!"
 echo "!! The Script is experimental. I didn't really test it. !!"
 echo
+echo "SCRIPTS ARE OUTDATED CURRENTLY"
+echo
 
 # determine the game's install location
 echo "Please specify the root folder of the game's"
