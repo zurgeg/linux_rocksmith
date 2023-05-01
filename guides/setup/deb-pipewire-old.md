@@ -56,7 +56,18 @@ In theory, this should also work with Lutris runners (located in `$HOME/.local/s
 1. Delete or rename `$STEAMLIBRARY/steamapps/compatdata/221680`, then start Rocksmith and stop the game once it's running.
 1. `WINEPREFIX=$STEAMLIBRARY/steamapps/compatdata/221680/pfx regsvr32 /usr/lib/i386-linux-gnu/wine/wineasio.dll` (Errors are normal, should end with "regsvr32: Successfully registered DLL [...]")
 
-I don't know a way to check if this is set up correctly. This is one of the first steps I'd redo when I have issues.
+<details><summary> How to check if this worked correctly</summary>
+
+Download this: [VBAsioTest_1013.zip](https://download.vb-audio.com/Download_MT128/VBAsioTest_1013.zip)
+
+Extract it somewhere and run a command like this (replace the last path with the correct path that you chose):
+
+```
+WINEPREFIX=$STEAMLIBRARY/steamapps/compatdata/221680/pfx $PROTON/bin/wine /path/to/VBASIOTest32.exe
+```
+
+---
+</details>
 
 ## Installing RS_ASIO
 
