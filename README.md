@@ -1,3 +1,13 @@
+# What is this branch?
+
+This is inspired by https://hacks.guide/ with the purpose of achieving better readability while having to maintain less files, as well as making the complex .md generation obsolete.
+
+I will still have to attach a table of contents to allow for quicker navigation.
+
+There might be a reason why I did it the way it is though. I will find out.
+
+---
+
 # Rocksmith 2014 on Linux
 
 These are a few Guides to get [Rocksmith 2014](https://store.steampowered.com/app/221680/Rocksmith_2014_Edition__Remastered/) running on Linux. In case you haven't tried gaming on Linux yet, other than not working, it won't get harder than this by far for other games.
@@ -38,21 +48,12 @@ There are two ways to do this. The one most people on [ProtonDB](https://www.pro
 
 Then there's the way of routing the audio through JACK -> wineASIO -> RS_ASIO, which has less delay and sounds better, but also takes longer to set up. I have Guides for Arch-based Distros and Debian-based ones. These can be found in the tables below.
 
-**Recent Proton versions:**
+**Main Guide**
 
-|| pipewire | non-pipewire |
-|---|---|---|
-| Arch | [Guide](guides/setup/arch-pipewire-new.md) | [Guide](guides/setup/arch-non-pipewire-new.md) |
-| Debian | [Not finished](guides/setup/deb-pipewire-new.md) | [Guide](guides/setup/deb-non-pipewire-new.md) |
-| Steam Deck | [Guide](guides/setup/deck-pipewire-new.md) | N/A |
+Do you use pipewire?
 
-**Proton versions 6.5 and below:**
-
-|| pipewire | non-pipewire |
-|---|---|---|
-| Arch | [Guide](guides/setup/arch-pipewire-old.md) | [Guide](guides/setup/arch-non-pipewire-old.md) |
-| Debian | [Not finished](guides/setup/deb-pipewire-old.md) | [Guide](guides/setup/deb-non-pipewire-old.md) |
-| Steam Deck | [Guide](guides/setup/deck-pipewire-old.md) | N/A |
+* [Yes]()
+* [No]()
 
 **Other Guides:**
 
