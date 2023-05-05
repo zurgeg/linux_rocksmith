@@ -283,7 +283,7 @@ Launch Big Picture Mode now and find the entry in your Library. It should now ha
 
 ---
 
-</summary>
+</details>
 
 # A bit of troubleshooting
 
