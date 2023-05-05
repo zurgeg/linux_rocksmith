@@ -48,14 +48,18 @@ In theory, this should also work with Lutris runners (located in `$HOME/.local/s
 ## Setting up the game's prefix/compatdata
 
 1. Delete or rename `$STEAMLIBRARY/steamapps/compatdata/221680`, then start Rocksmith and stop the game once it's running.
-1. `WINEPREFIX=$STEAMLIBRARY/steamapps/compatdata/221680/pfx regsvr32 000-x32windows-000/wineasio.dll` (Errors are normal, should end with "regsvr32: Successfully registered DLL [...]")
+1. `WINEPREFIX=$STEAMLIBRARY/steamapps/compatdata/221680/pfx $PROTON/bin/wine regsvr32 000-x32windows-000/wineasio.dll` (Errors are normal, should end with "regsvr32: Successfully registered DLL [...]")
+1. Copy wineasio.dll to the prefix:
+```
+cp $PROTON/lib/wine/i386-windows/wineasio.dll $STEAMLIBRARY/compatdata/221680/pfx/drive_c/windows/system32/
+cp $PROTON/lib/wine/i386-windows/wineasio.dll $STEAMLIBRARY/compatdata/221680/pfx/drive_c/windows/syswow64/
+```
 
 <details><summary> How to check if this worked correctly</summary>
 
 Download this: [VBAsioTest_1013.zip](https://download.vb-audio.com/Download_MT128/VBAsioTest_1013.zip)
 
 Extract it somewhere and run a command like this (replace the last path with the correct path that you chose):
-
 ```
 WINEPREFIX=$STEAMLIBRARY/steamapps/compatdata/221680/pfx $PROTON/bin/wine /path/to/VBASIOTest32.exe
 ```
@@ -79,9 +83,38 @@ Delete the `Rocksmith.ini` inside your Rocksmith installation. It will auto-gene
 
 000-steam-running-required-000
 
-If we start the game from the button that says "Play" in Steam, the game can't connect to wineasio (you won't have sound and will get an error message). However, running it from the terminal, or running a script, always made it work.
+If we start the game from the button that says "Play" in Steam, the game can't connect to wineasio (you won't have sound and will get an error message). There are two ways to go about this. You can apply both at the same time, they don't break each other.
 
-## Get the start script
+<details><summary>1. LD_PRELOAD</summary>
+
+* Advantages: Run from Steam directly
+* Disadvantages: higher possibility of crashes, steps you might need to do every game-boot.
+
+Add these launch options to Rocksmith:
+```
+LD_PRELOAD=/usr/lib32/libjack.so PIPEWIRE_LATENCY=256/48000 %command%
+```
+
+You can launch the game from Steam now. For the first few boot-ups, you have to remove window focus from Rocksmith (typically done with Alt+Tab) as soon as the window shows up. If it doesn't crash, continue.
+
+Rocksmith might not have audio, however, if you don't get a message saying that there's no output device, RS_ASIO and JACK are working fine.
+
+Open qpwgraph or a different JACK patchbay software of your choice. We want to connect microphones to the inputs of Rocksmith and two outputs to our actual output device. Rocksmith will sometimes crash when messing with the patchbay, so this is how you want to go about it:
+
+1. Connect one device to Rocksmith
+1. Window focus to Rocksmith
+1. Go to step one, until you have connected everything
+
+---
+
+</details>
+
+<details><summary>2. Start script, shortcut in Steam</summary>
+
+* Advantage: Reliable one time setup
+* Disadvantages: Another Steam game entry, or having to launch from terminal entirely
+
+### Get the start script
 
 In Steam, right click on Rocksmith and choose "Properties". Set the following launch options:
 
@@ -99,7 +132,7 @@ cp /tmp/proton_$USER/run $STEAMLIBRARY/steamapps/common/rocksmith-launcher.sh
 
 We can start the game via this script now: `PIPEWIRE_LATENCY="256/48000" $STEAMLIBRARY/steamapps/common/rocksmith-launcher.sh`
 
-## Making it nice via Steam entry (optional)
+### Making it nice via Steam entry (optional, but recommended)
 
 We can't start Rocksmith directly from the Steam Library. But we can use the Steam Library to start the script that starts the game in a way that Steam recognizes.
 
@@ -136,6 +169,10 @@ This is how it looks on my system:
 
 Launch Big Picture Mode now and find the entry in your Library. It should now have artwork.
 
+---
+
+</summary>
+
 # A bit of troubleshooting
 
 If some commands don't work, make sure you've set the variables.
@@ -146,10 +183,10 @@ Can happen sometimes when you use a different application, then focus Rocksmith 
 
 * First off, if the game crashes at the start, try two more times. Sometimes it was just random.
 * Keep Pavucontrol (or whatever you used) open while starting/playing - I can't really tell why, but it helps a lot
+* **Use onboard audio:** I use a seperate sound card (Shows up as "CM106") that creates issues. I don't have to unplug it, but just use the audio built into the mainboard. RealTone Cable works fine btw.
+* **Focus away:** If you use pipewire and the game crashes right after the window shows up, you could try taking the focus to another window as quick as possible. It helps sometimes, but isn't reliable
 * **Patch bay:** (Meaning: Changes with something like qpwgraph or Catia.) The game doesn't like these changes too much. You might get away with 1-2, but this is a bit luck-based.
 * **Disable Big Picture:** I think this was an issue for me at one point. I would do it just to be sure.
-* **Focus away:** If you use pipewire and the game crashes right after the window shows up, you could try taking the focus to another window as quick as possible. It helps sometimes, but isn't reliable
-* **Use onboard audio:** I use a seperate sound card (Shows up as "CM106") that creates issues. I don't have to unplug it, but just use the audio built into the mainboard. RealTone Cable works fine btw.
 * **Start from terminal:** This gives you more info on what's going on. Launch the script from the terminal or
 * **Try the old approach:** This is not meant to be used for playing anymore, but it's a reliable way to get the game running: `PIPEWIRE_LATENCY=256/48000 WINEPREFIX=$STEAMLIBRARY/steamapps/compatdata/221680/pfx $PROTON/bin/wine $STEAMLIBRARY/steamapps/common/Rocksmith2014/Rocksmith2014.exe`
 
