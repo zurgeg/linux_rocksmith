@@ -49,10 +49,13 @@ Then there's the way of routing the audio through JACK -> wineASIO -> RS_ASIO, w
 
 **Other Guides:**
 
+* [OBS guide for these setups](guides/obs.md)
 * [Differences: Proton versions 6.5 and below](guides/6.5-differences.md)
 * [ALSA - Quick and dirty](guides/quick.md)
+* [Different sound processing with Tonelib-GFX](guides/tonelibgfx.md)
+
+**Other information:**
 * [Steps I cut out](guides/unused.md)
-* [OBS guide for these setups](guides/obs.md)
 * [Why all of this works](guides/theory.md)
 
 ## Scripts
