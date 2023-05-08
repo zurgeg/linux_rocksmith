@@ -44,6 +44,7 @@ Then there's the way of routing the audio through JACK -> wineASIO -> RS_ASIO, w
 |---|---|---|
 | Arch | [Guide](guides/setup/arch-pipewire-new.md) | [Guide](guides/setup/arch-non-pipewire-new.md) |
 | Debian | [Not finished](guides/setup/deb-pipewire-new.md) | [Guide](guides/setup/deb-non-pipewire-new.md) |
+| Fedora | [Guide](guides/setup/fed-pipewire-new.md)
 | Steam Deck | [Guide](guides/setup/deck-pipewire-new.md) | N/A |
 
 **Proton versions 6.5 and below:**
