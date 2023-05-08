@@ -54,7 +54,7 @@ cd wineasio
 
 </details>
 
-For Fedora, you need a modified Makefile, which you can download from [here]() or modify yourself:
+For Fedora, you need a modified Makefile, which you can download from [here](../Makefile.mk) or modify yourself:
 
 <details><summary>How to modify</summary>
 
