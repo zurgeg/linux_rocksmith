@@ -42,21 +42,14 @@ Then there's the way of routing the audio through JACK -> wineASIO -> RS_ASIO, w
 
 || pipewire | non-pipewire |
 |---|---|---|
-| Arch | [Guide](guides/setup/arch-pipewire-new.md) | [Guide](guides/setup/arch-non-pipewire-new.md) |
-| Debian | [Not finished](guides/setup/deb-pipewire-new.md) | [Guide](guides/setup/deb-non-pipewire-new.md) |
-| Fedora | [Guide](guides/setup/fed-pipewire-new.md)
-| Steam Deck | [Guide](guides/setup/deck-pipewire-new.md) | N/A |
-
-**Proton versions 6.5 and below:**
-
-|| pipewire | non-pipewire |
-|---|---|---|
-| Arch | [Guide](guides/setup/arch-pipewire-old.md) | [Guide](guides/setup/arch-non-pipewire-old.md) |
-| Debian | [Not finished](guides/setup/deb-pipewire-old.md) | [Guide](guides/setup/deb-non-pipewire-old.md) |
-| Steam Deck | [Guide](guides/setup/deck-pipewire-old.md) | N/A |
+| Arch | [Guide](guides/setup/arch-pipewire.md) | [Guide](guides/setup/arch-non-pipewire.md) |
+| Debian | [Not finished](guides/setup/deb-pipewire.md) | [Guide](guides/setup/deb-non-pipewire.md) |
+| Fedora | [Guide](guides/setup/fed-pipewire.md) | N/A |
+| Steam Deck | [Guide](guides/setup/deck-pipewire.md) | N/A |
 
 **Other Guides:**
 
+* [Differences: Proton versions 6.5 and below](guides/6.5-differences.md)
 * [ALSA - Quick and dirty](guides/quick.md)
 * [Steps I cut out](guides/unused.md)
 * [OBS guide for these setups](guides/obs.md)

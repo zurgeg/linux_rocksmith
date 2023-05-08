@@ -40,7 +40,10 @@ To make Proton use wineasio, we need to copy these files into the appropriate lo
 
 ```
 # !!! WATCH OUT FOR VARIABLES !!!
-000-install-wineasio-runner-000
+cp 000-x32unix-000/wineasio.dll.so "$PROTON/lib/wine/i386-unix/wineasio.dll.so"
+cp 000-x64unix-000/wineasio.dll.so "$PROTON/lib64/wine/x86_64-unix/wineasio.dll.so"
+cp 000-x32windows-000/wineasio.dll "$PROTON/lib/wine/i386-windows/wineasio.dll"
+cp 000-x64windows-000/wineasio.dll "$PROTON/lib64/wine/x86_64-windows/wineasio.dll"
 ```
 
 In theory, this should also work with Lutris runners (located in `$HOME/.local/share/lutris/runners/wine/`)
