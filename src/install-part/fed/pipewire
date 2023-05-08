@@ -1,0 +1,6 @@
+This guide will use the Steam package from "RPM Fusion nonfree". This is to avoid sandboxing being an issue for now.
+
+I assume that `pipewire` and a session manager (eg. `wireplumber`, or `pipewire-media-session`) is already installed.
+
+```
+sudo dnf install -y gcc make glibc-devel.i686 wine wine-devel.i686 wine-devel.x86_64 pipewire-jack-audio-connection-kit-devel.i686 pipewire-jack-audio-connection-kit-devel.x86_64 pipewire-alsa pipewire-pulseaudio realtime-setup pavucontrol qpwgraph

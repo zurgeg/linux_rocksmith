@@ -1,6 +1,4 @@
-# JACK to ASIO with pipewire on Fedora Workstation
 
-This guide is in a pre-release state. It will be polished once it's integrated in src.
 
 ## Table of contents
 
@@ -16,12 +14,9 @@ This guide is in a pre-release state. It will be polished once it's integrated i
 
 # Install necessary stuff
 
-This guide will use the Steam package from "RPM Fusion nonfree". This is to avoid sandboxing being an issue for now.
+(I recommend `wine-staging` if your distro has it, but usual `wine` works as well.)
 
-I assume that `pipewire` and a session manager (eg. `wireplumber`, or `pipewire-media-session`) is already installed.
 
-```
-sudo dnf install -y gcc make glibc-devel.i686 wine wine-devel.i686 wine-devel.x86_64 pipewire-jack-audio-connection-kit-devel.i686 pipewire-jack-audio-connection-kit-devel.x86_64 pipewire-alsa pipewire-pulseaudio realtime-setup pavucontrol qpwgraph
 # the groups should already exist, but just in case
 sudo groupadd audio
 sudo groupadd realtime
@@ -29,7 +24,7 @@ sudo usermod -aG audio $USER`
 sudo usermod -aG realtime $USER`
 ```
 
-Log out and back in. Or reboot, if that doesn't work
+Log out and back in. Or reboot, if that doesn't work.
 
 <details><summary> How to check if this worked correctly</summary>
 For the packages, do `dnf list installed <package name>`. (You can do multiple packages at once) Should output the names and versions without errors.
@@ -39,7 +34,32 @@ For the packages, do `dnf list installed <package name>`. (You can do multiple p
 
 # wineasio
 
-[Download](https://github.com/wineasio/wineasio/releases) the newest zip and unpack it.
+For Fedora, you need a modified Makefile, which you can download from [here](../Makefile.mk) or modify yourself:
+
+<details><summary>How to modify</summary>
+
+Replace the line that says `LIBRARIES` (should be line 43) with this:
+
+	LIBRARIES             = -ljack
+
+change `wineasio_dll_LDFLAGS` (should be line 62) according to this:
+
+Add these lines below `$(wineasio_dll_MODULE:%=%.spec) \`:
+
+				-L/usr/lib$(M) \
+				-L/usr/lib \
+
+and these below `-L/usr/lib/$(ARCH)-linux-gnu/wine-development \`:
+
+	-L/usr/lib$(M)/pipewire-0.3/jack \
+	-L/usr/lib/pipewire-0.3/jack \
+
+</details>
+
+<details>
+	<summary>Compile from source</summary>
+
+[Download](https://github.com/wineasio/wineasio/releases) the newest zip and unpack it. Open a terminal inside the newly created folder and run the following commands:
 
 <details><summary>[How to] Clone instead of downloading:</summary>
 
@@ -66,8 +86,8 @@ change `wineasio_dll_LDFLAGS` (should be line 62) according to this:
 
 Add these lines below `$(wineasio_dll_MODULE:%=%.spec) \`:
 
-				-L/usr/lib$(M) \
-				-L/usr/lib \
+	-L/usr/lib$(M) \
+	-L/usr/lib \
 
 and these below `-L/usr/lib/$(ARCH)-linux-gnu/wine-development \`:
 
@@ -89,6 +109,23 @@ sudo cp build32/wineasio.dll.so /usr/lib/wine/i386-unix/wineasio.dll.so
 sudo cp build64/wineasio.dll /usr/lib64/wine/x86_64-windows/wineasio.dll
 sudo cp build64/wineasio.dll.so /usr/lib64/wine/x86_64-unix/wineasio.dll.so
 ```
+
+</details>
+
+<details>
+<summary>Use the AUR</summary>
+
+`yay` is an AUR helper, which I will use as an example. It will install the AUR package for you. You can do this in other ways too, of course
+
+```
+yay -S wineasio --noconfirm
+```
+
+Notes:
+
+* If it exits with an error, try and remove `--noconfirm`.
+* [Tutorial on `yay`](https://youtube.com/watch?v=BbnSoY_yDr8)
+</details>
 
 `wineasio` is now installed on your native wine installation.
 
@@ -148,17 +185,25 @@ Edit RS_ASIO.ini: fill in `WineASIO` where it says `Driver=`. Do this for `[Asio
 
 ## Set up JACK
 
-What we basically need to do is to select only one output and one input (2 inputs for multiplayer). I like to do this via `pavucontrol`, which works if `pipewire-pulse` is installed.
-
-Open pavucontrol ("PulseAudio Volume Control"), go to "Configuration" and make sure there's exactly one input device and one output device enabled.
-
-All available devices will automatically be tied to Rocksmith, and the game doesn't like you messing around in the patchbay (= it would crash often).
+1. Open Cadence. If it says on the bottom left that you should log out and back in, and you already did that, restart your machine.
+1. Go to `Configure -> Engine`. Make sure that "Realtime" is ticked.
+1. Go to "Driver", select ALSA.
+ * If you use the same device for input and output, untick "Duplex Mode" and select the device you want to use in the first line. If you use different devices for in- and output, tick "Duplex Mode" and select the devices in the 2nd and 3rd line. Please note that the names are not that intuitive to begin with.
+ * Input Channels: <no. of players>; Output Channels: 2
+ * Sample Rate: 48000
+ * Buffer Size and Buffer Periods: Bigger Buffer Size equals more stability and higher latency. AFAIK you can reduce the Buffer Size, if you add more Periods, but I'm not sure about that. 256/4 (~5ms) works fine for me.
+1. Press okay and go to `Tweaks -> WineASIO
+ * Tick everything
+ * Match No. of in- and -outputs
+ * Match Buffer size
+1. Press apply
+1. You're set up. To start JACK, you can press "Start" under "System"
 
 # Starting the game
 
 Delete the `Rocksmith.ini` inside your Rocksmith installation. It will auto-generate with the correct values. The only important part is the `LatencyBuffer=`, which has to match the Buffer Periods.
 
-Steam needs to be running.
+Steam and JACK need to be running.
 
 If we start the game from the button that says "Play" in Steam, the game can't connect to wineasio (you won't have sound and will get an error message). There are two ways to go about this. You can apply both at the same time, they don't break each other.
 
@@ -199,7 +244,7 @@ In Steam, right click on Rocksmith and choose "Properties". Set the following la
 PROTON_LOG=1 PROTON_DUMP_DEBUG_COMMANDS=1 %command%
 ```
 
-then start the game from Steam again. You will now have a script at `/tmp/proton_$USER/run` that represents the command Steam runs when starting the game. If we run this script, Rocksmith can start via Steam and have sound.
+then start the game from Steam again. You will now have a script at `/tmp/proton_$USER/run` that represents the command Steam runs when starting the game. If we run this script, Rocksmith can start via Steam and have sound. (`PIPEWIRE_LATENCY="256/48000" /tmp/proton_$USER/run`)
 
 Let's copy the script to somewhere else and give it a better name. This is an example that I will use in the rest of the guide. You can change the path or the name of the script, if you want to.
 
@@ -221,9 +266,7 @@ We can't start Rocksmith directly from the Steam Library. But we can use the Ste
 
 Go into your Steam Library and select "Add a game" -> "Add a Non-Steam Game" on the bottom left.
 Make sure you can see all files. Select the script we generated just now and add it. This will create a shortcut to the script, which I will refer to as "shortcut" from here on.
-Right click on the shortcut and select "Properties". Add these launch Options: `PIPEWIRE_LATENCY="256/48000" %command%`
 
-`PIPEWIRE_LATENCY`: Rocksmith needs a sample rate of 48000. 256 refers to the buffer size. This number worked great for me and others, but you can experiment with different values, of course.
 
 You can now start the game from Steam. Use the shortcut, it will launch the actual game.
 
@@ -277,4 +320,3 @@ This is a handy debugging tool (that I've also [used in the past](https://github
 
 * Make sure your game is patched for it. Since it's now an .exe, add that to your Steam Library and run it with Proton.
 * In the past, we had to set the working directory to the root of the game's folder. This would either be done in the script, in the properties of the shortcut, or in the terminal via `cd`.
-

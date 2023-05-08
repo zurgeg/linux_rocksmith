@@ -25,6 +25,16 @@ case $1 in
 		#echo p3
 		sed -i "s/000-x32windows-000/\/usr\/lib\/i386-linux-gnu\/wine/" $2
 	;;
+	fed)
+		echo "path script: arch"
+		sed -i 's/000-x64unix-000/\/usr\/lib64\/wine\/x86_64-unix/' $2
+		#echo p1
+		sed -i "s/000-x64windows-000/\/usr\/lib64\/wine\/x86_64-windows/" $2
+		#echo p2
+		sed -i "s/000-x32unix-000/\/usr\/lib\/wine\/i386-unix/" $2
+		#echo p3
+		sed -i "s/000-x32windows-000/\/usr\/lib\/wine\/i386-windows/" $2
+		;;
 	*)
 		echo "error: could not find out."
 		exit 2

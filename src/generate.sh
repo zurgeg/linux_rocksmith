@@ -12,7 +12,7 @@ path=../guides/setup
 echo -1
 rm $path/* # clean first
 # for every variation
-for dist in arch deb deck; do
+for dist in arch deb deck fed; do
 	for sound in non-pipewire pipewire; do
 		echo 0
 		echo "$dist; $sound" # print out, which file is worked on, so it's easier to debug.
@@ -42,6 +42,7 @@ for dist in arch deb deck; do
 		sed -i "s/000-install-wineasio-system-1-000/cat install-wineasio-system\/${sound}/e" $filename
 		sed -i "s/000-wineasio-source-000/cat install-wineasio-system\/wineasio-source/e" $filename
 		sed -i "s/000-download-wineasio-000/cat install-wineasio-system\/download-wineasio\/${dist}/e" $filename
+		sed -i "s/000-clone-wineasio-000/cat install-wineasio-system\/download-wineasio\/clone/e" $filename
 		#sed -i "s/000-wineasio-installed-note-000/cat install-wineasio-system\/wineasio-installed-note/e" $filename
 
 		echo 07

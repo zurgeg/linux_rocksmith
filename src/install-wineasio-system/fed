@@ -1,0 +1,39 @@
+For Fedora, you need a modified Makefile, which you can download from [here](../Makefile.mk) or modify yourself:
+
+<details><summary>How to modify</summary>
+
+Replace the line that says `LIBRARIES` (should be line 43) with this:
+
+	LIBRARIES             = -ljack
+
+change `wineasio_dll_LDFLAGS` (should be line 62) according to this:
+
+Add these lines below `$(wineasio_dll_MODULE:%=%.spec) \`:
+
+				-L/usr/lib$(M) \
+				-L/usr/lib \
+
+and these below `-L/usr/lib/$(ARCH)-linux-gnu/wine-development \`:
+
+	-L/usr/lib$(M)/pipewire-0.3/jack \
+	-L/usr/lib/pipewire-0.3/jack \
+
+</details>
+
+000-install-wineasio-system-1-000
+
+`wineasio` is now installed on your native wine installation.
+
+<details>
+	<summary>How to check if it's installed correctly</summary>
+
+	find /usr/lib/ -name "wineasio.dll"
+	find /usr/lib/ -name "wineasio.dll.so"
+	find /usr/lib64/ -name "wineasio.dll"
+	find /usr/lib64/ -name "wineasio.dll.so"
+
+This should output 4 paths (ignore the errors).
+
+---
+
+</details>

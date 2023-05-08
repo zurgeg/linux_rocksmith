@@ -1,16 +1,5 @@
 [Download](https://github.com/wineasio/wineasio/releases) the newest zip and unpack it. Open a terminal inside the newly created folder and run the following commands:
 
-<details><summary>[How to] Clone instead of downloading:</summary>
-
-(No support for this way, as release package is easier to replicate.)
-
-```
-git clone --recursive https://github.com/wineasio/wineasio.git
-cd wineasio
-```
-
----
-
-</details>
+000-clone-wineasio-000
 
 ```

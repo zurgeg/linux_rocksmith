@@ -1,8 +1,4 @@
-# JACK to ASIO on Steam Deck (pipewire)
-
-(Thanks to [BWagener](https://github.com/BWagener) for writing this.)
-
-(I (Nizo) don't own a Steam deck, but am the only maintainer currently. I therefore rely on reports of other people and try to keep this up to date as best as possible.)
+# JACK to ASIO with pipewire on Fedora Workstation
 
 ## Table of contents
 
@@ -20,18 +16,12 @@
 
 (I recommend `wine-staging` if your distro has it, but usual `wine` works as well.)
 
-Note: Install qpwgraph through Discover (Discover comes preinstalled on Steam Deck)
+This guide will use the Steam package from "RPM Fusion nonfree". This is to avoid sandboxing being an issue for now.
+
+I assume that `pipewire` and a session manager (eg. `wireplumber`, or `pipewire-media-session`) is already installed.
 
 ```
-# disable readonly mode
-sudo steamos-readonly disable
-
-sudo pacman-key --init
-sudo pacman-key --populate archlinux
-
-sudo pacman -S realtime-privileges wine-staging
-# These packages are already on SteamOS so I did not install them:
-# pipewire-alsa pipewire-pulse pipewire-jack lib32-pipewire-jack pavucontrol
+sudo dnf install -y gcc make glibc-devel.i686 wine wine-devel.i686 wine-devel.x86_64 pipewire-jack-audio-connection-kit-devel.i686 pipewire-jack-audio-connection-kit-devel.x86_64 pipewire-alsa pipewire-pulseaudio realtime-setup pavucontrol qpwgraph
 # the groups should already exist, but just in case
 sudo groupadd audio
 sudo groupadd realtime
@@ -42,54 +32,34 @@ sudo usermod -aG realtime $USER`
 Log out and back in. Or reboot, if that doesn't work.
 
 <details><summary> How to check if this worked correctly</summary>
-For the packages, do `pacman -Q package-name`. (You can do multiple at once) Should output the names and versions without errors.
+For the packages, do `dnf list installed <package name>`. (You can do multiple packages at once) Should output the names and versions without errors.
 
 	For the groups, run `groups`. This will give you a list, which should contain "audio" and "realtime".
 </details>
 
 # wineasio
 
-Installing `base-devel` is very useful for using the AUR and compiling in general.
+For Fedora, you need a modified Makefile, which you can download from [here](../Makefile.mk) or modify yourself:
 
-On SteamOS the following additional packages were required to compile wineasio:
+<details><summary>How to modify</summary>
 
-```
-sudo pacman -S base-devel glibc linux-headers linux-api-headers libtool binutils lib32-glibc
-# note about these two packages: they are in conflict with lib32-pipewire-jack pipewire-jack
-# pacman can remove these packages for you and we can reinstall them once wineasio is compiled
-sudo pacman -S lib32-jack2 jack2
-```
+Replace the line that says `LIBRARIES` (should be line 43) with this:
 
-<details><summary>Know already what's going on? Here are all commands in one piece without an explanation</summary>
+	LIBRARIES             = -ljack
 
-If the commands in this collapsible section don't work for you, try the "longer" variant first before asking for help.
+change `wineasio_dll_LDFLAGS` (should be line 62) according to this:
 
-YOU NEED TO HAVE THE $PROTON VARIABLE SET!! (or replaced with the correct path first)
+Add these lines below `$(wineasio_dll_MODULE:%=%.spec) \`:
 
-cd into the unpacked directory, then run this.
+				-L/usr/lib$(M) \
+				-L/usr/lib \
 
-```
-rm -rf build32
-rm -rf build64
-make 32
-make 64
-sudo cp build32/wineasio.dll /usr/lib32/wine/i386-windows/wineasio.dll
-sudo cp build32/wineasio.dll.so /usr/lib32/wine/i386-unix/wineasio.dll.so
-sudo cp build64/wineasio.dll /usr/lib/wine/x86_64-windows/wineasio.dll
-sudo cp build64/wineasio.dll.so /usr/lib/wine/x86_64-unix/wineasio.dll.so
-cp build32/wineasio.dll "$PROTON/lib/wine/i386-windows/wineasio.dll"
-cp build32/wineasio.dll.so "$PROTON/lib/wine/i386-unix/wineasio.dll.so"
-cp build64/wineasio.dll "$PROTON/lib64/wine/x86_64-windows/wineasio.dll"
-cp build64/wineasio.dll.so "$PROTON/lib64/wine/x86_64-unix/wineasio.dll.so"
-```
+and these below `-L/usr/lib/$(ARCH)-linux-gnu/wine-development \`:
 
-And you're done, continue with [Setting up the game's prefix/compatdata](#setting-up-the-games-prefixcompatdata).
-
----
+	-L/usr/lib$(M)/pipewire-0.3/jack \
+	-L/usr/lib/pipewire-0.3/jack \
 
 </details>
-
-The official source for wineasio is [wineasio/wineasio](https://github.com/wineasio/wineasio). If the official one doesn't work, clone the fixed version from here: https://github.com/BWagener/wineasio.git
 
 [Download](https://github.com/wineasio/wineasio/releases) the newest zip and unpack it. Open a terminal inside the newly created folder and run the following commands:
 
@@ -106,6 +76,28 @@ cd wineasio
 
 </details>
 
+For Fedora, you need a modified Makefile, which you can download from [here](../Makefile.mk) or modify yourself:
+
+<details><summary>How to modify</summary>
+
+Replace the line that says `LIBRARIES` (should be line 43) with this:
+
+	LIBRARIES             = -ljack
+
+change `wineasio_dll_LDFLAGS` (should be line 62) according to this:
+
+Add these lines below `$(wineasio_dll_MODULE:%=%.spec) \`:
+
+	-L/usr/lib$(M) \
+	-L/usr/lib \
+
+and these below `-L/usr/lib/$(ARCH)-linux-gnu/wine-development \`:
+
+	-L/usr/lib$(M)/pipewire-0.3/jack \
+	-L/usr/lib/pipewire-0.3/jack \
+
+</details>
+
 ```
 # build
 rm -rf build32
@@ -114,10 +106,10 @@ make 32
 make 64
 
 # Install on normal wine
-sudo cp build32/wineasio.dll /usr/lib32/wine/i386-windows/wineasio.dll
-sudo cp build32/wineasio.dll.so /usr/lib32/wine/i386-unix/wineasio.dll.so
-sudo cp build64/wineasio.dll /usr/lib/wine/x86_64-windows/wineasio.dll
-sudo cp build64/wineasio.dll.so /usr/lib/wine/x86_64-unix/wineasio.dll.so
+sudo cp build32/wineasio.dll /usr/lib/wine/i386-windows/wineasio.dll
+sudo cp build32/wineasio.dll.so /usr/lib/wine/i386-unix/wineasio.dll.so
+sudo cp build64/wineasio.dll /usr/lib64/wine/x86_64-windows/wineasio.dll
+sudo cp build64/wineasio.dll.so /usr/lib64/wine/x86_64-unix/wineasio.dll.so
 ```
 
 `wineasio` is now installed on your native wine installation.
@@ -127,20 +119,23 @@ sudo cp build64/wineasio.dll.so /usr/lib/wine/x86_64-unix/wineasio.dll.so
 
 	find /usr/lib/ -name "wineasio.dll"
 	find /usr/lib/ -name "wineasio.dll.so"
-	find /usr/lib32/ -name "wineasio.dll"
-	find /usr/lib32/ -name "wineasio.dll.so"
+	find /usr/lib64/ -name "wineasio.dll"
+	find /usr/lib64/ -name "wineasio.dll.so"
 
 This should output 4 paths (ignore the errors).
+
+---
+
 </details>
 
 To make Proton use wineasio, we need to copy these files into the appropriate locations:
 
 ```
 # !!! WATCH OUT FOR VARIABLES !!!
-cp /usr/lib32/wine/i386-unix/wineasio.dll.so "$PROTON/lib/wine/i386-unix/wineasio.dll.so"
-cp /usr/lib/wine/x86_64-unix/wineasio.dll.so "$PROTON/lib64/wine/x86_64-unix/wineasio.dll.so"
-cp /usr/lib32/wine/i386-windows/wineasio.dll "$PROTON/lib/wine/i386-windows/wineasio.dll"
-cp /usr/lib/wine/x86_64-windows/wineasio.dll "$PROTON/lib64/wine/x86_64-windows/wineasio.dll"
+cp /usr/lib/wine/i386-unix/wineasio.dll.so "$PROTON/lib/wine/i386-unix/wineasio.dll.so"
+cp /usr/lib64/wine/x86_64-unix/wineasio.dll.so "$PROTON/lib64/wine/x86_64-unix/wineasio.dll.so"
+cp /usr/lib/wine/i386-windows/wineasio.dll "$PROTON/lib/wine/i386-windows/wineasio.dll"
+cp /usr/lib64/wine/x86_64-windows/wineasio.dll "$PROTON/lib64/wine/x86_64-windows/wineasio.dll"
 ```
 
 In theory, this should also work with Lutris runners (located in `$HOME/.local/share/lutris/runners/wine/`)
@@ -148,7 +143,7 @@ In theory, this should also work with Lutris runners (located in `$HOME/.local/s
 ## Setting up the game's prefix/compatdata
 
 1. Delete or rename `$STEAMLIBRARY/steamapps/compatdata/221680`, then start Rocksmith and stop the game once it's running.
-1. `WINEPREFIX=$STEAMLIBRARY/steamapps/compatdata/221680/pfx $PROTON/bin/wine regsvr32 /usr/lib32/wine/i386-windows/wineasio.dll` (Errors are normal, should end with "regsvr32: Successfully registered DLL [...]")
+1. `WINEPREFIX=$STEAMLIBRARY/steamapps/compatdata/221680/pfx $PROTON/bin/wine regsvr32 /usr/lib/wine/i386-windows/wineasio.dll` (Errors are normal, should end with "regsvr32: Successfully registered DLL [...]")
 1. Copy wineasio.dll to the prefix:
 ```
 cp $PROTON/lib/wine/i386-windows/wineasio.dll $STEAMLIBRARY/compatdata/221680/pfx/drive_c/windows/system32/

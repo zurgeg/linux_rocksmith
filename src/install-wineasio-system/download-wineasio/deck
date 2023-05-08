@@ -2,17 +2,6 @@ The official source for wineasio is [wineasio/wineasio](https://github.com/winea
 
 [Download](https://github.com/wineasio/wineasio/releases) the newest zip and unpack it. Open a terminal inside the newly created folder and run the following commands:
 
-<details><summary>[How to] Clone instead of downloading:</summary>
-
-(Release Packages are easier to replicate. Support for cloning steps only with BWagener's version.)
-
-```
-git clone --recursive https://github.com/wineasio/wineasio.git
-cd wineasio
-```
-
----
-
-</details>
+000-clone-wineasio-000
 
 ```

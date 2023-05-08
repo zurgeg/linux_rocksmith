@@ -1,0 +1,1 @@
+For the packages, do `dnf list installed <package name>`. (You can do multiple packages at once) Should output the names and versions without errors.
