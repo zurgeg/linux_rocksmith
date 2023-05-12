@@ -54,8 +54,8 @@ In theory, this should also work with Lutris runners (located in `$HOME/.local/s
 1. `WINEPREFIX=$STEAMLIBRARY/steamapps/compatdata/221680/pfx $PROTON/bin/wine regsvr32 000-x32windows-000/wineasio.dll` (Errors are normal, should end with "regsvr32: Successfully registered DLL [...]")
 1. Copy wineasio.dll to the prefix:
 ```
-cp $PROTON/lib/wine/i386-windows/wineasio.dll $STEAMLIBRARY/compatdata/221680/pfx/drive_c/windows/system32/
-cp $PROTON/lib/wine/i386-windows/wineasio.dll $STEAMLIBRARY/compatdata/221680/pfx/drive_c/windows/syswow64/
+cp $PROTON/lib/wine/i386-windows/wineasio.dll $STEAMLIBRARY/steamapps/compatdata/221680/pfx/drive_c/windows/system32/
+cp $PROTON/lib/wine/i386-windows/wineasio.dll $STEAMLIBRARY/steamapps/compatdata/221680/pfx/drive_c/windows/syswow64/
 ```
 
 <details><summary> How to check if this worked correctly</summary>
