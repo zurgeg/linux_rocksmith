@@ -184,7 +184,9 @@ Steam needs to be running.
 
 If we start the game from the button that says "Play" in Steam, the game can't connect to wineasio (you won't have sound and will get an error message). There are two ways to go about this. You can apply both at the same time, they don't break each other.
 
-<details><summary>1. LD_PRELOAD</summary>
+
+
+<details><summary>**1. LD_PRELOAD**</summary>
 
 * Advantages: Run from Steam directly
 * Disadvantages: higher possibility of crashes, steps you might need to do every game-boot.
@@ -208,7 +210,7 @@ Open qpwgraph or a different JACK patchbay software of your choice. We want to c
 
 </details>
 
-<details><summary>2. Start script, shortcut in Steam</summary>
+<details><summary>**2. Start script, shortcut in Steam**</summary>
 
 * Advantage: Reliable one time setup
 * Disadvantages: Another Steam game entry, or having to launch from terminal entirely
@@ -242,10 +244,7 @@ We can't start Rocksmith directly from the Steam Library. But we can use the Ste
 </details>
 
 Go into your Steam Library and select "Add a game" -> "Add a Non-Steam Game" on the bottom left.
-Make sure you can see all files. Select the script we generated just now and add it. This will create a shortcut to the script, which I will refer to as "shortcut" from here on.
-Right click on the shortcut and select "Properties". Add these launch Options: `PIPEWIRE_LATENCY="256/48000" %command%`
-
-`PIPEWIRE_LATENCY`: Rocksmith needs a sample rate of 48000. 256 refers to the buffer size. This number worked great for me and others, but you can experiment with different values, of course.
+Make sure you can see all files. Select the script we generated just now and add it. This will create a shortcut to the script, which I will refer to as "shortcut" from here on. Right click on the shortcut and select "Properties". Add these launch Options: `PIPEWIRE_LATENCY="256/48000" %command%`
 
 You can now start the game from Steam. Use the shortcut, it will launch the actual game.
 
@@ -257,14 +256,14 @@ You can give the games in your Steam Library a custom look. A good Website for r
 
 You can take artwork from [Rocksmith](https://www.steamgriddb.com/game/1841), [Rocksmith 2014](https://www.steamgriddb.com/game/2295), [Rocksmith+](https://www.steamgriddb.com/game/5359161) or anything else you want. I would recommend something that makes the shortcut look different than the game.
 
-Go into the shortcut's Properties. Right under the text "Shortcut" you can change the game's icon and name (both show up in the list on the left in desktop mode). I recommend something like "Rocksmith 2014 - Launcher".
+**Name and icon:** Go into the shortcut's Properties. Right under the text "Shortcut" you can change the game's icon and name (both show up in the list on the left in desktop mode). I recommend something like "Rocksmith 2014 - Launcher".
 
-Above the "Play" button in Steam, there's artwork called the "hero". Right-click on it and choose "set custom background".
+**"Hero (banner/background)":** Located above the "Play" button in Steam. Right-click on it and choose "set custom background". You can theoretically set a logo too by right-clicking on the text, but I personally chose not to do that to clearly see which item is which.
 
-For the cover art ("grid"), it gets a bit harder. Go to `$HOME/.steam/steam/userdata/<number>/config/grid`. Since we added a hero, there should be a file that resembles it. It's called `<id>_hero.<file-ending>` we need the ID.
+**Grid (cover art):** For this it gets a bit harder. Go to `$HOME/.steam/steam/userdata/<number>/config/grid`. Since we added a hero, there should be a file that resembles it. It's called `<id>_hero.<file-ending>` we need the ID.
 copy the cover art into this folder and name it `<id>p.<file-ending>`.
 
-This is how it looks on my system:
+This is how the file structure looks on my system:
 
 ![](/img/grid-file.png)
 

@@ -1,3 +1,1 @@
-Right click on the shortcut and select "Properties". Add these launch Options: `PIPEWIRE_LATENCY="256/48000" %command%`
-
-`PIPEWIRE_LATENCY`: Rocksmith needs a sample rate of 48000. 256 refers to the buffer size. This number worked great for me and others, but you can experiment with different values, of course.
+Note about `PIPEWIRE_LATENCY`: Rocksmith needs a sample rate of 48000. 256 refers to the buffer size. This number worked great for me and others, but you can experiment with different values, of course. (128, 512, 1024, ...)

@@ -1,0 +1,1 @@
+Note about `PIPEWIRE_LATENCY`: This variable is only needed for systems with pipewire. You could leave it out, but doesn't do anything bad.
