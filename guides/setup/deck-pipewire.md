@@ -191,7 +191,7 @@ If we start the game from the button that says "Play" in Steam, the game can't c
 
 
 
-<details><summary>**1. LD_PRELOAD**</summary>
+<details><summary>1. LD_PRELOAD</summary>
 
 * Advantages: Run from Steam directly
 * Disadvantages: higher possibility of crashes, steps you might need to do every game-boot.
@@ -215,7 +215,7 @@ Open qpwgraph or a different JACK patchbay software of your choice. We want to c
 
 </details>
 
-<details><summary>**2. Start script, shortcut in Steam**</summary>
+<details><summary>2. Start script, shortcut in Steam</summary>
 
 * Advantage: Reliable one time setup
 * Disadvantages: Another Steam game entry, or having to launch from terminal entirely
