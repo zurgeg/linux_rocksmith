@@ -21,6 +21,10 @@ for dist in arch deb deck fed; do
 			echo "recognized deck-non-pipewire loop, skipping."
 			continue
 		fi
+		if [ "$dist" = "fed" ] && [ "$sound" = "non-pipewire" ]; then
+			echo "recognized fed-non-pipewire loop, skipping."
+			continue
+		fi
 		filename=$path/$dist-$sound.md
 		cp base.md $filename # BASE SHOULD NEVER BE CHANGED BY THIS SCRIPT
 
@@ -37,13 +41,28 @@ for dist in arch deb deck fed; do
 		echo 04
 		#sed -i "s/000-arch-base-devel-note-000/cat arch-base-devel-note\/${dist}/e" $filename # not used anymore
 		echo 06
-		sed -i "s/000-install-wineasio-system-000/cat install-wineasio-system\/${dist}/e" $filename
-		sed -i "s/000-all-in-1-000/cat install-wineasio-system\/all-in-1/e" $filename
-		sed -i "s/000-install-wineasio-system-1-000/cat install-wineasio-system\/${sound}/e" $filename
-		sed -i "s/000-wineasio-source-000/cat install-wineasio-system\/wineasio-source/e" $filename
-		sed -i "s/000-download-wineasio-000/cat install-wineasio-system\/download-wineasio\/${dist}/e" $filename
-		sed -i "s/000-clone-wineasio-000/cat install-wineasio-system\/download-wineasio\/clone/e" $filename
+# 		sed -i "s/000-install-wineasio-system-000/cat install-wineasio-system\/${dist}/e" $filename
+# 		sed -i "s/000-all-in-1-000/cat install-wineasio-system\/all-in-1/e" $filename
+# 		sed -i "s/000-install-wineasio-system-1-000/cat install-wineasio-system\/${sound}/e" $filename
+# 		sed -i "s/000-wineasio-source-000/cat install-wineasio-system\/wineasio-source/e" $filename
+# 		sed -i "s/000-download-wineasio-000/cat install-wineasio-system\/download-wineasio\/${dist}/e" $filename
+# 		sed -i "s/000-clone-wineasio-000/cat install-wineasio-system\/download-wineasio\/clone/e" $filename
 		#sed -i "s/000-wineasio-installed-note-000/cat install-wineasio-system\/wineasio-installed-note/e" $filename
+
+		echo 06-1
+		sed -i "s/000-install-wineasio-system-000/cat install-wineasio-system\/${dist}/e" $filename
+		sed -i "s/000-base-devel-000/cat install-wineasio-system\/stuff\/base-devel\/${dist}/e" $filename
+		if [ "$dist" = "arch" ] && [ "$sound" = "non-pipewire" ]; then
+			sed -i "s/000-line-before-download-000/cat install-wineasio-system\/stuff\/line-before-download\/arch-non-pipewire/e" $filename
+			sed -i "s/000-arch-non-pipewire-after-wineasio-install-000/cat install-wineasio-system\/stuff\/arch-non-pipewire-after-wineasio-install/e" $filename
+		elif [ "$dist" = "deck" ]; then
+			sed -i "s/000-line-before-download-000/cat install-wineasio-system\/stuff\/line-before-download\/deck/e" $filename
+		fi
+		sed -i "s/000-line-before-download-000//g" $filename
+		sed -i 's/000-arch-non-pipewire-after-wineasio-install-000//g' $filename
+		sed -i "s/000-deck-additional-packages-000/cat install-wineasio-system\/stuff\/deck-additional-packages\/${dist}/e" $filename
+		sed -i "s/000-fed-makefile-000/cat install-wineasio-system\/stuff\/fed-makefile\/${dist}/e" $filename
+
 
 		echo 07
 		sed -i "s/000-old-000/cat install-wineasio-runner\/old/e" $filename

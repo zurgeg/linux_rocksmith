@@ -1,0 +1,15 @@
+000-install-wineasio-system-1-000
+
+`wineasio` is now installed on your system.
+
+<details>
+	<summary>How to check if it's installed correctly</summary>
+
+	find /usr/lib/ -name "wineasio*"
+	find /usr/lib64/ -name "wineasio*"
+
+This should output 4 paths (ignore the errors).
+
+---
+
+</details>

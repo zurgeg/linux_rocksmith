@@ -36,7 +36,8 @@ Log out and back in. Or reboot, if that doesn't work.
 <details><summary> How to check if this worked correctly</summary>
 
 
-For the groups, run `groups`. This will give you a list, which should contain "audio" and "realtime".
+>
+> For the groups, run `groups`. This will give you a list, which should contain "audio" and "realtime".
 </details>
 
 # Create a clean prefix
@@ -69,14 +70,13 @@ env WINEPREFIX=$STEAMLIBRARY/steamapps/compatdata/221680/pfx ./wineasio-register
 
 <details><summary> How to check if this worked correctly</summary>
 
-Download this: [VBAsioTest_1013.zip](https://download.vb-audio.com/Download_MT128/VBAsioTest_1013.zip)
-
-Extract it somewhere and run a command like this (replace the last path with the correct path that you chose):
-```
-WINEPREFIX=$STEAMLIBRARY/steamapps/compatdata/221680/pfx $PROTON/bin/wine /path/to/VBASIOTest32.exe
-```
-
----
+> Download this: [VBAsioTest_1013.zip](https://download.vb-audio.com/Download_MT128/VBAsioTest_1013.zip)
+>
+> Extract it somewhere and run a command like this (replace the last path with the correct path that you chose):
+> ```
+> WINEPREFIX=$STEAMLIBRARY/steamapps/compatdata/221680/pfx $PROTON/bin/wine /path/to/VBASIOTest32.exe
+> ```
+>
 </details>
 
 ## Installing RS_ASIO
@@ -161,6 +161,8 @@ We can start the game via this script now: `PIPEWIRE_LATENCY="256/48000" $STEAML
 ### Making it nice via Steam entry (optional, but recommended)
 
 We can't start Rocksmith directly from the Steam Library. But we can use the Steam Library to start the script that starts the game in a way that Steam recognizes.
+
+---
 
 <details><summary>Fitting meme</summary>
 

@@ -40,9 +40,10 @@ sudo usermod -aG realtime $USER`
 Log out and back in. Or reboot, if that doesn't work.
 
 <details><summary> How to check if this worked correctly</summary>
-For the packages, do `pacman -Q package-name`. (You can do multiple at once) Should output the names and versions without errors.
 
-For the groups, run `groups`. This will give you a list, which should contain "audio" and "realtime".
+> For the packages, do `pacman -Q package-name`. (You can do multiple at once) Should output the names and versions without errors.
+>
+> For the groups, run `groups`. This will give you a list, which should contain "audio" and "realtime".
 </details>
 
 # Create a clean prefix
@@ -66,32 +67,30 @@ sudo pacman -S lib32-jack2 jack2
 
 <details><summary>Know already what's going on? Here are all commands in one piece without an explanation</summary>
 
-If the commands in this collapsible section don't work for you, try the "longer" variant first before asking for help.
-
-YOU NEED TO HAVE THE $PROTON AND $STEAMLIBRARY VARIABLE SET!! (or replaced with the correct path first)
-
-cd into the unpacked directory, then run this.
-
-```
-rm -rf build32
-rm -rf build64
-make 32
-make 64
-sudo cp build32/wineasio32.dll /usr/lib32/wine/i386-windows/wineasio32.dll
-sudo cp build32/wineasio32.dll.so /usr/lib32/wine/i386-unix/wineasio32.dll.so
-sudo cp build64/wineasio64.dll /usr/lib/wine/x86_64-windows/wineasio64.dll
-sudo cp build64/wineasio64.dll.so /usr/lib/wine/x86_64-unix/wineasio64.dll.so
-cp build32/wineasio32.dll "$PROTON/lib/wine/i386-windows/wineasio32.dll"
-cp build32/wineasio32.dll.so "$PROTON/lib/wine/i386-unix/wineasio32.dll.so"
-cp build64/wineasio64.dll "$PROTON/lib64/wine/x86_64-windows/wineasio64.dll"
-cp build64/wineasio64.dll.so "$PROTON/lib64/wine/x86_64-unix/wineasio64.dll.so"
-env WINEPREFIX=$STEAMLIBRARY/steamapps/compatdata/221680/pfx ./wineasio-register
-```
-
-And you're done, continue with [Installing RS_ASIO](#installing-rs_asio).
-
----
-
+> If the commands in this collapsible section don't work for you, try the "longer" variant first before asking for help.
+>
+> YOU NEED TO HAVE THE $PROTON AND $STEAMLIBRARY VARIABLE SET!! (or replaced with the correct path first)
+>
+> cd into the unpacked directory, then run this.
+>
+> ```
+> rm -rf build32
+> rm -rf build64
+> make 32
+> make 64
+> sudo cp build32/wineasio32.dll /usr/lib32/wine/i386-windows/wineasio32.dll
+> sudo cp build32/wineasio32.dll.so /usr/lib32/wine/i386-unix/wineasio32.dll.so
+> sudo cp build64/wineasio64.dll /usr/lib/wine/x86_64-windows/wineasio64.dll
+> sudo cp build64/wineasio64.dll.so /usr/lib/wine/x86_64-unix/wineasio64.dll.so
+> cp build32/wineasio32.dll "$PROTON/lib/wine/i386-windows/wineasio32.dll"
+> cp build32/wineasio32.dll.so "$PROTON/lib/wine/i386-unix/wineasio32.dll.so"
+> cp build64/wineasio64.dll "$PROTON/lib64/wine/x86_64-windows/wineasio64.dll"
+> cp build64/wineasio64.dll.so "$PROTON/lib64/wine/x86_64-unix/wineasio64.dll.so"
+> env WINEPREFIX=$STEAMLIBRARY/steamapps/compatdata/221680/pfx ./wineasio-register
+> ```
+>
+> And you're done, continue with [Installing RS_ASIO](#installing-rs_asio).
+>
 </details>
 
 The official source for wineasio is [wineasio/wineasio](https://github.com/wineasio/wineasio). If the official one doesn't work, clone the fixed version from here: https://github.com/BWagener/wineasio.git
@@ -100,16 +99,17 @@ The official source for wineasio is [wineasio/wineasio](https://github.com/winea
 
 <details><summary>[How to] Clone instead of downloading:</summary>
 
-(No support for this way, as release package is easier to replicate.)
-
-```
-git clone --recursive https://github.com/wineasio/wineasio.git
-cd wineasio
-```
-
----
+> (No support for this way, as release package is easier to replicate.)
+>
+> ```
+> git clone --recursive https://github.com/wineasio/wineasio.git
+> cd wineasio
+> ```
+>
 
 </details>
+
+
 
 ```
 # build
@@ -125,15 +125,17 @@ sudo cp build64/wineasio64.dll /usr/lib/wine/x86_64-windows/wineasio64.dll
 sudo cp build64/wineasio64.dll.so /usr/lib/wine/x86_64-unix/wineasio64.dll.so
 ```
 
+
+
 `wineasio` is now installed on your system.
 
-<details>
-	<summary>How to check if it's installed correctly</summary>
+<details><summary>How to check if it's installed correctly</summary>
 
-	find /usr/lib/ -name "wineasio*"
-	find /usr/lib32/ -name "wineasio*"
-
-This should output 4 paths (ignore the errors).
+> 	find /usr/lib32/ -name "wineasio*"
+> 	find /usr/lib/ -name "wineasio*"
+>
+> This should output 4 paths (ignore the errors).
+>
 </details>
 
 To make Proton use wineasio, we need to copy these files into the appropriate locations:
@@ -156,14 +158,13 @@ env WINEPREFIX=$STEAMLIBRARY/steamapps/compatdata/221680/pfx ./wineasio-register
 
 <details><summary> How to check if this worked correctly</summary>
 
-Download this: [VBAsioTest_1013.zip](https://download.vb-audio.com/Download_MT128/VBAsioTest_1013.zip)
-
-Extract it somewhere and run a command like this (replace the last path with the correct path that you chose):
-```
-WINEPREFIX=$STEAMLIBRARY/steamapps/compatdata/221680/pfx $PROTON/bin/wine /path/to/VBASIOTest32.exe
-```
-
----
+> Download this: [VBAsioTest_1013.zip](https://download.vb-audio.com/Download_MT128/VBAsioTest_1013.zip)
+>
+> Extract it somewhere and run a command like this (replace the last path with the correct path that you chose):
+> ```
+> WINEPREFIX=$STEAMLIBRARY/steamapps/compatdata/221680/pfx $PROTON/bin/wine /path/to/VBASIOTest32.exe
+> ```
+>
 </details>
 
 ## Installing RS_ASIO
@@ -240,6 +241,8 @@ We can start the game via this script now: `PIPEWIRE_LATENCY="256/48000" $STEAML
 ### Making it nice via Steam entry (optional, but recommended)
 
 We can't start Rocksmith directly from the Steam Library. But we can use the Steam Library to start the script that starts the game in a way that Steam recognizes.
+
+---
 
 <details><summary>Fitting meme</summary>
 

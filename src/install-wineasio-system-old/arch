@@ -1,0 +1,19 @@
+Installing `base-devel` is very useful for using the AUR and compiling in general.
+
+000-all-in-1-000
+
+000-install-wineasio-system-1-000
+
+`wineasio` is now installed on your system.
+
+<details>
+	<summary>How to check if it's installed correctly</summary>
+
+	find /usr/lib/ -name "wineasio*"
+	find /usr/lib32/ -name "wineasio*"
+
+This should output 4 paths (ignore the errors).
+
+---
+
+</details>

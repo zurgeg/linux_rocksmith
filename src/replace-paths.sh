@@ -14,6 +14,8 @@ case $1 in
 		sed -i "s/000-x32unix-000/\/usr\/lib32\/wine\/i386-unix/" $2
 		#echo p3
 		sed -i "s/000-x32windows-000/\/usr\/lib32\/wine\/i386-windows/" $2
+		sed -i "s/000-lib32-000/lib32/" $2
+		sed -i "s/000-lib64-000/lib/" $2
 		;;
 	deb)
 		echo "path script: debian"
@@ -24,6 +26,8 @@ case $1 in
 		sed -i "s/000-x32unix-000/\/usr\/lib\/i386-linux-gnu\/wine/" $2
 		#echo p3
 		sed -i "s/000-x32windows-000/\/usr\/lib\/i386-linux-gnu\/wine/" $2
+		sed -i "s/000-lib32-000/lib/" $2
+		sed -i "s/000-lib64-000/lib64/" $2
 	;;
 	fed)
 		echo "path script: fedora"
@@ -34,6 +38,8 @@ case $1 in
 		sed -i "s/000-x32unix-000/\/usr\/lib\/wine\/i386-unix/" $2
 		#echo p3
 		sed -i "s/000-x32windows-000/\/usr\/lib\/wine\/i386-windows/" $2
+		sed -i "s/000-lib32-000/lib/" $2
+		sed -i "s/000-lib64-000/lib64/" $2
 		;;
 	*)
 		echo "error: could not find out."
