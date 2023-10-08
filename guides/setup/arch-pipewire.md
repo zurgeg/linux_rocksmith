@@ -106,7 +106,6 @@ sudo cp build32/wineasio32.dll /usr/lib32/wine/i386-windows/wineasio32.dll
 sudo cp build32/wineasio32.dll.so /usr/lib32/wine/i386-unix/wineasio32.dll.so
 sudo cp build64/wineasio64.dll /usr/lib/wine/x86_64-windows/wineasio64.dll
 sudo cp build64/wineasio64.dll.so /usr/lib/wine/x86_64-unix/wineasio64.dll.so
-
 ```
 
 
@@ -130,21 +129,18 @@ cp /usr/lib32/wine/i386-unix/wineasio32.dll.so "$PROTON/lib/wine/i386-unix/winea
 cp /usr/lib/wine/x86_64-unix/wineasio64.dll.so "$PROTON/lib64/wine/x86_64-unix/wineasio64.dll.so"
 cp /usr/lib32/wine/i386-windows/wineasio32.dll "$PROTON/lib/wine/i386-windows/wineasio32.dll"
 cp /usr/lib/wine/x86_64-windows/wineasio64.dll "$PROTON/lib64/wine/x86_64-windows/wineasio64.dll"
-```
-
-In theory, this should also work with Lutris runners (located in `$HOME/.local/share/lutris/runners/wine/`)
-
-To register wineasio (so that it can be used in the prefix), run the `wineasio-register` script and set the `WINEPREFIX` to Rocksmith's.
-
-```
-env WINEPREFIX=$STEAMLIBRARY/steamapps/compatdata/221680/pfx ./wineasio-register
-```
-We also need to make sure RS ASIO can find WineASIO:
-```
 cp "$PROTON/lib/wine/i386-windows/wineasio32.dll" "$PROTON/lib/wine/i386-windows/wineasio.dll"
 cp "$PROTON/lib/wine/i386-unix/wineasio32.dll.so" "$PROTON/lib/wine/i386-unix/wineasio.dll.so"
 cp "$PROTON/lib64/wine/x86_64-windows/wineasio64.dll" "$PROTON/lib/wine/x86_64-windows/wineasio.dll"
 cp "$PROTON/lib64/wine/x86_64-unix/wineasio64.dll.so" "$PROTON/lib/wine/x86_64-unix/wineasio.dll.so"
+```
+
+In theory, this should also work with Lutris runners (located in `$HOME/.local/share/lutris/runners/wine/`)
+
+To register wineasio (so that it can be used in the prefix), run the `wineasio-register` script and set the `WINEPREFIX` to Rocksmiths.
+
+```
+env WINEPREFIX=$STEAMLIBRARY/steamapps/compatdata/221680/pfx ./wineasio-register
 ```
 
 <details><summary> How to check if this worked correctly</summary>
