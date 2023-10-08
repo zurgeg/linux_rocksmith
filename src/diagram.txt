@@ -8,10 +8,11 @@ base.md
     install-check
     (arch-base-devel-note)
     install-wineasio-system
-        all-in-1
-        install-wineasio-system-1 (sound server name)
-            wineasio-source (one file)
-                download-wineasio
+        everything except deb goes to base
+            base-devel
+            line-before-download
+            fed-makefile
+            arch-non-pipewire-after-wineasio-installation
     install wienasio-runner
         old
     jack-setup
