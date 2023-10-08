@@ -111,6 +111,8 @@ cd wineasio
 
 </details>
 
+
+
 ```
 # build
 rm -rf build32
@@ -125,15 +127,18 @@ sudo cp build64/wineasio64.dll /usr/lib/wine/x86_64-windows/wineasio64.dll
 sudo cp build64/wineasio64.dll.so /usr/lib/wine/x86_64-unix/wineasio64.dll.so
 ```
 
+
+
 `wineasio` is now installed on your system.
 
 <details>
 	<summary>How to check if it's installed correctly</summary>
 
-	find /usr/lib/ -name "wineasio*"
 	find /usr/lib32/ -name "wineasio*"
+	find /usr/lib/ -name "wineasio*"
 
 This should output 4 paths (ignore the errors).
+
 </details>
 
 To make Proton use wineasio, we need to copy these files into the appropriate locations:

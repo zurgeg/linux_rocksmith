@@ -43,6 +43,40 @@ The rest will be set up later.
 
 # wineasio
 
+
+
+<details><summary>Know already what's going on? Here are all commands in one piece without an explanation</summary>
+
+If the commands in this collapsible section don't work for you, try the "longer" variant first before asking for help.
+
+YOU NEED TO HAVE THE $PROTON AND $STEAMLIBRARY VARIABLE SET!! (or replaced with the correct path first)
+
+cd into the unpacked directory, then run this.
+
+```
+rm -rf build32
+rm -rf build64
+make 32
+make 64
+sudo cp build32/wineasio32.dll /usr/lib/wine/i386-windows/wineasio32.dll
+sudo cp build32/wineasio32.dll.so /usr/lib/wine/i386-unix/wineasio32.dll.so
+sudo cp build64/wineasio64.dll /usr/lib64/wine/x86_64-windows/wineasio64.dll
+sudo cp build64/wineasio64.dll.so /usr/lib64/wine/x86_64-unix/wineasio64.dll.so
+cp build32/wineasio32.dll "$PROTON/lib/wine/i386-windows/wineasio32.dll"
+cp build32/wineasio32.dll.so "$PROTON/lib/wine/i386-unix/wineasio32.dll.so"
+cp build64/wineasio64.dll "$PROTON/lib64/wine/x86_64-windows/wineasio64.dll"
+cp build64/wineasio64.dll.so "$PROTON/lib64/wine/x86_64-unix/wineasio64.dll.so"
+env WINEPREFIX=$STEAMLIBRARY/steamapps/compatdata/221680/pfx ./wineasio-register
+```
+
+And you're done, continue with [Installing RS_ASIO](#installing-rs_asio).
+
+---
+
+</details>
+
+
+
 [Download](https://github.com/wineasio/wineasio/releases) the newest zip and unpack it. Open a terminal inside the newly created folder and run the following commands:
 
 <details><summary>[How to] Clone instead of downloading:</summary>
@@ -94,6 +128,8 @@ sudo cp build64/wineasio64.dll /usr/lib64/wine/x86_64-windows/wineasio64.dll
 sudo cp build64/wineasio64.dll.so /usr/lib64/wine/x86_64-unix/wineasio64.dll.so
 ```
 
+
+
 `wineasio` is now installed on your system.
 
 <details>
@@ -103,8 +139,6 @@ sudo cp build64/wineasio64.dll.so /usr/lib64/wine/x86_64-unix/wineasio64.dll.so
 	find /usr/lib64/ -name "wineasio*"
 
 This should output 4 paths (ignore the errors).
-
----
 
 </details>
 

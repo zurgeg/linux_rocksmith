@@ -43,6 +43,8 @@ The rest will be set up later.
 
 Installing `base-devel` is very useful for using the AUR and compiling in general.
 
+
+
 <details><summary>Know already what's going on? Here are all commands in one piece without an explanation</summary>
 
 If the commands in this collapsible section don't work for you, try the "longer" variant first before asking for help.
@@ -91,6 +93,8 @@ cd wineasio
 
 </details>
 
+
+
 ```
 # build
 rm -rf build32
@@ -127,12 +131,10 @@ Notes:
 <details>
 	<summary>How to check if it's installed correctly</summary>
 
-	find /usr/lib/ -name "wineasio*"
 	find /usr/lib32/ -name "wineasio*"
+	find /usr/lib/ -name "wineasio*"
 
 This should output 4 paths (ignore the errors).
-
----
 
 </details>
 

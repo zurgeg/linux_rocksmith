@@ -43,6 +43,8 @@ The rest will be set up later.
 
 Installing `base-devel` is very useful for using the AUR and compiling in general.
 
+
+
 <details><summary>Know already what's going on? Here are all commands in one piece without an explanation</summary>
 
 If the commands in this collapsible section don't work for you, try the "longer" variant first before asking for help.
@@ -73,6 +75,8 @@ And you're done, continue with [Installing RS_ASIO](#installing-rs_asio).
 
 </details>
 
+
+
 [Download](https://github.com/wineasio/wineasio/releases) the newest zip and unpack it. Open a terminal inside the newly created folder and run the following commands:
 
 <details><summary>[How to] Clone instead of downloading:</summary>
@@ -88,6 +92,8 @@ cd wineasio
 
 </details>
 
+
+
 ```
 # build
 rm -rf build32
@@ -102,17 +108,17 @@ sudo cp build64/wineasio64.dll /usr/lib/wine/x86_64-windows/wineasio64.dll
 sudo cp build64/wineasio64.dll.so /usr/lib/wine/x86_64-unix/wineasio64.dll.so
 ```
 
+
+
 `wineasio` is now installed on your system.
 
 <details>
 	<summary>How to check if it's installed correctly</summary>
 
-	find /usr/lib/ -name "wineasio*"
 	find /usr/lib32/ -name "wineasio*"
+	find /usr/lib/ -name "wineasio*"
 
 This should output 4 paths (ignore the errors).
-
----
 
 </details>
 
