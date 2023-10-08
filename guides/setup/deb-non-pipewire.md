@@ -36,7 +36,7 @@ Log out and back in. Or reboot, if that doesn't work.
 <details><summary> How to check if this worked correctly</summary>
 
 
-	For the groups, run `groups`. This will give you a list, which should contain "audio" and "realtime".
+For the groups, run `groups`. This will give you a list, which should contain "audio" and "realtime".
 </details>
 
 # Create a clean prefix
@@ -83,7 +83,7 @@ WINEPREFIX=$STEAMLIBRARY/steamapps/compatdata/221680/pfx $PROTON/bin/wine /path/
 
 [Download](https://github.com/mdias/rs_asio/releases) the newest release, unpack everything to the root of your Rocksmith installation (`$STEAMLIBRARY/steamapps/common/Rocksmith2014/`)
 
-Edit RS_ASIO.ini: fill in `wineasio-rsasio` where it says `Driver=`. Do this for `[Asio.Output]`, `[Asio.Input.0]`, `[Asio.Input.1]` and `[Asio.Input.Mic]`. For singleplayer, you only need Output and Input.0, so you can comment the other ones out by putting a `;` in front of every line
+Edit RS_ASIO.ini: fill in `wineasio-rsasio` where it says `Driver=`. Do this for every Output and Input section.
 
 ## Set up JACK
 

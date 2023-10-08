@@ -42,7 +42,7 @@ Log out and back in. Or reboot, if that doesn't work.
 <details><summary> How to check if this worked correctly</summary>
 For the packages, do `pacman -Q package-name`. (You can do multiple at once) Should output the names and versions without errors.
 
-	For the groups, run `groups`. This will give you a list, which should contain "audio" and "realtime".
+For the groups, run `groups`. This will give you a list, which should contain "audio" and "realtime".
 </details>
 
 # Create a clean prefix
@@ -119,10 +119,10 @@ make 32
 make 64
 
 # Install on normal wine
-sudo cp build32/wineasio.dll /usr/lib32/wine/i386-windows/wineasio32.dll
-sudo cp build32/wineasio.dll.so /usr/lib32/wine/i386-unix/wineasio32.dll.so
-sudo cp build64/wineasio.dll /usr/lib/wine/x86_64-windows/wineasio64.dll
-sudo cp build64/wineasio.dll.so /usr/lib/wine/x86_64-unix/wineasio64.dll.so
+sudo cp build32/wineasio32.dll /usr/lib32/wine/i386-windows/wineasio32.dll
+sudo cp build32/wineasio32.dll.so /usr/lib32/wine/i386-unix/wineasio32.dll.so
+sudo cp build64/wineasio64.dll /usr/lib/wine/x86_64-windows/wineasio64.dll
+sudo cp build64/wineasio64.dll.so /usr/lib/wine/x86_64-unix/wineasio64.dll.so
 ```
 
 `wineasio` is now installed on your system.
@@ -170,7 +170,7 @@ WINEPREFIX=$STEAMLIBRARY/steamapps/compatdata/221680/pfx $PROTON/bin/wine /path/
 
 [Download](https://github.com/mdias/rs_asio/releases) the newest release, unpack everything to the root of your Rocksmith installation (`$STEAMLIBRARY/steamapps/common/Rocksmith2014/`)
 
-Edit RS_ASIO.ini: fill in `wineasio-rsasio` where it says `Driver=`. Do this for `[Asio.Output]`, `[Asio.Input.0]`, `[Asio.Input.1]` and `[Asio.Input.Mic]`. For singleplayer, you only need Output and Input.0, so you can comment the other ones out by putting a `;` in front of every line
+Edit RS_ASIO.ini: fill in `wineasio-rsasio` where it says `Driver=`. Do this for every Output and Input section.
 
 ## Set up JACK
 

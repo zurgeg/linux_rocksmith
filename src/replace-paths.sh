@@ -26,7 +26,7 @@ case $1 in
 		sed -i "s/000-x32windows-000/\/usr\/lib\/i386-linux-gnu\/wine/" $2
 	;;
 	fed)
-		echo "path script: arch"
+		echo "path script: fedora"
 		sed -i 's/000-x64unix-000/\/usr\/lib64\/wine\/x86_64-unix/' $2
 		#echo p1
 		sed -i "s/000-x64windows-000/\/usr\/lib64\/wine\/x86_64-windows/" $2

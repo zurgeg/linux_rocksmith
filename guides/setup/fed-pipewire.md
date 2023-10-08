@@ -32,7 +32,7 @@ Log out and back in. Or reboot, if that doesn't work.
 <details><summary> How to check if this worked correctly</summary>
 For the packages, do `dnf list installed <package name>`. (You can do multiple packages at once) Should output the names and versions without errors.
 
-	For the groups, run `groups`. This will give you a list, which should contain "audio" and "realtime".
+For the groups, run `groups`. This will give you a list, which should contain "audio" and "realtime".
 </details>
 
 # Create a clean prefix
@@ -42,28 +42,6 @@ Delete or rename `$STEAMLIBRARY/steamapps/compatdata/221680`, then start Rocksmi
 The rest will be set up later.
 
 # wineasio
-
-For Fedora, you need a modified Makefile, which you can download from [here](../Makefile.mk) or modify yourself:
-
-<details><summary>How to modify</summary>
-
-Replace the line that says `LIBRARIES` (should be line 43) with this:
-
-	LIBRARIES             = -ljack
-
-change `wineasio_dll_LDFLAGS` (should be line 62) according to this:
-
-Add these lines below `$(wineasio_dll_MODULE:%=%.spec) \`:
-
-				-L/usr/lib$(M) \
-				-L/usr/lib \
-
-and these below `-L/usr/lib/$(ARCH)-linux-gnu/wine-development \`:
-
-	-L/usr/lib$(M)/pipewire-0.3/jack \
-	-L/usr/lib/pipewire-0.3/jack \
-
-</details>
 
 [Download](https://github.com/wineasio/wineasio/releases) the newest zip and unpack it. Open a terminal inside the newly created folder and run the following commands:
 
@@ -110,10 +88,10 @@ make 32
 make 64
 
 # Install on normal wine
-sudo cp build32/wineasio.dll /usr/lib/wine/i386-windows/wineasio32.dll
-sudo cp build32/wineasio.dll.so /usr/lib/wine/i386-unix/wineasio32.dll.so
-sudo cp build64/wineasio.dll /usr/lib64/wine/x86_64-windows/wineasio64.dll
-sudo cp build64/wineasio.dll.so /usr/lib64/wine/x86_64-unix/wineasio64.dll.so
+sudo cp build32/wineasio32.dll /usr/lib/wine/i386-windows/wineasio32.dll
+sudo cp build32/wineasio32.dll.so /usr/lib/wine/i386-unix/wineasio32.dll.so
+sudo cp build64/wineasio64.dll /usr/lib64/wine/x86_64-windows/wineasio64.dll
+sudo cp build64/wineasio64.dll.so /usr/lib64/wine/x86_64-unix/wineasio64.dll.so
 ```
 
 `wineasio` is now installed on your system.
@@ -121,10 +99,8 @@ sudo cp build64/wineasio.dll.so /usr/lib64/wine/x86_64-unix/wineasio64.dll.so
 <details>
 	<summary>How to check if it's installed correctly</summary>
 
-	find /usr/lib/ -name "wineasio32.dll"
-	find /usr/lib/ -name "wineasio32.dll.so"
-	find /usr/lib64/ -name "wineasio64.dll"
-	find /usr/lib64/ -name "wineasio64.dll.so"
+	find /usr/lib/ -name "wineasio*"
+	find /usr/lib64/ -name "wineasio*"
 
 This should output 4 paths (ignore the errors).
 
@@ -166,7 +142,7 @@ WINEPREFIX=$STEAMLIBRARY/steamapps/compatdata/221680/pfx $PROTON/bin/wine /path/
 
 [Download](https://github.com/mdias/rs_asio/releases) the newest release, unpack everything to the root of your Rocksmith installation (`$STEAMLIBRARY/steamapps/common/Rocksmith2014/`)
 
-Edit RS_ASIO.ini: fill in `wineasio-rsasio` where it says `Driver=`. Do this for `[Asio.Output]`, `[Asio.Input.0]`, `[Asio.Input.1]` and `[Asio.Input.Mic]`. For singleplayer, you only need Output and Input.0, so you can comment the other ones out by putting a `;` in front of every line
+Edit RS_ASIO.ini: fill in `wineasio-rsasio` where it says `Driver=`. Do this for every Output and Input section.
 
 ## Set up JACK
 
