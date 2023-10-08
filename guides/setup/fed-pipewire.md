@@ -195,53 +195,57 @@ If we start the game from the button that says "Play" in Steam, the game can't c
 
 <details><summary>1. LD_PRELOAD</summary>
 
-> * Advantages: Run from Steam directly
-> * Disadvantages: higher possibility of crashes, steps you might need to do every game-boot.
->
-> Add these launch options to Rocksmith:
-> ```
-> LD_PRELOAD=/usr/lib32/libjack.so PIPEWIRE_LATENCY=256/48000 %command%
-> ```
->
-> You can launch the game from Steam now. For the first few boot-ups, you have to remove window focus from Rocksmith (typically done with Alt+Tab) as soon as the window shows up. If it doesn't crash, continue.
->
-> Rocksmith might not have audio, however, if you don't get a message saying that there's no output device, RS_ASIO and JACK are working fine.
->
-> Open qpwgraph or a different JACK patchbay software of your choice. We want to connect microphones to the inputs of Rocksmith and two outputs to our actual output device. Rocksmith will sometimes crash when messing with the patchbay, so this is how you want to go about it:
->
-> 1. Connect one device to Rocksmith
-> 1. Window focus to Rocksmith
-> 1. Go to step one, until you have connected everything
->
+* Advantages: Run from Steam directly
+* Disadvantages: higher possibility of crashes, steps you might need to do every game-boot.
+
+Add these launch options to Rocksmith:
+```
+LD_PRELOAD=/usr/lib32/libjack.so PIPEWIRE_LATENCY=256/48000 %command%
+```
+
+You can launch the game from Steam now. For the first few boot-ups, you have to remove window focus from Rocksmith (typically done with Alt+Tab) as soon as the window shows up. If it doesn't crash, continue.
+
+Rocksmith might not have audio, however, if you don't get a message saying that there's no output device, RS_ASIO and JACK are working fine.
+
+Open qpwgraph or a different JACK patchbay software of your choice. We want to connect microphones to the inputs of Rocksmith and two outputs to our actual output device. Rocksmith will sometimes crash when messing with the patchbay, so this is how you want to go about it:
+
+1. Connect one device to Rocksmith
+1. Window focus to Rocksmith
+1. Go to step one, until you have connected everything
+
+---
+
 </details>
 
 <details><summary>2. Start script, shortcut in Steam</summary>
 
-> * Advantage: Reliable one time setup
-> * Disadvantages: Another Steam game entry, or having to launch from terminal entirely
->
-> ### Get the start script
->
-> In Steam, right click on Rocksmith and choose "Properties". Set the following launch options:
->
-> ```
-> PROTON_LOG=1 PROTON_DUMP_DEBUG_COMMANDS=1 %command%
-> ```
->
-> then start the game from Steam again. You will now have a script at `/tmp/proton_$USER/run` that represents the command Steam runs when starting the game. If we run this script, Rocksmith can start via Steam and have sound. (`PIPEWIRE_LATENCY="256/48000" /tmp/proton_$USER/run`)
->
-> Let's copy the script to somewhere else and give it a better name. This is an example that I will use in the rest of the guide. You can change the path or the name of the script, if you want to.
->
-> ```
-> cp /tmp/proton_$USER/run $STEAMLIBRARY/steamapps/common/rocksmith-launcher.sh
-> ```
->
-> We can start the game via this script now: `PIPEWIRE_LATENCY="256/48000" $STEAMLIBRARY/steamapps/common/rocksmith-launcher.sh`
->
-> ### Making it nice via Steam entry (optional, but recommended)
->
-> We can't start Rocksmith directly from the Steam Library. But we can use the Steam Library to start the script that starts the game in a way that Steam recognizes.
->
+* Advantage: Reliable one time setup
+* Disadvantages: Another Steam game entry, or having to launch from terminal entirely
+
+### Get the start script
+
+In Steam, right click on Rocksmith and choose "Properties". Set the following launch options:
+
+```
+PROTON_LOG=1 PROTON_DUMP_DEBUG_COMMANDS=1 %command%
+```
+
+then start the game from Steam again. You will now have a script at `/tmp/proton_$USER/run` that represents the command Steam runs when starting the game. If we run this script, Rocksmith can start via Steam and have sound. (`PIPEWIRE_LATENCY="256/48000" /tmp/proton_$USER/run`)
+
+Let's copy the script to somewhere else and give it a better name. This is an example that I will use in the rest of the guide. You can change the path or the name of the script, if you want to.
+
+```
+cp /tmp/proton_$USER/run $STEAMLIBRARY/steamapps/common/rocksmith-launcher.sh
+```
+
+We can start the game via this script now: `PIPEWIRE_LATENCY="256/48000" $STEAMLIBRARY/steamapps/common/rocksmith-launcher.sh`
+
+### Making it nice via Steam entry (optional, but recommended)
+
+We can't start Rocksmith directly from the Steam Library. But we can use the Steam Library to start the script that starts the game in a way that Steam recognizes.
+
+---
+
 <details><summary>Fitting meme</summary>
 
 ![](https://i.kym-cdn.com/photos/images/original/002/546/187/fb1.jpg)
