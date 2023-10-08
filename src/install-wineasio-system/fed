@@ -22,15 +22,15 @@ and these below `-L/usr/lib/$(ARCH)-linux-gnu/wine-development \`:
 
 000-install-wineasio-system-1-000
 
-`wineasio` is now installed on your native wine installation.
+`wineasio` is now installed on your system.
 
 <details>
 	<summary>How to check if it's installed correctly</summary>
 
-	find /usr/lib/ -name "wineasio.dll"
-	find /usr/lib/ -name "wineasio.dll.so"
-	find /usr/lib64/ -name "wineasio.dll"
-	find /usr/lib64/ -name "wineasio.dll.so"
+	find /usr/lib/ -name "wineasio32.dll"
+	find /usr/lib/ -name "wineasio32.dll.so"
+	find /usr/lib64/ -name "wineasio64.dll"
+	find /usr/lib64/ -name "wineasio64.dll.so"
 
 This should output 4 paths (ignore the errors).
 

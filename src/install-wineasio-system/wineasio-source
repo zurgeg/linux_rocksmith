@@ -6,8 +6,8 @@ make 32
 make 64
 
 # Install on normal wine
-sudo cp build32/wineasio.dll 000-x32windows-000/wineasio.dll
-sudo cp build32/wineasio.dll.so 000-x32unix-000/wineasio.dll.so
-sudo cp build64/wineasio.dll 000-x64windows-000/wineasio.dll
-sudo cp build64/wineasio.dll.so 000-x64unix-000/wineasio.dll.so
+sudo cp build32/wineasio.dll 000-x32windows-000/wineasio32.dll
+sudo cp build32/wineasio.dll.so 000-x32unix-000/wineasio32.dll.so
+sudo cp build64/wineasio.dll 000-x64windows-000/wineasio64.dll
+sudo cp build64/wineasio.dll.so 000-x64unix-000/wineasio64.dll.so
 ```

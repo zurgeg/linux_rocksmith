@@ -3,14 +3,12 @@
 ## Table of contents
 
 1. [Install necessary stuff](#install-necessary-stuff)
+1. [Create a clean prefix](#create-a-cean-prefix)
 1. [wineasio](#wineasio)
-1. [Setting up the game's prefix/compatdata](#setting-up-the-games-prefixcompatdata)
 1. [Installing RS_ASIO](#installing-rs_asio)
 1. [Set up JACK](#set-up-jack)
 1. [Starting the game](#starting-the-game)
-1. [Get the start script)](#get-the-start-script)
-1. [Making it nice via Steam entry (optional)](#making-it-nice-via-steam-entry-optional)
-1. [Beautification (even more optional, but recommended)](#beautification-even-more-optional-but-recommended)
+1. [A bit of troubleshooting](#a-bit-of-troubleshooting)
 
 # Install necessary stuff
 
@@ -36,6 +34,12 @@ For the packages, do `dnf list installed <package name>`. (You can do multiple p
 
 	For the groups, run `groups`. This will give you a list, which should contain "audio" and "realtime".
 </details>
+
+# Create a clean prefix
+
+Delete or rename `$STEAMLIBRARY/steamapps/compatdata/221680`, then start Rocksmith and stop the game once it's running.
+
+The rest will be set up later.
 
 # wineasio
 
@@ -106,21 +110,21 @@ make 32
 make 64
 
 # Install on normal wine
-sudo cp build32/wineasio.dll /usr/lib/wine/i386-windows/wineasio.dll
-sudo cp build32/wineasio.dll.so /usr/lib/wine/i386-unix/wineasio.dll.so
-sudo cp build64/wineasio.dll /usr/lib64/wine/x86_64-windows/wineasio.dll
-sudo cp build64/wineasio.dll.so /usr/lib64/wine/x86_64-unix/wineasio.dll.so
+sudo cp build32/wineasio.dll /usr/lib/wine/i386-windows/wineasio32.dll
+sudo cp build32/wineasio.dll.so /usr/lib/wine/i386-unix/wineasio32.dll.so
+sudo cp build64/wineasio.dll /usr/lib64/wine/x86_64-windows/wineasio64.dll
+sudo cp build64/wineasio.dll.so /usr/lib64/wine/x86_64-unix/wineasio64.dll.so
 ```
 
-`wineasio` is now installed on your native wine installation.
+`wineasio` is now installed on your system.
 
 <details>
 	<summary>How to check if it's installed correctly</summary>
 
-	find /usr/lib/ -name "wineasio.dll"
-	find /usr/lib/ -name "wineasio.dll.so"
-	find /usr/lib64/ -name "wineasio.dll"
-	find /usr/lib64/ -name "wineasio.dll.so"
+	find /usr/lib/ -name "wineasio32.dll"
+	find /usr/lib/ -name "wineasio32.dll.so"
+	find /usr/lib64/ -name "wineasio64.dll"
+	find /usr/lib64/ -name "wineasio64.dll.so"
 
 This should output 4 paths (ignore the errors).
 
@@ -132,22 +136,18 @@ To make Proton use wineasio, we need to copy these files into the appropriate lo
 
 ```
 # !!! WATCH OUT FOR VARIABLES !!!
-cp /usr/lib/wine/i386-unix/wineasio.dll.so "$PROTON/lib/wine/i386-unix/wineasio.dll.so"
-cp /usr/lib64/wine/x86_64-unix/wineasio.dll.so "$PROTON/lib64/wine/x86_64-unix/wineasio.dll.so"
-cp /usr/lib/wine/i386-windows/wineasio.dll "$PROTON/lib/wine/i386-windows/wineasio.dll"
-cp /usr/lib64/wine/x86_64-windows/wineasio.dll "$PROTON/lib64/wine/x86_64-windows/wineasio.dll"
+cp /usr/lib/wine/i386-unix/wineasio32.dll.so "$PROTON/lib/wine/i386-unix/wineasio32.dll.so"
+cp /usr/lib64/wine/x86_64-unix/wineasio64.dll.so "$PROTON/lib64/wine/x86_64-unix/wineasio64.dll.so"
+cp /usr/lib/wine/i386-windows/wineasio32.dll "$PROTON/lib/wine/i386-windows/wineasio32.dll"
+cp /usr/lib64/wine/x86_64-windows/wineasio64.dll "$PROTON/lib64/wine/x86_64-windows/wineasio64.dll"
 ```
 
 In theory, this should also work with Lutris runners (located in `$HOME/.local/share/lutris/runners/wine/`)
 
-## Setting up the game's prefix/compatdata
+To register wineasio (so that it can be used in the prefix), run the `wineasio-register` script and set the `WINEPREFIX` to Rocksmiths.
 
-1. Delete or rename `$STEAMLIBRARY/steamapps/compatdata/221680`, then start Rocksmith and stop the game once it's running.
-1. `WINEPREFIX=$STEAMLIBRARY/steamapps/compatdata/221680/pfx $PROTON/bin/wine regsvr32 /usr/lib/wine/i386-windows/wineasio.dll` (Errors are normal, should end with "regsvr32: Successfully registered DLL [...]")
-1. Copy wineasio.dll to the prefix:
 ```
-cp $PROTON/lib/wine/i386-windows/wineasio.dll $STEAMLIBRARY/steamapps/compatdata/221680/pfx/drive_c/windows/system32/
-cp $PROTON/lib/wine/i386-windows/wineasio.dll $STEAMLIBRARY/steamapps/compatdata/221680/pfx/drive_c/windows/syswow64/
+env WINEPREFIX=$STEAMLIBRARY/steamapps/compatdata/221680/pfx ./wineasio-register
 ```
 
 <details><summary> How to check if this worked correctly</summary>
@@ -166,7 +166,7 @@ WINEPREFIX=$STEAMLIBRARY/steamapps/compatdata/221680/pfx $PROTON/bin/wine /path/
 
 [Download](https://github.com/mdias/rs_asio/releases) the newest release, unpack everything to the root of your Rocksmith installation (`$STEAMLIBRARY/steamapps/common/Rocksmith2014/`)
 
-Edit RS_ASIO.ini: fill in `WineASIO` where it says `Driver=`. Do this for `[Asio.Output]`, `[Asio.Input.0]` and `[Asio.Input.Mic]`. If you don't play multiplayer, you can comment out Input.1 and Input.Mic by putting a `;` in front of the lines.
+Edit RS_ASIO.ini: fill in `wineasio-rsasio` where it says `Driver=`. Do this for `[Asio.Output]`, `[Asio.Input.0]`, `[Asio.Input.1]` and `[Asio.Input.Mic]`. For singleplayer, you only need Output and Input.0, so you can comment the other ones out by putting a `;` in front of every line
 
 ## Set up JACK
 
@@ -244,6 +244,9 @@ We can't start Rocksmith directly from the Steam Library. But we can use the Ste
 </details>
 
 Go into your Steam Library and select "Add a game" -> "Add a Non-Steam Game" on the bottom left.
+
+> With the redesign of the Steam UI, adding non-Steam games is currently not possible because of a bug. You can still add entries via the old gui, which you can open with this command: `steam -vgui
+
 Make sure you can see all files. Select the script we generated just now and add it. This will create a shortcut to the script, which I will refer to as "shortcut" from here on. Right click on the shortcut and select "Properties". Add these launch Options: `PIPEWIRE_LATENCY="256/48000" %command%`
 
 You can now start the game from Steam. Use the shortcut, it will launch the actual game.

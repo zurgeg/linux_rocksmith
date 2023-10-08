@@ -4,15 +4,13 @@ Installing `base-devel` is very useful for using the AUR and compiling in genera
 
 000-install-wineasio-system-1-000
 
-`wineasio` is now installed on your native wine installation.
+`wineasio` is now installed on your system.
 
 <details>
 	<summary>How to check if it's installed correctly</summary>
 
-	find /usr/lib/ -name "wineasio.dll"
-	find /usr/lib/ -name "wineasio.dll.so"
-	find /usr/lib32/ -name "wineasio.dll"
-	find /usr/lib32/ -name "wineasio.dll.so"
+	find /usr/lib/ -name "wineasio*"
+	find /usr/lib32/ -name "wineasio*"
 
 This should output 4 paths (ignore the errors).
 

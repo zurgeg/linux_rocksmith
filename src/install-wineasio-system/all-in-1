@@ -2,7 +2,7 @@
 
 If the commands in this collapsible section don't work for you, try the "longer" variant first before asking for help.
 
-YOU NEED TO HAVE THE $PROTON VARIABLE SET!! (or replaced with the correct path first)
+YOU NEED TO HAVE THE $PROTON AND $STEAMLIBRARY VARIABLE SET!! (or replaced with the correct path first)
 
 cd into the unpacked directory, then run this.
 
@@ -11,17 +11,18 @@ rm -rf build32
 rm -rf build64
 make 32
 make 64
-sudo cp build32/wineasio.dll 000-x32windows-000/wineasio.dll
-sudo cp build32/wineasio.dll.so 000-x32unix-000/wineasio.dll.so
-sudo cp build64/wineasio.dll 000-x64windows-000/wineasio.dll
-sudo cp build64/wineasio.dll.so 000-x64unix-000/wineasio.dll.so
-cp build32/wineasio.dll "$PROTON/lib/wine/i386-windows/wineasio.dll"
-cp build32/wineasio.dll.so "$PROTON/lib/wine/i386-unix/wineasio.dll.so"
-cp build64/wineasio.dll "$PROTON/lib64/wine/x86_64-windows/wineasio.dll"
-cp build64/wineasio.dll.so "$PROTON/lib64/wine/x86_64-unix/wineasio.dll.so"
+sudo cp build32/wineasio32.dll 000-x32windows-000/wineasio32.dll
+sudo cp build32/wineasio32.dll.so 000-x32unix-000/wineasio32.dll.so
+sudo cp build64/wineasio64.dll 000-x64windows-000/wineasio64.dll
+sudo cp build64/wineasio64.dll.so 000-x64unix-000/wineasio64.dll.so
+cp build32/wineasio32.dll "$PROTON/lib/wine/i386-windows/wineasio32.dll"
+cp build32/wineasio32.dll.so "$PROTON/lib/wine/i386-unix/wineasio32.dll.so"
+cp build64/wineasio64.dll "$PROTON/lib64/wine/x86_64-windows/wineasio64.dll"
+cp build64/wineasio64.dll.so "$PROTON/lib64/wine/x86_64-unix/wineasio64.dll.so"
+env WINEPREFIX=$STEAMLIBRARY/steamapps/compatdata/221680/pfx ./wineasio-register
 ```
 
-And you're done, continue with [Setting up the game's prefix/compatdata](#setting-up-the-games-prefixcompatdata).
+And you're done, continue with [Installing RS_ASIO](#installing-rs_asio).
 
 ---
 
