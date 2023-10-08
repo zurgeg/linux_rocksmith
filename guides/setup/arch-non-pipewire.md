@@ -28,11 +28,10 @@ sudo usermod -aG realtime $USER`
 Log out and back in. Or reboot, if that doesn't work.
 
 <details><summary> How to check if this worked correctly</summary>
->
+
 > For the packages, do `pacman -Q package-name`. (You can do multiple at once) Should output the names and versions without errors.
 >
 > For the groups, run `groups`. This will give you a list, which should contain "audio" and "realtime".
->
 </details>
 
 # Create a clean prefix
@@ -132,7 +131,7 @@ Notes:
 `wineasio` is now installed on your system.
 
 <details><summary>How to check if it's installed correctly</summary>
->
+
 > 	find /usr/lib32/ -name "wineasio*"
 > 	find /usr/lib/ -name "wineasio*"
 >
@@ -159,7 +158,7 @@ env WINEPREFIX=$STEAMLIBRARY/steamapps/compatdata/221680/pfx ./wineasio-register
 ```
 
 <details><summary> How to check if this worked correctly</summary>
->
+
 > Download this: [VBAsioTest_1013.zip](https://download.vb-audio.com/Download_MT128/VBAsioTest_1013.zip)
 >
 > Extract it somewhere and run a command like this (replace the last path with the correct path that you chose):
