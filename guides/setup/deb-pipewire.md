@@ -56,8 +56,8 @@ cp /usr/lib/i386-linux-gnu/wine/wineasio32.dll "$PROTON/lib/wine/i386-windows/wi
 cp /usr/lib/x86_64-linux-gnu/wine/wineasio64.dll "$PROTON/lib64/wine/x86_64-windows/wineasio64.dll"
 cp "$PROTON/lib/wine/i386-windows/wineasio32.dll" "$PROTON/lib/wine/i386-windows/wineasio.dll"
 cp "$PROTON/lib/wine/i386-unix/wineasio32.dll.so" "$PROTON/lib/wine/i386-unix/wineasio.dll.so"
-cp "$PROTON/lib64/wine/x86_64-windows/wineasio64.dll" "$PROTON/lib/wine/x86_64-windows/wineasio.dll"
-cp "$PROTON/lib64/wine/x86_64-unix/wineasio64.dll.so" "$PROTON/lib/wine/x86_64-unix/wineasio.dll.so"
+cp "$PROTON/lib64/wine/x86_64-windows/wineasio64.dll" "$PROTON/lib64/wine/x86_64-windows/wineasio.dll"
+cp "$PROTON/lib64/wine/x86_64-unix/wineasio64.dll.so" "$PROTON/lib64/wine/x86_64-unix/wineasio.dll.so"
 ```
 
 In theory, this should also work with Lutris runners (located in `$HOME/.local/share/lutris/runners/wine/`)
