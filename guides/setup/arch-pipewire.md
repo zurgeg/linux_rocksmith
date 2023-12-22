@@ -137,7 +137,7 @@ cp "$PROTON/lib64/wine/x86_64-unix/wineasio64.dll.so" "$PROTON/lib64/wine/x86_64
 
 In theory, this should also work with Lutris runners (located in `$HOME/.local/share/lutris/runners/wine/`)
 
-To register wineasio (so that it can be used in the prefix), run the `wineasio-register` script and set the `WINEPREFIX` to Rocksmiths.
+To register wineasio (so that it can be used in the prefix), run the `wineasio-register` script that comes in the wineasio zip and set the `WINEPREFIX` to Rocksmiths.
 
 ```
 env WINEPREFIX=$STEAMLIBRARY/steamapps/compatdata/221680/pfx ./wineasio-register
@@ -156,17 +156,16 @@ env WINEPREFIX=$STEAMLIBRARY/steamapps/compatdata/221680/pfx ./wineasio-register
 
 ## Installing RS_ASIO
 
-[Download](https://github.com/mdias/rs_asio/releases) the newest release, unpack everything to the root of your Rocksmith installation (`$STEAMLIBRARY/steamapps/common/Rocksmith2014/`)
-
-Edit RS_ASIO.ini: fill in `wineasio-rsasio` where it says `Driver=`. Do this for every Output and Input section.
+1. [Download](https://github.com/mdias/rs_asio/releases) the newest release, unpack everything to the root of your Rocksmith installation (`$STEAMLIBRARY/steamapps/common/Rocksmith2014/`)
+1. Edit RS_ASIO.ini: fill in `wineasio-rsasio` where it says `Driver=`. Do this for every Output and Input section.
 
 ## Set up JACK
 
-What we basically need to do is to select only one output and one input (2 inputs for multiplayer). I like to do this via `pavucontrol`, which works if `pipewire-pulse` is installed.
+What we basically need to do is to select only one output and just as much inputs as you need (1 input (eg. singleplayer) = 1 device; 2 inputs (eg. 2 Players) = 2 devices, etc.). I like to do this via `pavucontrol`, which works if `pipewire-pulse` is installed.
 
-Open pavucontrol ("PulseAudio Volume Control"), go to "Configuration" and make sure there's exactly one input device and one output device enabled.
+Open pavucontrol ("PulseAudio Volume Control"), go to "Configuration" and make sure the amount of enabled input devices matches the amount of inputs you want for Rocksmith.
 
-All available devices will automatically be tied to Rocksmith, and the game doesn't like you messing around in the patchbay (= it would crash often).
+All available devices will automatically be tied to Rocksmith, and the game doesn't like you messing around in the patchbay (= it's possible, but would crash often).
 
 # Starting the game
 
@@ -188,7 +187,7 @@ Add these launch options to Rocksmith:
 LD_PRELOAD=/usr/lib32/libjack.so PIPEWIRE_LATENCY=256/48000 %command%
 ```
 
-You can launch the game from Steam now. For the first few boot-ups, you have to remove window focus from Rocksmith (typically done with Alt+Tab) as soon as the window shows up. If it doesn't crash, continue.
+You can launch the game from Steam now. For the first few boot-ups, you have to remove window focus from Rocksmith (typically done with Alt+Tab) as soon as the window shows up. If it doesn't crash, continue with instructions.
 
 Rocksmith might not have audio, however, if you don't get a message saying that there's no output device, RS_ASIO and JACK are working fine.
 
@@ -223,13 +222,15 @@ Let's copy the script to somewhere else and give it a better name. This is an ex
 cp /tmp/proton_$USER/run $STEAMLIBRARY/steamapps/common/rocksmith-launcher.sh
 ```
 
+!! If you switch Proton versions, regenerate this script !!
+
 We can start the game via this script now: `PIPEWIRE_LATENCY="256/48000" $STEAMLIBRARY/steamapps/common/rocksmith-launcher.sh`
 
 ### Making it nice via Steam entry (optional, but recommended)
 
-We can't start Rocksmith directly from the Steam Library. But we can use the Steam Library to start the script that starts the game in a way that Steam recognizes.
+!! This currently doesn't work for me. Look below for an alternative route. !!
 
----
+We can't start Rocksmith directly from the Steam Library. But we can use the Steam Library to start the script that starts the game in a way that Steam recognizes.
 
 <details><summary>Fitting meme</summary>
 
@@ -239,11 +240,24 @@ We can't start Rocksmith directly from the Steam Library. But we can use the Ste
 
 Go into your Steam Library and select "Add a game" -> "Add a Non-Steam Game" on the bottom left.
 
-> With the redesign of the Steam UI, adding non-Steam games is currently not possible because of a bug. You can still add entries via the old gui, which you can open with this command: `steam -vgui
-
 Make sure you can see all files. Select the script we generated just now and add it. This will create a shortcut to the script, which I will refer to as "shortcut" from here on. Right click on the shortcut and select "Properties". Add these launch Options: `PIPEWIRE_LATENCY="256/48000" %command%`
 
 You can now start the game from Steam. Use the shortcut, it will launch the actual game.
+
+---
+
+Launching the script from Steam doesn't work for me right now. You can alternatively add a game in Lutris, which consists of starting this script as explained. Then in Lutris select "Create Steam shortcut".
+
+This works because of how Lutris behaves when games are launched from Steam. All the Steam shortcut does is to notify Lutris to start a game. This is finished when Lutris received the message (= Steam sees it as "stopped"). Lutris then launches the game.
+
+Important Settings:
+
+* Runner: Linux
+* Working Directory: The folder where your script is.
+* Disable Lutris Runtime: true
+* Environment Variables:
+	* Name: PIPEWIRE_LATENCY
+	* Value: 256/48000
 
 ### Beautification (even more optional, but recommended)
 
@@ -257,7 +271,7 @@ You can take artwork from [Rocksmith](https://www.steamgriddb.com/game/1841), [R
 
 **"Hero (banner/background)":** Located above the "Play" button in Steam. Right-click on it and choose "set custom background". You can theoretically set a logo too by right-clicking on the text, but I personally chose not to do that to clearly see which item is which.
 
-**Grid (cover art):** For this it gets a bit harder. Go to `$HOME/.steam/steam/userdata/<number>/config/grid`. Since we added a hero, there should be a file that resembles it. It's called `<id>_hero.<file-ending>` we need the ID.
+**Grid (cover art):** For this it gets a bit harder. Go to `$HOME/.steam/steam/userdata/<number>/config/grid`. Since we added a hero, there should be a file that resembles it, so find it with an image viewer. It's called `<id>_hero.<file-ending>` we need the ID.
 copy the cover art into this folder and name it `<id>p.<file-ending>`.
 
 This is how the file structure looks on my system:

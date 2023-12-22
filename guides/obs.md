@@ -6,7 +6,7 @@ Works just fine.
 
 ## JACK
 
-Start JACK first, just in case.
+If you don't use pipewire, start JACK first, just in case.
 
 Open OBS. In sources, click `+` -> JACK Input Client -> Choose name. Select 2 input channels, if asked.
 
@@ -16,7 +16,7 @@ I recommend to disable any other system audio in OBS: Settings -> Audio -> Globa
 
 ![](/img/2-obs.png)
 
-Start the game and open Catia once it's running. It will look something like this:
+Start the game and open a patchbay once it's running. It will look something like this:
 
 ![](/img/1-catia.png)
 

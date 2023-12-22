@@ -6,7 +6,7 @@ These are a few Guides to get [Rocksmith 2014](https://store.steampowered.com/ap
 
 This is the bare minimum to get it to work. I don't know if certain changes recommended by other people have a performance impact.
 
-I tested it on Manjaro, Arch and a Linux Mint VM. Due to the VM factor, I was actually able to start the game, but the experience is 1fps or something like that.
+I tested it on Manjaro, Arch and a Linux Mint VM. Due to the VM factor, I was actually able to start the game, but I got about 1fps, definitely not playable.
 
 I have only tested the Steam version.
 
@@ -14,9 +14,9 @@ I have only tested the Steam version.
 
 # Prerequisites
 
-Don't install or copy Rocksmith from/to an NTFS drive. It will not start. (I think that's because of permissions, but I'm not sure.)
+Don't install or copy Rocksmith from/to an NTFS drive. It will not start. (I think that's because of permissions, but I'm not sure.) There's probably a way, but it's easier not having to bother with it.
 
-If you use Proton-GE, install scripts sometimes don't run. Make sure you use normal Proton the first time.
+If you use Proton-GE, install scripts sometimes don't run. In that case, use Valve's Proton for the first start, then switch to Proton-GE.
 
 We will need wine, which is installed in the first step.
 
@@ -24,19 +24,19 @@ We will need wine, which is installed in the first step.
 
 I will refer to them with variables. You can actually set them as variables via `variablename=value` and just copy-paste the commands, or replace the text. Keep in mind that these are temporary, so only available in the terminal instance where the variable was defined.
 
-#.## has to be replaced by a version number, because I don't know which version you use. So for "Proton #.##", an example replacement would be "Proton 7.0".
+`#.##` will be a placeholder for the Proton version you use. So for "Proton #.##", an example replacement would be "Proton 7.0".
 
 * `$HOME`: Already set, don't worry about it. (redirects to `/home/<username>`)
-* `$STEAMLIBRARY`: The Steam Library, where Rocksmith is installed in. You can check it by opening Steam, then going to `Steam -> Settings -> Downloads -> Steam Library Folders`. Right above the disk usage indicator, there's a path. that's the one we need.
+* `$STEAMLIBRARY`: The Steam Library, where Rocksmith is installed in. You can check it by opening Steam, then going to `Steam -> Settings -> Storage`. Above the disk usage indicator, there's a path. that's the one we need.
 * `$PROTON`: A specific location inside your Proton installation
- * Normal Proton: `/path/to/steamapps/common/Proton\ #.##/dist`
- * Proton-GE: It's located in the default Steam Library under `compatibilitytools.d/Proton-#.##-GE-#/files`
+	* Normal Proton: `/path/to/steamapps/common/Proton\ #.##/dist`
+	* Proton-GE: It's located in the default Steam Library under `compatibilitytools.d/Proton-#.##-GE-#/files`
 
 # Guides
 
 There are two ways to do this. The one most people on [ProtonDB](https://www.protondb.com/app/221680) use is quicker, but results in high delay and distorted sound. It routes the sound through ALSA. This can be found in "Other Guides".
 
-Then there's the way of routing the audio through JACK -> wineASIO -> RS_ASIO, which has less delay and sounds better, but also takes longer to set up. I have Guides for Arch-based Distros and Debian-based ones. These can be found in the tables below.
+Then there's the way of routing the audio through JACK -> wineASIO -> RS_ASIO, which has less delay and sounds better, but also takes longer to set up. These can be found in the table below.
 
 **Recent Proton versions:**
 

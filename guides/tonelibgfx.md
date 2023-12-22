@@ -2,7 +2,7 @@
 
 This is not an advertisement, it's just the tool I know of.
 
-I want to explain how you can use other tools in your Rocksmith setup and want to show it using Tonelib-GFX, which is a pretty nice tool made for guitar and bass input.
+I want to explain how you can use other JACK tools in your setup and.
 
 # Let Tonelib-GFX process via JACK
 

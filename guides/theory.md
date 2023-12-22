@@ -22,7 +22,9 @@ Plugging everything together, we get the chain above.
 
 You install JACK and set it up in a certain way. You install wineasio into the standard wine, as well as your runner (Steam Proton, or something else you use). You patch the wine prefix to accept WineASIO and install RS_ASIO to Rocksmith.
 
-Steam Proton has a wrapper, which eg. contains libraries and files that are used instead of system files, to ensure that the games work the same across every platform. Somehow, this destroys functionality with WineASIO, that's why we have to start it without the wrapper. We need to use Proton though, because it can find Steam, which is important because of the Steam DRM.
+Steam Proton has a wrapper, which contains libraries and files that are used instead of system files, to ensure that the games work the same across every platform. Somehow, this destroys functionality with WineASIO. In the past, we tried to start Rocksmith without the wrapper. This isn't possible anymore because of an update to the game.
+
+I don't know why exactly the script works, but not the "Play" button in Steam, but it does.
 
 ## Can you set up a prefix to be able to do both?
 
