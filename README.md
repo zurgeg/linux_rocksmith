@@ -31,6 +31,7 @@ I will refer to them with variables. You can actually set them as variables via 
 * `$PROTON`: A specific location inside your Proton installation
 	* Normal Proton: `/path/to/steamapps/common/Proton\ #.##/dist`
 	* Proton-GE: It's located in the default Steam Library under `compatibilitytools.d/Proton-#.##-GE-#/files`
+	* Lutris Runners: No specific location, just `$HOME/.local/share/lutris/runners/wine/wine-ge-8-25-x86_64`
 
 # Guides
 
