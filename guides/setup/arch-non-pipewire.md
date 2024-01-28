@@ -61,14 +61,10 @@ Installing `base-devel` is very useful for using the AUR and compiling in genera
 > sudo cp build32/wineasio32.dll.so /usr/lib32/wine/i386-unix/wineasio32.dll.so
 > sudo cp build64/wineasio64.dll /usr/lib/wine/x86_64-windows/wineasio64.dll
 > sudo cp build64/wineasio64.dll.so /usr/lib/wine/x86_64-unix/wineasio64.dll.so
-> cp build32/wineasio32.dll "$PROTON/lib/wine/i386-windows/wineasio32.dll"
-> cp build32/wineasio32.dll.so "$PROTON/lib/wine/i386-unix/wineasio32.dll.so"
-> cp build64/wineasio64.dll "$PROTON/lib64/wine/x86_64-windows/wineasio64.dll"
-> cp build64/wineasio64.dll.so "$PROTON/lib64/wine/x86_64-unix/wineasio64.dll.so"
-> cp "$PROTON/lib/wine/i386-windows/wineasio32.dll" "$PROTON/lib/wine/i386-windows/wineasio.dll"
-> cp "$PROTON/lib/wine/i386-unix/wineasio32.dll.so" "$PROTON/lib/wine/i386-unix/wineasio.dll.so"
-> cp "$PROTON/lib64/wine/x86_64-windows/wineasio64.dll" "$PROTON/lib/wine/x86_64-windows/wineasio.dll"
-> cp "$PROTON/lib64/wine/x86_64-unix/wineasio64.dll.so" "$PROTON/lib/wine/x86_64-unix/wineasio.dll.so"
+> cp build32/wineasio32.dll "$PROTON/lib/wine/i386-windows/wineasio.dll"
+> cp build32/wineasio32.dll.so "$PROTON/lib/wine/i386-unix/wineasio.dll.so"
+> cp build64/wineasio64.dll "$PROTON/lib/wine/x86_64-windows/wineasio.dll"
+> cp build64/wineasio64.dll.so "$PROTON/lib/wine/x86_64-unix/wineasio.dll.so"
 > env WINEPREFIX=$STEAMLIBRARY/steamapps/compatdata/221680/pfx ./wineasio-register
 > ```
 >
@@ -147,14 +143,10 @@ To make Proton use wineasio, we need to copy these files into the appropriate lo
 
 ```
 # !!! WATCH OUT FOR VARIABLES !!!
-cp /usr/lib32/wine/i386-unix/wineasio32.dll.so "$PROTON/lib/wine/i386-unix/wineasio32.dll.so"
-cp /usr/lib/wine/x86_64-unix/wineasio64.dll.so "$PROTON/lib64/wine/x86_64-unix/wineasio64.dll.so"
-cp /usr/lib32/wine/i386-windows/wineasio32.dll "$PROTON/lib/wine/i386-windows/wineasio32.dll"
-cp /usr/lib/wine/x86_64-windows/wineasio64.dll "$PROTON/lib64/wine/x86_64-windows/wineasio64.dll"
-cp "$PROTON/lib/wine/i386-windows/wineasio32.dll" "$PROTON/lib/wine/i386-windows/wineasio.dll"
-cp "$PROTON/lib/wine/i386-unix/wineasio32.dll.so" "$PROTON/lib/wine/i386-unix/wineasio.dll.so"
-cp "$PROTON/lib64/wine/x86_64-windows/wineasio64.dll" "$PROTON/lib64/wine/x86_64-windows/wineasio.dll"
-cp "$PROTON/lib64/wine/x86_64-unix/wineasio64.dll.so" "$PROTON/lib64/wine/x86_64-unix/wineasio.dll.so"
+cp /usr/lib32/wine/i386-unix/wineasio32.dll.so "$PROTON/lib/wine/i386-unix/wineasio.dll.so"
+cp /usr/lib/wine/x86_64-unix/wineasio64.dll.so "$PROTON/lib64/wine/x86_64-unix/wineasio.dll.so"
+cp /usr/lib32/wine/i386-windows/wineasio32.dll "$PROTON/lib/wine/i386-windows/wineasio.dll"
+cp /usr/lib/wine/x86_64-windows/wineasio64.dll "$PROTON/lib64/wine/x86_64-windows/wineasio.dll"
 ```
 
 In theory, this should also work with Lutris runners (located in `$HOME/.local/share/lutris/runners/wine/`)
