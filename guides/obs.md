@@ -4,6 +4,10 @@
 
 Works just fine.
 
+## with pipewire
+
+Works just fine.
+
 ## JACK
 
 If you don't use pipewire, start JACK first, just in case.
