@@ -10,7 +10,7 @@ Works just fine.
 
 ## JACK
 
-If you don't use pipewire, start JACK first, just in case.
+Start JACK first, just in case.
 
 Open OBS. In sources, click `+` -> JACK Input Client -> Choose name. Select 2 input channels, if asked.
 
